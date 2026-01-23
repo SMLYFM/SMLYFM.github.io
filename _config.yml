@@ -119,5 +119,5 @@ search:
 
 deploy:
   type: git
-  repo: git@github.com-SMLYFM:SMLYFM/SMLYFM.github.io.git
+  repo: github_yytcjx:SMLYFM/SMLYFM.github.io.git
   branch: main
