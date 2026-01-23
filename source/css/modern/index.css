@@ -1,0 +1,162 @@
+/**
+ * 现代博客主题 - 主入口文件
+ * 集成所有CSS模块
+ */
+
+/* 💡 引入Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700&display=swap');
+
+/* 💡 引入模块化CSS */
+@import './variables.css';
+@import './cards.css';
+@import './animations.css';
+
+/* ========================================
+ * 全局样式增强 - Global Enhancements
+ * ======================================== */
+
+body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+}
+
+/* ========================================
+ * 首页布局容器 - Homepage Layout
+ * ======================================== */
+
+.modern-homepage {
+    position: relative;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/* 💡 桌面端：绝对定位卡片布局 */
+@media screen and (min-width: 768px) {
+    .modern-homepage {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .modern-homepage .card-container {
+        position: absolute;
+    }
+}
+
+/* 💡 移动端：垂直堆叠flex布局 */
+@media screen and (max-width: 767px) {
+    .modern-homepage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--card-spacing-sm);
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+    }
+
+    .modern-homepage .card-container {
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        max-width: 400px;
+    }
+}
+
+/* ========================================
+ * 背景层 - Background Layers
+ * ======================================== */
+
+.modern-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: var(--z-background);
+    pointer-events: none;
+}
+
+.snowfall-canvas,
+.particles-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ========================================
+ * 工具类补充 - Additional Utilities
+ * ======================================== */
+
+/* 隐藏滚动条 */
+.scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+}
+
+/* 平滑滚动 */
+.smooth-scroll {
+    scroll-behavior: smooth;
+}
+
+/* 防止选择 */
+.no-select {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* 鼠标指针 */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* ========================================
+ * 响应式工具 - Responsive Utilities
+ * ======================================== */
+
+/* 仅移动端显示 */
+.mobile-only {
+    display: none;
+}
+
+@media screen and (max-width: 767px) {
+    .mobile-only {
+        display: block;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+}
+
+/* 仅桌面端显示 */
+@media screen and (min-width: 768px) {
+    .desktop-only {
+        display: block;
+    }
+}
+
+/* ========================================
+ * 打印样式 - Print Styles
+ * ======================================== */
+
+@media print {
+    .modern-card {
+        backdrop-filter: none;
+        background-color: white;
+        break-inside: avoid;
+    }
+
+    .modern-background,
+    .snowfall-canvas,
+    .particles-canvas {
+        display: none;
+    }
+}

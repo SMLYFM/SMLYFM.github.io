@@ -1,0 +1,270 @@
+/**
+ * 现代博客主题 - 卡片组件样式
+ * 实现毛玻璃、圆角、阴影等现代视觉效果
+ */
+
+/* ========================================
+ * 基础卡片样式 - Base Card
+ * ======================================== */
+
+.modern-card {
+    /* 💡 背景和毛玻璃效果 */
+    background-color: var(--color-card);
+    backdrop-filter: var(--blur-sm);
+    -webkit-backdrop-filter: var(--blur-sm);
+
+    /* 💡 圆角 */
+    border-radius: var(--radius-card);
+
+    /* 💡 边框 */
+    border: 1px solid var(--color-border);
+
+    /* 💡 阴影 */
+    box-shadow: var(--shadow-card);
+
+    /* 💡 内边距 */
+    padding: var(--spacing-lg);
+
+    /* 💡 过渡动画 */
+    transition: transform var(--transition-base),
+        box-shadow var(--transition-base);
+
+    /* 💡 定位（用于绝对布局） */
+    position: relative;
+
+    /* 💡 防止内容溢出 */
+    overflow: hidden;
+}
+
+/* Squircle圆角支持（Safari等） */
+@supports (corner-shape: squircle) {
+    .modern-card.squircle {
+        corner-shape: squircle;
+        border-radius: 64px;
+    }
+}
+
+/* ========================================
+ * 卡片交互效果 - Card Interactions
+ * ======================================== */
+
+.modern-card.hoverable {
+    cursor: pointer;
+}
+
+.modern-card.hoverable:hover {
+    /* 💡 hover时轻微上浮 */
+    transform: translateY(-4px);
+
+    /* 💡 hover时阴影加深 */
+    box-shadow: 0 48px 60px -32px rgba(0, 0, 0, 0.12),
+        inset 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.modern-card.hoverable:active {
+    /* 💡 点击时回弹 */
+    transform: translateY(-2px);
+}
+
+/* ========================================
+ * 卡片变体 - Card Variants
+ * ======================================== */
+
+/* 半透明卡片 */
+.modern-card-transparent {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* 渐变卡片 */
+.modern-card-gradient {
+    background: var(--gradient-brand);
+    color: white;
+    border: none;
+}
+
+/* 紧凑卡片 */
+.modern-card-compact {
+    padding: var(--spacing-md);
+}
+
+/* ========================================
+ * 特定卡片样式 - Specific Cards
+ * ======================================== */
+
+/* Hi Card - 个人介绍卡片 */
+.hi-card {
+    text-align: center;
+    min-width: 320px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hi-card .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: 0 16px 32px -5px rgba(226, 217, 206, 0.5);
+    margin-bottom: var(--spacing-md);
+}
+
+.hi-card .greeting {
+    font-size: var(--font-size-2xl);
+    font-family: var(--font-display);
+    margin-top: var(--spacing-md);
+    line-height: 1.4;
+}
+
+.hi-card .username {
+    font-size: var(--font-size-3xl);
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+/* Article Card - 文章卡片 */
+.article-card {
+    min-width: 300px;
+}
+
+.article-card .article-item {
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    transition: background-color var(--transition-fast);
+    cursor: pointer;
+}
+
+.article-card .article-item:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.article-card .article-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 0.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.article-card .article-date {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+/* Clock Card - 时钟卡片 */
+.clock-card {
+    text-align: center;
+    min-width: 200px;
+}
+
+.clock-card .time {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.clock-card .date {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* Social Card - 社交链接卡片 */
+.social-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.social-card .social-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    text-decoration: none;
+    color: var(--color-text-primary);
+}
+
+.social-card .social-link:hover {
+    background-color: rgba(102, 126, 234, 0.1);
+    transform: translateX(4px);
+}
+
+.social-card .social-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--color-brand-primary);
+}
+
+/* ========================================
+ * 工具类 - Utility Classes
+ * ======================================== */
+
+/* 渐变文字 */
+.text-gradient {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 渐变按钮 */
+.btn-gradient {
+    background: var(--gradient-brand);
+    color: white;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-gradient:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+ * 响应式适配 - Responsive Design
+ * ======================================== */
+
+@media screen and (max-width: 768px) {
+    .modern-card {
+        /* 💡 移动端调整圆角和内边距 */
+        border-radius: var(--radius-lg);
+        padding: var(--spacing-md);
+    }
+
+    .hi-card {
+        min-width: auto;
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .hi-card .greeting {
+        font-size: var(--font-size-xl);
+    }
+
+    .hi-card .username {
+        font-size: var(--font-size-2xl);
+    }
+}

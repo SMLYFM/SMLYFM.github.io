@@ -18,7 +18,10 @@
 
 ## ✨ 特性
 
-- 🎨 **精美主题**: 使用Butterfly主题,界面美观现代
+### 核心功能
+
+- 🎨 **精美主题**: 使用Butterfly主题，界面美观现代
+- 🌟 **现代卡片布局**: 全新的首页卡片式设计（v1.0.0新增）
 - 📝 **Markdown**: 支持完整的Markdown语法和扩展
 - 🔍 **本地搜索**: 快速全文搜索
 - 🏷️ **分类标签**: 完善的文章分类和标签系统
@@ -26,6 +29,17 @@
 - 📱 **响应式**: 完美适配桌面和移动设备
 - ⚡ **快速加载**: 优化的资源加载策略
 - 🔧 **开发工具**: 丰富的开发脚本和配置
+
+### 现代主题特性 (v1.0.0)
+
+- ✨ **毛玻璃卡片**: 半透明背景 + backdrop-filter效果
+- 🎭 **品牌色渐变**: 紫蓝渐变色系 (#667eea → #764ba2)
+- ❄️ **粒子动画**: Canvas实现的雪花背景效果
+- 💫 **动态交互**: Hover悬浮、心跳动画、阴影变化
+- 🕐 **实时组件**: 动态时钟、智能问候语
+- 📅 **智能日历**: 自动标记有文章的日期
+- 🔗 **社交卡片**: GitHub、Email等快速链接
+- 📱 **完美适配**: 桌面绝对定位，移动垂直堆叠
 
 ---
 
@@ -62,25 +76,41 @@ npm run dev
 
 ```
 SMLYFM.github.io/
-├── .github/              # GitHub配置
-│   └── workflows/        # GitHub Actions自动部署
-├── docs/                 # 项目文档
-│   ├── DEVELOPMENT.md    # 开发指南
-│   └── DEPLOYMENT.md     # 部署指南
-├── tools/              # 开发脚本
-│   ├── new-post.sh      # 创建新文章
-│   ├── deploy.sh        # 一键部署
-│   └── preview.sh       # 本地预览
-├── source/               # 博客源文件
-│   ├── _posts/          # 文章目录
-│   ├── _drafts/         # 草稿目录
-│   └── _data/           # 数据文件
-├── themes/               # 主题目录
-│   └── butterfly/       # Butterfly主题
-├── _config.yml          # Hexo主配置
-├── _config.butterfly.yml # 主题配置
-├── package.json         # 依赖配置
-└── README.md            # 项目说明
+├── .github/                  # GitHub配置
+│   └── workflows/            # GitHub Actions自动部署
+├── docs/                     # 项目文档
+│   ├── DEVELOPMENT.md        # 开发指南
+│   ├── DEPLOYMENT.md         # 部署指南
+│   ├── THEME_CUSTOMIZATION.md       # 主题定制指南 (新增)
+│   └── MODERN_THEME_CHANGELOG.md    # 现代主题更新日志 (新增)
+├── tools/                    # 开发脚本
+│   ├── new-post.sh           # 创建新文章
+│   ├── deploy.sh             # 一键部署
+│   └── preview.sh            # 本地预览
+├── source/                   # 博客源文件
+│   ├── _posts/               # 文章目录
+│   ├── _drafts/              # 草稿目录
+│   ├── _data/                # 数据文件
+│   ├── css/modern/           # 现代主题CSS (新增)
+│   │   ├── variables.css     # 设计变量
+│   │   ├── cards.css         # 卡片样式
+│   │   ├── animations.css    # 动画效果
+│   │   └── index.css         # 主入口
+│   └── js/                   # JavaScript文件 (新增)
+│       ├── effects/          # 特效组件
+│       │   └── snowfall.js   # 雪花动画
+│       └── components/       # 功能组件
+│           ├── clock.js      # 实时时钟
+│           └── greeting.js   # 动态问候
+├── themes/                   # 主题目录
+│   └── butterfly/            # Butterfly主题
+│       └── layout/
+│           ├── index-modern.ejs      # 现代首页模板 (新增)
+│           └── modern-cards/         # 卡片组件 (新增)
+├── _config.yml               # Hexo主配置
+├── _config.butterfly.yml     # 主题配置
+├── package.json              # 依赖配置
+└── README.md                 # 项目说明
 ```
 
 ---
@@ -250,8 +280,15 @@ npx hexo deploy
 
 ## 📚 文档
 
+### 基础文档
+
 - [📖 开发指南](docs/DEVELOPMENT.md) - 本地开发、调试技巧
 - [🚀 部署指南](docs/DEPLOYMENT.md) - SSH配置、部署流程
+
+### 现代主题文档 (v1.0.0)
+
+- [🎨 主题定制指南](docs/THEME_CUSTOMIZATION.md) - 详细的定制和配置说明
+- [📝 现代主题更新日志](docs/MODERN_THEME_CHANGELOG.md) - 完整的修改记录和技术细节
 
 ---
 
@@ -280,6 +317,7 @@ npx hexo deploy
 - [Hexo](https://hexo.io/) - 强大的静态网站生成器
 - [Butterfly](https://butterfly.js.org/) - 精美的Hexo主题
 - [GitHub Pages](https://pages.github.com/) - 免费的静态网站托管
+- [YYsuni/2025-blog-public](https://github.com/YYsuni/2025-blog-public) - 现代主题设计灵感来源
 
 ---
 

@@ -1,0 +1,68 @@
+<%# Calendar Card - 日历卡片 💡 显示当月日历，标记有文章的日期 %>
+
+    <% var now=new Date(); var year=now.getFullYear(); var month=now.getMonth(); var postsThisMonth=[]; var
+        postDates=[]; // 获取本月文章 if (site.posts && site.posts.length> 0) {
+        site.posts.forEach(function(post) {
+        if (post.date) {
+        var postDate = post.date.toDate();
+        if (postDate.getFullYear() === year && postDate.getMonth() === month) {
+        postsThisMonth.push(post);
+        postDates.push(post.date.date());
+        }
+        }
+        });
+        }
+
+        var firstDay = new Date(year, month, 1).getDay();
+        var daysInMonth = new Date(year, month + 1, 0).getDate();
+        var monthNames = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+        %>
+
+        <div class="card-container modern-card calendar-card"
+            style="<%= getCardPosition('calendarCard') %>; min-width: 280px;">
+            <h3
+                style="font-size: var(--font-size-base); font-weight: 600; margin-bottom: var(--spacing-md); color: var(--color-text-secondary);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    style="vertical-align: middle; margin-right: 4px;">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                <%= year %>年<%= monthNames[month] %>
+            </h3>
+
+            <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 8px;">
+                <% ['日', '一' , '二' , '三' , '四' , '五' , '六' ].forEach(function(day) { %>
+                    <div
+                        style="text-align: center; font-size: var(--font-size-xs); color: var(--color-text-secondary); font-weight: 600;">
+                        <%= day %>
+                    </div>
+                    <% }) %>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;">
+                <% for (var i=0; i < firstDay; i++) { %>
+                    <div></div>
+                    <% } %>
+
+                        <% for (var day=1; day <=daysInMonth; day++) { var isToday=day===now.getDate(); var
+                            hasPost=postDates.indexOf(day) !==-1; var
+                            styleStr='aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-size: var(--font-size-sm);'
+                            ; if (isToday) { styleStr
+                            +=' background: var(--gradient-brand); color: white; font-weight: 700;' ; } else if
+                            (hasPost) { styleStr
+                            +=' background: rgba(102, 126, 234, 0.1); color: var(--color-brand-primary); font-weight: 600;'
+                            ; } %>
+                            <div style="<%= styleStr %>">
+                                <%= day %>
+                            </div>
+                            <% } %>
+            </div>
+        </div>
+
+        <style>
+            .calendar-card {
+                user-select: none;
+            }
+        </style>

@@ -1,0 +1,363 @@
+/**
+ * 现代博客主题 - 动画效果
+ * 包含关键帧动画、过渡效果、交互动画
+ */
+
+/* ========================================
+ * 关键帧动画 - Keyframe Animations
+ * ======================================== */
+
+/* 💡 淡入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* 💡 淡入 + 上浮 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 💡 淡入 + 缩放 */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 💡 心跳动画（参考2025-blog） */
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(1.15);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+
+    60% {
+        transform: scale(1.15);
+    }
+
+    80% {
+        transform: scale(1);
+    }
+}
+
+/* 💡 脉冲动画 */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* 💡 旋转动画 */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 💡 浮动动画 */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* 💡 闪烁动画 */
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+/* ========================================
+ * 动画工具类 - Animation Utilities
+ * ======================================== */
+
+/* 淡入 */
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* 淡入上浮 */
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* 淡入缩放 */
+.animate-fade-in-scale {
+    animation: fadeInScale 0.4s ease-out;
+}
+
+/* 延迟动画（配合JS使用） */
+.animate-delay-1 {
+    animation-delay: 0.1s;
+}
+
+.animate-delay-2 {
+    animation-delay: 0.2s;
+}
+
+.animate-delay-3 {
+    animation-delay: 0.3s;
+}
+
+.animate-delay-4 {
+    animation-delay: 0.4s;
+}
+
+.animate-delay-5 {
+    animation-delay: 0.5s;
+}
+
+/* ========================================
+ * 交互动画 - Interactive Animations
+ * ======================================== */
+
+/* 心跳容器：hover时触发子元素心跳 */
+.heartbeat-container:hover .heartbeat {
+    animation: heartbeat 0.8s ease-in-out;
+}
+
+/* 脉冲效果 */
+.pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* 旋转加载 */
+.spin {
+    animation: rotate 1s linear infinite;
+}
+
+/* 浮动效果 */
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* ========================================
+ * 页面加载动画 - Page Load Animations
+ * ======================================== */
+
+/* 💡 卡片依次加载 */
+.card-stagger-animation {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* 第1-10个卡片的延迟 */
+.card-stagger-animation:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.card-stagger-animation:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.card-stagger-animation:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.card-stagger-animation:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.card-stagger-animation:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.card-stagger-animation:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+.card-stagger-animation:nth-child(7) {
+    animation-delay: 0.7s;
+}
+
+.card-stagger-animation:nth-child(8) {
+    animation-delay: 0.8s;
+}
+
+.card-stagger-animation:nth-child(9) {
+    animation-delay: 0.9s;
+}
+
+.card-stagger-animation:nth-child(10) {
+    animation-delay: 1.0s;
+}
+
+/* ========================================
+ * Hover特效 - Hover Effects
+ * ======================================== */
+
+/* 边框光晃效果 */
+.hover-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.hover-shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    transition: left 0.5s;
+}
+
+.hover-shimmer:hover::before {
+    left: 100%;
+}
+
+/* 发光效果 */
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
+
+/* 倾斜效果 */
+.hover-tilt {
+    transition: transform var(--transition-base);
+}
+
+.hover-tilt:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
+}
+
+/* ========================================
+ * 滚动动画 - Scroll Animations
+ * 💡 配合Intersection Observer使用
+ * ======================================== */
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out,
+        transform 0.6s ease-out;
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+ * 特殊效果 - Special Effects
+ * ======================================== */
+
+/* 渐变文字动画 */
+.text-gradient-animate {
+    background: linear-gradient(90deg,
+            var(--color-brand-primary),
+            var(--color-brand-secondary),
+            var(--color-brand-primary));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+}
+
+/* 打字机效果（需配合JS） */
+.typewriter {
+    overflow: hidden;
+    border-right: 2px solid var(--color-brand-primary);
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end),
+        blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent;
+    }
+
+    50% {
+        border-color: var(--color-brand-primary);
+    }
+}
+
+/* ========================================
+ * 性能优化 - Performance
+ * ======================================== */
+
+/* 💡 对动画元素启用GPU加速 */
+.gpu-accelerated {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* 💡 减少动画（用户偏好） */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

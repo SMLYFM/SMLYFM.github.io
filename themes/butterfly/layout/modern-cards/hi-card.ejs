@@ -1,0 +1,68 @@
+<%# Hi Card - 个人介绍卡片 💡 显示头像、问候语和自我介绍 %>
+
+    <div class="card-container modern-card hi-card hoverable" style="<%= getCardPosition('hiCard') %>">
+        <!-- 💡 头像 -->
+        <img src="<%= theme.avatar.img || '/img/avatar.png' %>" alt="<%= config.author %>" class="avatar" />
+
+        <!-- 💡 问候语 -->
+        <h1 class="greeting">
+            <span id="greeting-text"></span><br />
+            我是 <span class="username">
+                <%= config.author || 'CJX' %>
+            </span>,<br />
+            欢迎来到我的博客!
+        </h1>
+
+        <!-- 💡 简短介绍 -->
+        <% if (config.description) { %>
+            <p style="margin-top: 1rem; color: var(--color-text-secondary); font-size: var(--font-size-sm);">
+                <%= config.description %>
+            </p>
+            <% } %>
+    </div>
+
+    <script>
+        // 💡 卡片位置计算函数（桌面端绝对定位）
+        function getCardPosition(cardName) {
+            if (window.innerWidth < 768) {
+                return '' // 移动端不使用绝对定位
+            }
+
+            // 💡 卡片位置配置（可根据需要调整）
+            const positions = {
+                hiCard: {
+                    left: '50%',
+                    top: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '360px',
+                    height: 'auto'
+                },
+                articleCard: {
+                    left: 'calc(50% + 400px)',
+                    top: '50%',
+                    transform: 'translate(0, -50%)',
+                    width: '320px',
+                    height: 'auto'
+                },
+                clockCard: {
+                    left: 'calc(50% - 400px)',
+                    top: 'calc(50% - 150px)',
+                    transform: 'translate(-100%, 0)',
+                    width: '220px',
+                    height: 'auto'
+                },
+                socialCard: {
+                    left: 'calc(50% - 400px)',
+                    top: 'calc(50% + 100px)',
+                    transform: 'translate(-100%, 0)',
+                    width: '220px',
+                    height: 'auto'
+                }
+            }
+
+            const pos = positions[cardName]
+            if (!pos) return ''
+
+            return `position: absolute; left: ${pos.left}; top: ${pos.top}; transform: ${pos.transform}; width: ${pos.width}; height: ${pos.height};`
+        }
+    </script>

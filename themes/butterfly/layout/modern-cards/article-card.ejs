@@ -1,0 +1,51 @@
+<%# Article Card - 最新文章卡片 💡 显示最近发布的文章列表 %>
+
+    <% // 💡 获取最新文章（最多5篇） const recentPosts=site.posts.sort('date', -1).limit(5).toArray() %>
+
+        <div class="card-container modern-card article-card" style="<%= getCardPosition('articleCard') %>">
+            <!-- 💡 卡片标题 -->
+            <h2
+                style="font-size: var(--font-size-xl); font-weight: 700; margin-bottom: var(--spacing-md); display: flex; align-items: center; gap: 0.5rem;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10 9 9 9 8 9" />
+                </svg>
+                最新文章
+            </h2>
+
+            <!-- 💡 文章列表 -->
+            <div class="article-list">
+                <% recentPosts.forEach(function(post) { %>
+                    <a href="<%= url_for(post.path) %>" class="article-item"
+                        style="text-decoration: none; display: block;">
+                        <div class="article-title">
+                            <%= post.title %>
+                        </div>
+                        <div class="article-date">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                            <%= date(post.date, 'YYYY-MM-DD' ) %>
+                        </div>
+                    </a>
+                    <% }) %>
+            </div>
+
+            <!-- 💡 查看更多链接 -->
+            <a href="<%= url_for('/archives/') %>" class="btn-gradient"
+                style="margin-top: var(--spacing-md); display: inline-flex; text-decoration: none;">
+                查看全部文章
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    style="margin-left: 4px;">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                </svg>
+            </a>
+        </div>

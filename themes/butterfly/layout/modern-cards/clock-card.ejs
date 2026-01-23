@@ -1,0 +1,35 @@
+<%# Clock Card - 时钟卡片 💡 显示实时时间和日期 %>
+
+    <div class="card-container modern-card clock-card" style="<%= getCardPosition('clockCard') %>">
+        <!-- 💡 卡片标题 -->
+        <h3
+            style="font-size: var(--font-size-base); font-weight: 600; margin-bottom: var(--spacing-md); color: var(--color-text-secondary);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                style="vertical-align: middle; margin-right: 4px;">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+            </svg>
+            当前时间
+        </h3>
+
+        <!-- 💡 时钟容器（JavaScript动态填充） -->
+        <div id="clock-container"></div>
+    </div>
+
+    <style>
+        .clock-time {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .clock-date {
+            font-size: var(--font-size-base);
+            color: var(--color-text-secondary);
+        }
+    </style>

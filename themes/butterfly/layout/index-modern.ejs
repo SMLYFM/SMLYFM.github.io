@@ -1,0 +1,70 @@
+<%# 
+  现代首页布局
+  💡 卡片式设计，结合传统Butterfly功能
+%>
+
+<!DOCTYPE html>
+<html lang="<%- config.language %>">
+<head>
+  <%- partial('_partial/head') %>
+  <!-- 💡 引入现代CSS -->
+  <link rel="stylesheet" href="<%= url_for('/css/modern/index.css') %>">
+</head>
+
+<body>
+  <!-- 💡 Butterfly导航栏 -->
+  <%- partial('_partial/header', null, {cache: !config.relative_link}) %>
+
+  <!-- 💡 雪花背景Canvas -->
+  <div class="modern-background">
+    <canvas id="snowfall-canvas"></canvas>
+  </div>
+
+  <!-- 💡 主内容区 -->
+  <main id="content-inner" class="modern-homepage">
+    <%# Hi Card - 个人介绍卡片 %>
+    <%- partial('modern-cards/hi-card') %>
+
+    <%# Article Card - 最新文章卡片 %>
+    <%- partial('modern-cards/article-card') %>
+
+    <%# Clock Card - 时钟卡片（仅桌面） %>
+    <div class="desktop-only">
+      <%- partial('modern-cards/clock-card') %>
+    </div>
+
+    <%# Social Card - 社交链接卡片 %>
+    <%- partial('modern-cards/social-card') %>
+
+    <%# Calendar Card - 日历卡片（可选） %>
+    <% if (theme.modern_cards && theme.modern_cards.calendar_enabled) { %>
+      <div class="desktop-only">
+        <%- partial('modern-cards/calendar-card') %>
+      </div>
+    <% } %>
+  </main>
+
+  <!-- 💡 Butterfly侧边栏（保留） -->
+  <%- partial('_partial/rightside') %>
+
+  <!-- 💡 Butterfly页脚 -->
+  <%- partial('_partial/footer') %>
+
+  <!-- 💡 引入JavaScript效果 -->
+  <script src="<%= url_for('/js/effects/snowfall.js') %>"></script>
+  <script src="<%= url_for('/js/components/clock.js') %>"></script>
+  <script src="<%= url_for('/js/components/greeting.js') %>"></script>
+
+  <!-- 💡 卡片加载动画 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 添加卡片依次加载动画
+      const cards = document.querySelectorAll('.card-container')
+      cards.forEach((card, index) => {
+        card.classList.add('card-stagger-animation')
+        card.style.animationDelay = `${index * 0.1}s`
+      })
+    })
+  </script>
+</body>
+</html>
