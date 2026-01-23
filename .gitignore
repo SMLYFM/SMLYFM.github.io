@@ -1,9 +1,37 @@
-.DS_Store
-Thumbs.db
+# Hexo
+.deploy_git/
+public/
 db.json
 *.log
+debug.log
+npm-debug.log*
+
+# Node.js
 node_modules/
-public/
-.deploy_git/
+package-lock.json
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editor
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
+
+# Backup
+*.backup
+*.bak
+*.tmp
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Project specific
+.deploy/

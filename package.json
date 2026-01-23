@@ -3,10 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "hexo generate",
+    "dev": "hexo clean && hexo server --draft",
+    "build": "hexo clean && hexo generate",
+    "deploy": "bash tools/deploy.sh",
+    "server": "hexo server",
     "clean": "hexo clean",
-    "deploy": "hexo deploy",
-    "server": "hexo server"
+    "new": "bash tools/new-post.sh",
+    "preview": "bash tools/preview.sh",
+    "lint": "prettier --check '**/*.{md,yml,yaml,json}'",
+    "format": "prettier --write '**/*.{md,yml,yaml,json}'"
   },
   "hexo": {
     "version": "7.3.0"

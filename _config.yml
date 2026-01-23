@@ -1,123 +1,214 @@
-# Hexo Configuration
-## Docs: https://hexo.io/docs/configuration.html
-## Source: https://github.com/hexojs/hexo/
+# ============================================
+# Hexo 配置文件
+# ============================================
+# 💡 完整文档: https://hexo.io/zh-cn/docs/configuration.html
+# 💡 项目: https://github.com/SMLYFM/SMLYFM.github.io
 
-# Site
-#title: Hexo-CJX Blog
-#subtitle: '做好自己就行'
-#description: '一个数学和程序语言爱好者'
-#keywords: Math 
-#author: CJX
-#language: en
-#timezone: ''
-# Site
+# ============================================
+# 网站基本信息
+# ============================================
 title: Hexo-CJX Blog
 subtitle: '做好自己就行'
-description: '一个数学和程序语言爱好者的个人博客，分享技术心得、学习笔记和生活感悟。'
-keywords: Math, Programming, Hexo, Blog, Technology
+description: '一个数学和程序语言爱好者的个人博客,分享技术心得、学习笔记和生活感悟。'
+keywords: Math, Programming, Hexo, Blog, Technology, Rust, Python, LaTeX
 author: CJX
-language: zh-CN 
+language: zh-CN
 timezone: Asia/Shanghai
-# URL
-url: https://smlyfm.github.io/
-permalink: :year/:title/
-pretty_urls:
-  trailing_index: false
-  trailing_html: false
 
-# Directory
-source_dir: source
-public_dir: public
-tag_dir: tags
-archive_dir: archives
-category_dir: categories
-code_dir: downloads/code
-i18n_dir: :lang
+# ============================================
+# URL 配置
+# ============================================
+# 💡 网站URL,用于生成绝对链接
+url: https://smlyfm.github.io
+
+# 💡 永久链接格式
+# - :year/:month/:day/:title/  按日期
+# - :year/:title/              按年份(当前使用)
+# - :category/:title/          按分类
+permalink: :year/:title/
+
+# 💡 URL美化选项
+pretty_urls:
+  trailing_index: false  # 移除链接末尾的 index.html
+  trailing_html: false   # 移除链接末尾的 .html
+
+# ============================================
+# 目录结构
+# ============================================
+source_dir: source          # 源文件目录
+public_dir: public          # 生成文件目录
+tag_dir: tags              # 标签目录
+archive_dir: archives      # 归档目录
+category_dir: categories   # 分类目录
+code_dir: downloads/code   # 代码片段目录
+i18n_dir: :lang            # 国际化目录
+
+# 💡 跳过渲染的文件(保持原样)
 skip_render:
   - README.md
   - LICENSE
+  - CNAME
+  - robots.txt
+
+# 💡 为每篇文章创建同名资源文件夹(用于存放图片等)
 post_asset_folder: true
 
-# Writing   syntax_highlighter : 推荐使用 highlight.js 或 prismjs，并启用行号显示。
-#           filename_case : 设置为 1，强制文件名小写，避免大小写问题。
+# ============================================
+# 文章配置
+# ============================================
+# 💡 新文章的文件名格式
 new_post_name: :title.md
+
+# 💡 默认布局(post/page/draft)
 default_layout: post
+
+# 💡 标题转换(false=保持原样)
 titlecase: false
+
+# 💡 外部链接配置
 external_link:
-  enable: true
-  field: site
+  enable: true      # 自动为外部链接添加 target="_blank"
+  field: site       # site=仅站外链接, post=所有链接
   exclude: ''
+
+# 💡 文件名小写(1=强制小写, 0=保持原样, 2=大写)
 filename_case: 1
+
+# 💡 是否渲染草稿
 render_drafts: false
+
+# 💡 是否使用相对链接
 relative_link: false
+
+# 💡 是否显示未来日期的文章
 future: true
+
+# ============================================
+# 代码高亮配置
+# ============================================
+# 💡 语法高亮引擎(highlight.js 或 prismjs)
 syntax_highlighter: highlight.js
+
+# highlight.js 配置
 highlight:
-  line_number: true
-  auto_detect: false
-  tab_replace: ''
-  wrap: true
-  hljs: false
+  line_number: true    # 显示行号
+  auto_detect: false   # 自动检测语言(可能影响性能)
+  tab_replace: ''      # Tab替换字符
+  wrap: true           # 代码折行
+  hljs: false          # 使用hljs类名
+
+# prismjs 配置(备用)
 prismjs:
-  preprocess: true
-  line_number: true
-  tab_replace: ''
+  preprocess: true     # 预处理
+  line_number: true    # 显示行号
+  tab_replace: ''      # Tab替换字符
 
-# Home page setting
+# ============================================
+# 首页设置
+# ============================================
 index_generator:
-  path: ''
-  per_page: 8 # 减少每页文章数量，提升加载速度
-  order_by: -date
+  path: ''             # 首页路径
+  per_page: 8          # 每页文章数(建议8-12篇)
+  order_by: -date      # 排序方式(-date=最新在前)
 
-
-# Category & Tag
+# ============================================
+# 分类 & 标签
+# ============================================
+# 💡 默认分类
 default_category: blog
+
+# 💡 分类别名映射
 category_map:
   tech: 技术
   life: 生活
+  math: 数学
+  programming: 编程
+  rust: Rust
+  python: Python
+  latex: LaTeX
+
+# 💡 标签别名映射
 tag_map:
   math: 数学
   programming: 编程
+  rust: Rust
+  python: Python
+  latex: LaTeX
+  pde: 偏微分方程
+  functional-analysis: 泛函分析
 
-# Metadata elements
-## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+# ============================================
+# 元数据
+# ============================================
+# 💡 是否生成 meta generator 标签
 meta_generator: true
 
-# Date / Time format
-## Hexo uses Moment.js to parse and display date
-## You can customize the date format as defined in
-## http://momentjs.com/docs/#/displaying/format/
+# ============================================
+# 日期/时间格式
+# ============================================
+# 💡 使用 Moment.js 格式
+# 💡 参考: http://momentjs.com/docs/#/displaying/format/
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
-## updated_option supports 'mtime', 'date', 'empty'
+
+# 💡 文章更新时间选项
+# - mtime: 使用文件修改时间
+# - date: 使用文章的 updated 字段
+# - empty: 不显示更新时间
 updated_option: 'mtime'
 
-# Pagination
-## Set per_page to 0 to disable pagination
+# ============================================
+# 分页设置
+# ============================================
+# 💡 每页显示的文章数量(0=禁用分页)
 per_page: 10
+
+# 💡 分页目录名
 pagination_dir: page
 
-# Include / Exclude file(s)
-## include:/exclude: options only apply to the 'source/' folder
+# ============================================
+# 包含/排除文件
+# ============================================
+# 💡 仅适用于 source/ 目录
 include:
 exclude:
 ignore:
 
-# Extensions
-Plugins: https://hexo.io/plugins/
-## Themes: https://hexo.io/themes/
-## theme: landscape
+# ============================================
+# 扩展
+# ============================================
+# 💡 主题
 theme: butterfly
 
-
+# 💡 搜索配置
 search:
-  path: search.xml
-  field: post
-  content: true
-# Deployment
-# Docs: https://hexo.io/docs/one-command-deployment
+  path: search.xml      # 搜索数据文件
+  field: post           # 搜索范围(post/page/all)
+  content: true         # 是否包含文章内容
 
+# ============================================
+# 部署配置
+# ============================================
+# 💡 文档: https://hexo.io/zh-cn/docs/one-command-deployment
 deploy:
   type: git
   repo: github_yytcjx:SMLYFM/SMLYFM.github.io.git
   branch: main
+  message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
+
+# ============================================
+# 性能优化(可选)
+# ============================================
+# 💡 启用Hexo缓存(加快生成速度)
+# cache:
+#   enable: true
+
+# 💡 压缩HTML/CSS/JS(需要安装插件)
+# neat_enable: true
+# neat_html:
+#   enable: true
+#   exclude:
+# neat_css:
+#   enable: true
+# neat_js:
+#   enable: true

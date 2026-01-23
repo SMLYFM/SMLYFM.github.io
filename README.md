@@ -1,122 +1,277 @@
-# 个人博客
+# Hexo-CJX Blog
 
+<div align="center">
 
+[![Hexo](https://img.shields.io/badge/Hexo-7.3.0-blue.svg)](https://hexo.io)
+[![Theme](https://img.shields.io/badge/Theme-Butterfly-pink.svg)](https://butterfly.js.org/)
+[![Node](https://img.shields.io/badge/Node-%3E%3D14.0.0-green.svg)](https://nodejs.org)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Deploy](https://github.com/SMLYFM/SMLYFM.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/SMLYFM/SMLYFM.github.io/actions/workflows/deploy.yml)
 
-* **GitHub Issues**: 在本项目的 GitHub Issues 页面新建一个 issue。
-* **个人博客**: [分享数学和计算机技术](https://smlyfm.github.io)
-* **GitHub 主页**: [![GitHub](https://img.shields.io/badge/GitHub-KS--MATH-blue?style=social&logo=github)](https://github.com/KS-MATH)，[![GitHub](https://img.shields.io/badge/GitHub-topmkter-blue?style=social&logo=github)](https://github.com/topmkter)
-* **邮件**: 发送邮件至 <sudocjx@gmail.com>。
+**一个数学和程序语言爱好者的个人博客**
 
-提交时，请尽可能详细地描述问题，包括复现步骤、错误截图和您的运行环境，这将有助于我更快地定位和解决问题。
+[🌐 在线访问](https://smlyfm.github.io) · [📖 开发指南](docs/DEVELOPMENT.md) · [🚀 部署指南](docs/DEPLOYMENT.md)
 
+</div>
 
+---
 
-# 搭建说明
+## ✨ 特性
 
+- 🎨 **精美主题**: 使用Butterfly主题,界面美观现代
+- 📝 **Markdown**: 支持完整的Markdown语法和扩展
+- 🔍 **本地搜索**: 快速全文搜索
+- 🏷️ **分类标签**: 完善的文章分类和标签系统
+- 💬 **代码高亮**: 多种语言的代码高亮支持
+- 📱 **响应式**: 完美适配桌面和移动设备
+- ⚡ **快速加载**: 优化的资源加载策略
+- 🔧 **开发工具**: 丰富的开发脚本和配置
 
+---
 
-使用`git`管理项目源码，`hexo`管理网页
+## 🚀 快速开始
 
+### 环境要求
 
+- **Node.js**: >= 14.0.0
+- **npm**: >= 6.0.0
+- **Git**: >= 2.0.0
 
-1. **先用 `git init`**：在本地创建一个仓库。
-2. **再用 `git remote add`**：将这个本地仓库与一个远程仓库（比如 GitHub 上的）关联起来。
+### 安装
 
+```bash
+# 克隆仓库
+git clone git@github_yytcjx:SMLYFM/SMLYFM.github.io.git
+cd SMLYFM.github.io
 
+# 切换到master分支
+git checkout master
 
-```
-# 确保使用你的 SSH 别名来构建地址
-git remote add origin git@github.com-SMLYFM:SMLYFM/SMLYFM.github.io.git
-```
+# 安装依赖
+npm install
 
-**这个命令的意思是**：添加一个名为 `origin` 的远程仓库，它的地址是 `git@github.com-SMLYFM:SMLYFM/SMLYFM.github.io.git`。
-
-> **注意**：如果提示 `fatal: remote origin already exists.`，说明你之前可能添加过一个错误的 origin。你需要先用 `git remote remove origin` 删掉它，然后再重新运行上面的 `git remote add` 命令。
-
-
-
-```
-git remote -v
-```
-
-如果你看到类似下面的输出，**那就证明你已经成功了**！
-
-```
-origin  git@github.com-SMLYFM:SMLYFM/SMLYFM.github.io.git (fetch)
-origin  git@github.com-SMLYFM:SMLYFM/SMLYFM.github.io.git (push)
-```
-
-
-
-```
-# 现在这个命令应该可以成功执行了
-git push origin --delete gh-pages
-
-# 删除 master 分支
-git push origin --delete master
+# 启动本地服务器
+npm run dev
 ```
 
-这个工作模式非常清晰：
+访问 `http://localhost:4000` 查看博客。
 
-* **`main` 分支**：作为**部署分支**。只存放由 `hexo generate` 生成的、可以直接在网上浏览的公开网页文件（HTML, CSS, JS）。这个分支通常由 `hexo deploy` 命令自动管理。
-* **`master` 分支**：作为**源文件分支**。存放你整个项目的“菜谱”，也就是你的 Markdown 文章、配置文件 `_config.yml`、主题文件等。这个分支由你手动通过 `git add`, `git commit`, `git push` 来管理，作为你的心血备份。
+---
 
-------
-
-
+## 📁 项目结构
 
 ```
-git branch
+SMLYFM.github.io/
+├── .github/              # GitHub配置
+│   └── workflows/        # GitHub Actions自动部署
+├── docs/                 # 项目文档
+│   ├── DEVELOPMENT.md    # 开发指南
+│   └── DEPLOYMENT.md     # 部署指南
+├── tools/              # 开发脚本
+│   ├── new-post.sh      # 创建新文章
+│   ├── deploy.sh        # 一键部署
+│   └── preview.sh       # 本地预览
+├── source/               # 博客源文件
+│   ├── _posts/          # 文章目录
+│   ├── _drafts/         # 草稿目录
+│   └── _data/           # 数据文件
+├── themes/               # 主题目录
+│   └── butterfly/       # Butterfly主题
+├── _config.yml          # Hexo主配置
+├── _config.butterfly.yml # 主题配置
+├── package.json         # 依赖配置
+└── README.md            # 项目说明
 ```
 
-你应该会看到 `* master`。
+---
 
+## 🛠️ 常用命令
 
+| 命令 | 说明 |
+|------|------|
+| `npm run dev` | 启动开发服务器(包含草稿) |
+| `npm run build` | 构建静态文件 |
+| `npm run deploy` | 一键部署(提交+构建+部署) |
+| `npm run new` | 创建新文章(交互式) |
+| `npm run preview` | 启动预览服务器 |
+| `npm run clean` | 清理缓存 |
+| `npm run lint` | 检查代码格式 |
+| `npm run format` | 格式化代码 |
 
-```
-git push -u origin master
-```
+---
 
-* **`git push`**: 推送命令。
-* **`origin`**: 你的远程仓库别名（指向 GitHub）。
-* **`master`**: 你要推送的本地分支名，同时也是你想在远程创建的分支名。
-* **`-u`**: 建立本地 `master` 和远程 `master` 的跟踪关系，方便以后直接使用 `git push`。
+## 📝 写作工作流
 
-执行完这个命令后，你再去 GitHub 仓库页面刷新一下，就能在分支列表里看到新出现的 `master` 分支了，里面存放着你博客的所有源文件。
+### 1. 创建新文章
 
-------
+```bash
+# 使用交互式脚本(推荐)
+npm run new
 
-### 确保未来的部署正确无误
-
-最后一步，我们需要检查并确保你 Hexo 的部署配置是正确的，即让 `hexo deploy` 命令把生成的网站推送到 `main` 分支。
-
-请打开你项目的 `_config.yml` 文件，找到 `deploy` 部分，确保 `branch` 的值是 `main`。
-
-YAML
-
-```
-# _config.yml
-
-deploy:
-  type: git
-  # repo 地址使用你的 SSH 别名
-  repo: git@github.com-SMLYFM:SMLYFM/SMLYFM.github.io.git
-  # 确认部署分支是 main
-  branch: main
+# 或使用Hexo命令
+npx hexo new post "文章标题"
 ```
 
-如果这里不是 `main`，请务必修改过来并保存。
+### 2. 编写内容
 
-### 你的未来工作流程总结
+文章保存在 `source/_posts/` 目录,使用Markdown格式。
 
-从现在开始，你的工作流程会非常清晰：
+**Front Matter示例**:
 
-1. **写文章、改配置（管理源代码）**：
-   * `git add .`
-   * `git commit -m "你的修改说明"`
-   * `git push origin master`  **(备份源代码到 `master` 分支)**
-2. **发布网站（更新线上内容）**：
-   * `hexo clean && hexo generate`
-   * `hexo deploy`  **(发布公开网站到 `main` 分支)**
+```yaml
+---
+title: 文章标题
+date: 2026-01-23 18:00:00
+categories: tech
+tags:
+  - Hexo
+  - Blog
+---
+```
 
-这两个流程互相独立，分工明确。你已经搭建起了专业、高效的博客工作流，恭喜！
+### 3. 本地预览
+
+```bash
+npm run dev
+```
+
+访问 `http://localhost:4000` 预览文章。
+
+### 4. 发布
+
+```bash
+# 一键部署(推荐)
+npm run deploy
+
+# 或手动部署
+git add .
+git commit -m "Update: 添加新文章"
+git push origin master
+```
+
+**GitHub Actions会自动构建并部署到 `main` 分支。**
+
+---
+
+## 🌟 技术栈
+
+### 核心框架
+
+- [Hexo](https://hexo.io/) - 静态网站生成器
+- [Butterfly](https://butterfly.js.org/) - 主题
+
+### 开发工具
+
+- [EditorConfig](https://editorconfig.org/) - 编辑器配置
+- [Prettier](https://prettier.io/) - 代码格式化
+
+### 部署
+
+- [GitHub Pages](https://pages.github.com/) - 静态网站托管
+- [GitHub Actions](https://github.com/features/actions) - CI/CD自动部署
+
+---
+
+## 🔧 配置说明
+
+### Hexo配置 (`_config.yml`)
+
+主要配置项:
+
+- **Site**: 网站基本信息
+- **URL**: 网站地址和链接格式
+- **Writing**: 文章渲染配置
+- **Deployment**: 部署配置
+
+### 主题配置 (`_config.butterfly.yml`)
+
+Butterfly主题的详细配置,包括UI、代码高亮、搜索等。
+
+详细说明请参考 [开发指南](docs/DEVELOPMENT.md)。
+
+---
+
+## 🚀 部署方式
+
+### 方式1: 自动部署 (推荐)
+
+推送到 `master` 分支后,GitHub Actions自动构建并部署:
+
+```bash
+git push origin master
+```
+
+### 方式2: 手动部署
+
+```bash
+npm run deploy
+```
+
+### 方式3: 本地部署
+
+```bash
+npm run build
+npx hexo deploy
+```
+
+详细说明请参考 [部署指南](docs/DEPLOYMENT.md)。
+
+---
+
+## 📊 分支说明
+
+| 分支 | 用途 | 管理方式 |
+|------|------|---------|
+| `master` | 源代码(Markdown、配置等) | 手动提交 |
+| `main` | 静态网站(HTML、CSS、JS) | 自动部署 |
+
+**工作流程**:
+
+```
+编写文章 → 提交到master → GitHub Actions自动部署到main → 网站更新
+```
+
+---
+
+## 📚 文档
+
+- [📖 开发指南](docs/DEVELOPMENT.md) - 本地开发、调试技巧
+- [🚀 部署指南](docs/DEPLOYMENT.md) - SSH配置、部署流程
+
+---
+
+## 🤝 贡献
+
+欢迎提交Issue和Pull Request!
+
+---
+
+## 📮 联系方式
+
+- **博客**: [https://smlyfm.github.io](https://smlyfm.github.io)
+- **GitHub**: [@SMLYFM](https://github.com/SMLYFM)
+- **Email**: <sudocjx@gmail.com>
+
+---
+
+## 📄 License
+
+[MIT License](LICENSE)
+
+---
+
+## 🙏 致谢
+
+- [Hexo](https://hexo.io/) - 强大的静态网站生成器
+- [Butterfly](https://butterfly.js.org/) - 精美的Hexo主题
+- [GitHub Pages](https://pages.github.com/) - 免费的静态网站托管
+
+---
+
+<div align="center">
+
+**⭐ 如果觉得不错,请给个Star! ⭐**
+
+Made with ❤️ by [CJX](https://github.com/SMLYFM)
+
+</div>
