@@ -201,6 +201,18 @@ SMLYFM.github.io/
 ---
 
 ## 常用命令
+\n### Makefile命令
+
+现在推荐使用Makefile管理博客:
+
+```bash
+make help    # 查看所有命令
+make check   # 检查项目状态
+make sync    # 一键同步发布
+```
+
+详见: [Makefile使用指南](./MAKEFILE.md)
+
 
 ### npm scripts
 
