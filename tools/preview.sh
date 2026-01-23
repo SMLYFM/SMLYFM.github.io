@@ -6,10 +6,10 @@
 set -e
 
 # 颜色定义
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-YELLOW='\033[1;33m'
-NC='\033[0m'
+GREEN=''
+BLUE=''
+YELLOW=''
+NC=''
 
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "${BLUE}    Hexo 本地预览服务${NC}"
