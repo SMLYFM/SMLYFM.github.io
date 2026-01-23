@@ -1,7 +1,7 @@
 <%# Calendar Card - 日历卡片 💡 显示当月日历，标记有文章的日期 %>
 
     <% var now=new Date(); var year=now.getFullYear(); var month=now.getMonth(); var postsThisMonth=[]; var
-        postDates=[]; // 获取本月文章 if (site.posts && site.posts.length> 0) {
+        postDates=[]; if (site.posts && site.posts.length> 0) {
         site.posts.forEach(function(post) {
         if (post.date) {
         var postDate = post.date.toDate();
