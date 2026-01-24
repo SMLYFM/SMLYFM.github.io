@@ -12,31 +12,60 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           submodules: true
-      
+
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'npm'
-      
+
       - name: 📦 Install Dependencies
         run: npm ci
-      
+
       - name: 🧹 Clean Cache
         run: npx hexo clean
-      
+
       - name: 🏗️ Build Static Files
         run: npx hexo generate
-      
+
+      - name: 🔍 Verify Build Artifacts
+        run: |
+          echo "### 📋 Build Verification" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          # 检查 sitemap
+          if [ -f "public/sitemap.xml" ]; then
+            echo "✅ sitemap.xml exists" >> $GITHUB_STEP_SUMMARY
+            echo "   - $(grep -c '<url>' public/sitemap.xml) URLs found" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ sitemap.xml not found" >> $GITHUB_STEP_SUMMARY
+          fi
+          # 检查 robots.txt
+          if [ -f "public/robots.txt" ]; then
+            echo "✅ robots.txt exists" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ robots.txt not found" >> $GITHUB_STEP_SUMMARY
+          fi
+          # 检查 PWA manifest
+          if [ -f "public/manifest.json" ]; then
+            echo "✅ manifest.json exists (PWA ready)" >> $GITHUB_STEP_SUMMARY
+          fi
+          # 检查 Service Worker
+          if [ -f "public/sw.js" ]; then
+            echo "✅ sw.js exists (Offline support)" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📊 Total files: $(find public -type f | wc -l)" >> $GITHUB_STEP_SUMMARY
+          echo "📦 Total size: $(du -sh public | cut -f1)" >> $GITHUB_STEP_SUMMARY
+
       - name: 🚀 Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
@@ -45,7 +74,7 @@ jobs:
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: '🤖 Auto deploy from ${{ github.sha }}'
           force_orphan: false
-      
+
       - name: ✅ Deployment Summary
         run: |
           echo "### 🎉 Deployment Successful!" >> $GITHUB_STEP_SUMMARY

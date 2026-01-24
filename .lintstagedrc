@@ -1,0 +1,11 @@
+{
+  "*.md": [
+    "markdownlint --fix"
+  ],
+  "*.{js,css}": [
+    "prettier --write"
+  ],
+  "*.{yml,yaml,json}": [
+    "prettier --write"
+  ]
+}

@@ -119,14 +119,33 @@ help: ## 显示帮助信息
 	@echo "    📝 工具与写作     → LaTeX"
 	@echo ""
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@echo "  📖 文档链接"
+	@echo "  � 容器化部署"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
-	@echo "    docs/CONFIG_GUIDE.md        配置修改指南 (公告、背景、导航等)"
-	@echo "    docs/MAKEFILE.md            Makefile 详细说明"
-	@echo "    docs/DEVELOPMENT.md         本地开发指南"
-	@echo "    docs/DEPLOYMENT.md          部署指南"
+	@echo "  Docker:"
+	@echo "    make docker-build             构建 Docker 镜像"
+	@echo "    make docker-run               运行 Docker 容器 (端口 80)"
+	@echo "    make docker-compose-up        Docker Compose 启动"
 	@echo ""
+	@echo "  Podman (Fedora 推荐):"
+	@echo "    make podman-build             构建 Podman 镜像"
+	@echo "    make podman-run               运行 Podman 容器 (端口 8080)"
+	@echo "    make podman-systemd           生成 Systemd 服务"
+	@echo ""
+	@echo "  服务器:"
+	@echo "    make deploy-server            部署到自有服务器 (需配置)"
+	@echo ""
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "  �📖 文档链接"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@echo "    docs/CONFIG_GUIDE.md          配置修改指南 (公告、背景、导航等)"
+	@echo "    docs/MAKEFILE.md              Makefile 详细说明"
+	@echo "    docs/DEVELOPMENT.md           本地开发指南"
+	@echo "    docs/DEPLOYMENT.md            GitHub Pages 部署指南"
+	@echo "    docs/SERVER_DEPLOYMENT.md     服务器/Docker/Podman 部署指南"
+	@echo ""
+
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo "  💡 示例"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -847,3 +866,95 @@ version: ## 显示版本信息
 	@echo "环境: Node $(NODE_VERSION), npm $(NPM_VERSION), Hexo $(HEXO_VERSION)"
 	@echo "分支: $$(git branch --show-current)"
 	@echo "提交: $$(git rev-parse --short HEAD)"
+
+# ============================================
+# 🐳 Docker/Podman 容器化部署
+# ============================================
+
+# Docker 镜像配置
+DOCKER_IMAGE := smlyfm-blog
+DOCKER_TAG := latest
+CONTAINER_NAME := smlyfm-blog
+
+.PHONY: docker-build docker-run docker-stop docker-logs docker-compose-up docker-compose-down
+.PHONY: podman-build podman-run podman-stop podman-logs podman-systemd
+
+docker-build: ## 🐳 构建 Docker 镜像
+	@echo "🐳 构建 Docker 镜像: $(DOCKER_IMAGE):$(DOCKER_TAG)"
+	docker build -t $(DOCKER_IMAGE):$(DOCKER_TAG) .
+	@echo "✅ 镜像构建完成"
+
+docker-run: docker-build ## 🐳 运行 Docker 容器
+	@echo "🐳 启动 Docker 容器..."
+	@docker stop $(CONTAINER_NAME) 2>/dev/null || true
+	@docker rm $(CONTAINER_NAME) 2>/dev/null || true
+	docker run -d --name $(CONTAINER_NAME) -p 80:80 $(DOCKER_IMAGE):$(DOCKER_TAG)
+	@echo "✅ 容器已启动: http://localhost"
+
+docker-stop: ## 🐳 停止 Docker 容器
+	@echo "🐳 停止 Docker 容器..."
+	docker stop $(CONTAINER_NAME) && docker rm $(CONTAINER_NAME)
+	@echo "✅ 容器已停止"
+
+docker-logs: ## 🐳 查看 Docker 日志
+	docker logs -f $(CONTAINER_NAME)
+
+docker-compose-up: ## 🐳 使用 Docker Compose 启动
+	@echo "🐳 使用 Docker Compose 启动..."
+	docker compose up -d --build
+	@echo "✅ 服务已启动: http://localhost"
+
+docker-compose-down: ## 🐳 使用 Docker Compose 停止
+	docker compose down
+	@echo "✅ 服务已停止"
+
+# ============================================
+# 🦭 Podman 部署 (Fedora 推荐)
+# ============================================
+
+podman-build: ## 🦭 构建 Podman 镜像
+	@echo "🦭 构建 Podman 镜像: $(DOCKER_IMAGE):$(DOCKER_TAG)"
+	podman build -t $(DOCKER_IMAGE):$(DOCKER_TAG) .
+	@echo "✅ 镜像构建完成"
+
+podman-run: podman-build ## 🦭 运行 Podman 容器 (端口 8080)
+	@echo "🦭 启动 Podman 容器..."
+	@podman stop $(CONTAINER_NAME) 2>/dev/null || true
+	@podman rm $(CONTAINER_NAME) 2>/dev/null || true
+	podman run -d --name $(CONTAINER_NAME) -p 8080:80 $(DOCKER_IMAGE):$(DOCKER_TAG)
+	@echo "✅ 容器已启动: http://localhost:8080"
+
+podman-stop: ## 🦭 停止 Podman 容器
+	@echo "🦭 停止 Podman 容器..."
+	podman stop $(CONTAINER_NAME) && podman rm $(CONTAINER_NAME)
+	@echo "✅ 容器已停止"
+
+podman-logs: ## 🦭 查看 Podman 日志
+	podman logs -f $(CONTAINER_NAME)
+
+podman-systemd: ## 🦭 生成 Systemd 服务文件
+	@echo "🦭 生成 Systemd 服务文件..."
+	podman generate systemd --name $(CONTAINER_NAME) --files --new
+	@echo ""
+	@echo "📋 将服务文件移动到用户目录:"
+	@echo "   mkdir -p ~/.config/systemd/user"
+	@echo "   mv container-$(CONTAINER_NAME).service ~/.config/systemd/user/"
+	@echo ""
+	@echo "📋 启用服务:"
+	@echo "   systemctl --user daemon-reload"
+	@echo "   systemctl --user enable container-$(CONTAINER_NAME).service"
+	@echo "   systemctl --user start container-$(CONTAINER_NAME)"
+
+# ============================================
+# 🖥️ 服务器部署
+# ============================================
+
+# 服务器配置 (根据实际情况修改)
+SERVER_USER ?= your-username
+SERVER_HOST ?= your-server-ip
+SERVER_PATH ?= /var/www/blog
+
+deploy-server: build ## 🖥️ 部署到自有服务器 (需配置 SERVER_*)
+	@echo "🖥️ 部署到服务器: $(SERVER_USER)@$(SERVER_HOST)"
+	rsync -avz --delete ./public/ $(SERVER_USER)@$(SERVER_HOST):$(SERVER_PATH)/
+	@echo "✅ 部署完成"

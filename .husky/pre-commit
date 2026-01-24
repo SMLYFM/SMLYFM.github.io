@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+# 💡 Husky pre-commit 钩子
+# 用于在 Git 提交前运行 lint-staged
+
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx lint-staged

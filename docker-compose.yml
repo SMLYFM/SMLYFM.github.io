@@ -1,0 +1,51 @@
+# ============================================
+# Docker Compose 配置
+# 作者: CJX
+# 项目: SMLYFM.github.io
+#
+# 使用方法:
+#   docker compose up -d --build    # 构建并启动
+#   docker compose logs -f blog     # 查看日志
+#   docker compose down              # 停止
+# ============================================
+
+version: '3.8'
+
+services:
+  blog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: smlyfm-blog
+    restart: unless-stopped
+    ports:
+      - '${BLOG_PORT:-80}:80'
+    volumes:
+      # 日志持久化
+      - ./logs:/var/log/nginx
+      # 可选：挂载自定义配置
+      # - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+      # 可选：SSL 证书挂载
+      # - /etc/letsencrypt:/etc/letsencrypt:ro
+    environment:
+      - TZ=Asia/Shanghai
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'wget',
+          '--no-verbose',
+          '--tries=1',
+          '--spider',
+          'http://localhost/',
+        ]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge

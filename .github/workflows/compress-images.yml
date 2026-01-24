@@ -1,0 +1,46 @@
+# ==================================================
+# 图片自动压缩工作流
+# 在 PR 时自动压缩 source/ 目录下的图片
+# ==================================================
+
+name: Compress Images
+
+on:
+  pull_request:
+    paths:
+      - 'source/**/*.png'
+      - 'source/**/*.jpg'
+      - 'source/**/*.jpeg'
+      - 'source/**/*.gif'
+      - 'source/**/*.webp'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  compress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compress Images
+        uses: calibreapp/image-actions@main
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          # 💡 压缩配置
+          jpegQuality: '85'
+          jpegProgressive: true
+          pngQuality: '85'
+          webpQuality: '85'
+          ignorePaths: 'node_modules/**,public/**,.deploy_git/**'
+
+      - name: Commit compressed images
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'ci: 🖼️ auto-compress images'
+          file_pattern: 'source/**/*.{png,jpg,jpeg,gif,webp}'

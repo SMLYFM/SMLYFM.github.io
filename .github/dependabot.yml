@@ -1,7 +1,24 @@
 version: 2
 updates:
-- package-ecosystem: npm
-  directory: "/"
-  schedule:
-    interval: daily
-  open-pull-requests-limit: 20
+  # 💡 npm 依赖更新
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: 'deps(npm)'
+    labels:
+      - dependencies
+      - npm
+
+  # 💡 GitHub Actions 更新
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: 'ci(actions)'
+    labels:
+      - dependencies
+      - github-actions
