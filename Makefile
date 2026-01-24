@@ -50,8 +50,10 @@ help: ## 显示帮助信息
 	@echo ""
 	@echo "📝 文章管理:"
 	@echo "  make new              交互式创建新文章"
-	@echo "  make new-math         创建数学文章模板"
-	@echo "  make new-code         创建编程文章模板"
+	@echo "  make new-math         创建数学文章模板 (SUB=分析学/实分析/泛函分析/拓扑学)"
+	@echo "  make new-code         创建编程文章模板 (LANG=python/rust/pytorch)"
+	@echo "  make new-sci          创建科学计算文章模板"
+	@echo "  make new-tool         创建工具类文章模板"
 	@echo "  make list             列出所有文章"
 	@echo "  make edit             编辑最新文章"
 	@echo "  make delete           删除指定文章"
@@ -227,20 +229,24 @@ new: ## 交互式创建新文章
 		$(EDITOR) "$$FILENAME"; \
 	fi
 
-new-math: ## 创建数学文章 (make new-math TITLE="标题")
+new-math: ## 创建数学文章 (make new-math TITLE="标题" SUB="分析学")
 	@if [ -z "$(TITLE)" ]; then \
-		echo "❌ 用法: make new-math TITLE=\"文章标题\""; \
+		echo "❌ 用法: make new-math TITLE=\"文章标题\" SUB=\"分析学\""; \
+		echo ""; \
+		echo "可用子分类: 分析学, 实分析, 泛函分析, 拓扑学"; \
 		exit 1; \
 	fi
-	@FILENAME="$(POST_DIR)/$(TITLE).md"; \
+	@SUB="$${SUB:-分析学}"; \
+	FILENAME="$(POST_DIR)/$(TITLE).md"; \
 	echo "---" > "$$FILENAME"; \
 	echo "title: $(TITLE)" >> "$$FILENAME"; \
 	echo "date: $(TIMESTAMP)" >> "$$FILENAME"; \
 	echo "updated: $(TIMESTAMP)" >> "$$FILENAME"; \
 	echo "categories:" >> "$$FILENAME"; \
 	echo "  - 数学" >> "$$FILENAME"; \
+	echo "  - $$SUB" >> "$$FILENAME"; \
 	echo "tags:" >> "$$FILENAME"; \
-	echo "  - 数学分析" >> "$$FILENAME"; \
+	echo "  - 数学基础" >> "$$FILENAME"; \
 	echo "mathjax: true" >> "$$FILENAME"; \
 	echo "---" >> "$$FILENAME"; \
 	echo "" >> "$$FILENAME"; \
@@ -262,11 +268,14 @@ new-math: ## 创建数学文章 (make new-math TITLE="标题")
 	echo "" >> "$$FILENAME"; \
 	echo "## 参考文献" >> "$$FILENAME"; \
 	echo "" >> "$$FILENAME"; \
-	echo "✅ 数学文章已创建: $$FILENAME"
+	echo "✅ 数学文章已创建: $$FILENAME"; \
+	echo "   分类: 数学 > $$SUB"
 
 new-code: ## 创建编程文章 (make new-code TITLE="标题" LANG="python")
 	@if [ -z "$(TITLE)" ]; then \
 		echo "❌ 用法: make new-code TITLE=\"文章标题\" LANG=\"python\""; \
+		echo ""; \
+		echo "LANG 选项: python, rust, pytorch"; \
 		exit 1; \
 	fi
 	@LANG="$${LANG:-python}"; \
@@ -276,7 +285,8 @@ new-code: ## 创建编程文章 (make new-code TITLE="标题" LANG="python")
 	echo "date: $(TIMESTAMP)" >> "$$FILENAME"; \
 	echo "updated: $(TIMESTAMP)" >> "$$FILENAME"; \
 	echo "categories:" >> "$$FILENAME"; \
-	echo "  - 编程" >> "$$FILENAME"; \
+	echo "  - 编程语言" >> "$$FILENAME"; \
+	echo "  - $$LANG" >> "$$FILENAME"; \
 	echo "tags:" >> "$$FILENAME"; \
 	echo "  - $$LANG" >> "$$FILENAME"; \
 	echo "highlight_shrink: false" >> "$$FILENAME"; \
@@ -304,7 +314,83 @@ new-code: ## 创建编程文章 (make new-code TITLE="标题" LANG="python")
 	echo "" >> "$$FILENAME"; \
 	echo "## 参考链接" >> "$$FILENAME"; \
 	echo "" >> "$$FILENAME"; \
-	echo "✅ 编程文章已创建: $$FILENAME"
+	echo "✅ 编程文章已创建: $$FILENAME"; \
+	echo "   分类: 编程语言 > $$LANG"
+
+new-sci: ## 创建科学计算文章 (make new-sci TITLE="标题")
+	@if [ -z "$(TITLE)" ]; then \
+		echo "❌ 用法: make new-sci TITLE=\"文章标题\""; \
+		exit 1; \
+	fi
+	@FILENAME="$(POST_DIR)/$(TITLE).md"; \
+	echo "---" > "$$FILENAME"; \
+	echo "title: $(TITLE)" >> "$$FILENAME"; \
+	echo "date: $(TIMESTAMP)" >> "$$FILENAME"; \
+	echo "updated: $(TIMESTAMP)" >> "$$FILENAME"; \
+	echo "categories:" >> "$$FILENAME"; \
+	echo "  - 科学计算" >> "$$FILENAME"; \
+	echo "  - 偏微分方程" >> "$$FILENAME"; \
+	echo "tags:" >> "$$FILENAME"; \
+	echo "  - PDE" >> "$$FILENAME"; \
+	echo "  - 数值方法" >> "$$FILENAME"; \
+	echo "mathjax: true" >> "$$FILENAME"; \
+	echo "---" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 问题描述" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "<!-- more -->" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 数学模型" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 数值方法" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 代码实现" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "\`\`\`python" >> "$$FILENAME"; \
+	echo "# 数值求解代码" >> "$$FILENAME"; \
+	echo "\`\`\`" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 结果分析" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 参考文献" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "✅ 科学计算文章已创建: $$FILENAME"; \
+	echo "   分类: 科学计算 > 偏微分方程"
+
+new-tool: ## 创建工具类文章 (make new-tool TITLE="标题")
+	@if [ -z "$(TITLE)" ]; then \
+		echo "❌ 用法: make new-tool TITLE=\"文章标题\""; \
+		exit 1; \
+	fi
+	@FILENAME="$(POST_DIR)/$(TITLE).md"; \
+	echo "---" > "$$FILENAME"; \
+	echo "title: $(TITLE)" >> "$$FILENAME"; \
+	echo "date: $(TIMESTAMP)" >> "$$FILENAME"; \
+	echo "updated: $(TIMESTAMP)" >> "$$FILENAME"; \
+	echo "categories:" >> "$$FILENAME"; \
+	echo "  - 工具与写作" >> "$$FILENAME"; \
+	echo "  - LaTeX" >> "$$FILENAME"; \
+	echo "tags:" >> "$$FILENAME"; \
+	echo "  - 工具" >> "$$FILENAME"; \
+	echo "  - 效率" >> "$$FILENAME"; \
+	echo "---" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 简介" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "<!-- more -->" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 安装与配置" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 基本使用" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 进阶技巧" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 常见问题" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 参考资料" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "✅ 工具类文章已创建: $$FILENAME"; \
+	echo "   分类: 工具与写作 > LaTeX"
 
 draft: ## 创建草稿 (make draft TITLE="草稿标题")
 	@if [ -z "$(TITLE)" ]; then \
