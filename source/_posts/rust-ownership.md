@@ -3,7 +3,8 @@ title: Rust所有权系统详解
 date: 2026-01-25 01:27:00
 updated: 2026-01-25 01:27:00
 categories:
-  - rust
+  - 编程语言
+  - Rust
 tags:
   - Rust
   - 内存安全

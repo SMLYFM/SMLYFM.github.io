@@ -3,7 +3,8 @@ title: Python装饰器深入理解
 date: 2026-01-25 01:27:00
 updated: 2026-01-25 01:27:00
 categories:
-  - python
+  - 编程语言
+  - Python
 tags:
   - Python
   - 装饰器

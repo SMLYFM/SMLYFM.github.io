@@ -3,7 +3,8 @@ title: PyTorch自动微分机制详解
 date: 2026-01-25 01:27:00
 updated: 2026-01-25 01:27:00
 categories:
-  - pytorch
+  - 编程语言
+  - PyTorch
 tags:
   - PyTorch
   - 深度学习

@@ -3,7 +3,8 @@ title: LaTeX数学公式排版指南
 date: 2026-01-25 01:27:00
 updated: 2026-01-25 01:27:00
 categories:
-  - latex
+  - 工具与写作
+  - LaTeX
 tags:
   - LaTeX
   - 数学排版

@@ -212,3 +212,39 @@ deploy:
 #   enable: true
 # neat_js:
 #   enable: true
+
+# ============================================
+# Marked 渲染器配置（解决 LaTeX 公式渲染问题）
+# ============================================
+# 💡 禁用某些 Markdown 特性，避免与 MathJax LaTeX 语法冲突
+marked:
+  gfm: true           # 启用 GitHub Flavored Markdown
+  pedantic: false
+  breaks: false       # 💡 关键：禁用自动换行，避免公式内 \n 变成 <br>
+  smartLists: true
+  smartypants: false  # 禁用智能引号（避免与 LaTeX 冲突）
+  modifyAnchors: 0
+  autolink: true
+  mangle: false       # 不转义邮箱地址
+  sanitizeUrl: false
+  headerIds: true
+  lazyload: false
+  prependRoot: false
+  postAsset: false
+  descriptionLists: true
+
+# ============================================
+# hexo-filter-mathjax 配置
+# ============================================
+# 💡 在 Markdown 渲染前预处理 LaTeX 公式，避免符号转义
+mathjax:
+  tags: ams           # 公式编号：ams / all / none
+  single_dollars: true  # 允许 $...$ 行内公式
+  chtml:
+    scale: 1.0
+    matchFontHeight: false
+    mtextInheritFont: false
+  svg:
+    scale: 1.0
+    matchFontHeight: false
+    mtextInheritFont: false

@@ -30,15 +30,20 @@ menu:
   # 数学分类
   Math||fas fa-calculator||hide:
     数学: /categories/数学/ || fas fa-infinity
-    PDE: /categories/pde/ || fas fa-wave-square
+    科学计算: /categories/科学计算/ || fas fa-wave-square
 
   # 编程分类
   Computer-Science||fas fa-code||hide:
     计算机: /categories/计算机/ || fas fa-laptop-code
-    Rust: /categories/rust/ || fas fa-cogs
-    Python: /categories/python/ || fab fa-python
-    LaTeX: /categories/latex/ || fas fa-file-alt
-    PyTorch: /categories/pytorch/ || fas fa-fire
+    编程语言: /categories/编程语言/ || fas fa-code
+    Rust: /categories/编程语言/rust/ || fas fa-cogs
+    Python: /categories/编程语言/python/ || fab fa-python
+    PyTorch: /categories/编程语言/pytorch/ || fas fa-fire
+
+  # 工具
+  Tools||fas fa-tools||hide:
+    LaTeX: /categories/工具与写作/latex/ || fas fa-file-alt
+    工具与写作: /categories/工具与写作/ || fas fa-pen-fancy
 # --------------------------------------
 # Code Blocks Settings
 # --------------------------------------
@@ -121,13 +126,29 @@ cover:
   # When cover is not set, the default cover is displayed #封面显示的位置
   # 三个值可配置 left , right , both  
   default_cover:
-    # 💡 使用更美观的渐变和自然风景图片
+    # 💡 高品质自然风景图片（Unsplash）
+    # 山脉系列
+    - https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop
+    - https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=400&fit=crop
+    - https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&h=400&fit=crop
+    - https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=800&h=400&fit=crop
+    # 湖泊与水景
     - https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop
     - https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&h=400&fit=crop
+    - https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&h=400&fit=crop
+    # 森林与自然
     - https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=800&h=400&fit=crop
-    - https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&h=400&fit=crop
-    - https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=400&fit=crop
-    - https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop
+    - https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&h=400&fit=crop
+    - https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&h=400&fit=crop
+    # 星空与夜景
+    - https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&h=400&fit=crop
+    - https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=800&h=400&fit=crop
+    # 海洋与海岸
+    - https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&h=400&fit=crop
+    - https://images.unsplash.com/photo-1520942702018-0862200e6873?w=800&h=400&fit=crop
+    # 极光与天空
+    - https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800&h=400&fit=crop
+    - https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=800&h=400&fit=crop
 
 # Replace Broken Images
 error_img:
@@ -144,11 +165,11 @@ post_meta:
   # Home Page
   page:
     # Choose: created / updated / both
-    date_type: created
+    date_type: both  # 💡 同时显示创建和更新时间
     # Choose: date / relative
     date_format: date
     categories: true
-    tags: false
+    tags: true  # 💡 首页也显示标签
     label: true
   post:
     # Choose: left / center
@@ -220,7 +241,7 @@ toc:
   post: true # 文章页是否显示 TOC
   page: false  # 普通页面是否显示 TOC
   number: true # 是否显示章节数
-  expand: false # 是否展开 TOC
+  expand: true # 是否展开 TOC
   # Only for post
   style_simple: false
   scroll_percent: true
@@ -391,7 +412,7 @@ rightside_bottom:
 
 # Conversion between Traditional and Simplified Chinese
 translate:
-  enable: false
+  enable: true
   # The text of a button
   default: 繁
   # the language of website (1 - Traditional Chinese/ 2 - Simplified Chinese）
@@ -421,7 +442,7 @@ darkmode:
   end:
 
 # Show scroll percent in scroll-to-top button
-rightside_scroll_percent: false
+rightside_scroll_percent: true
 
 # Don't modify the following settings unless you know how they work
 # Choose: readmode,translate,darkmode,hideAside,toc,chat,comment
@@ -439,9 +460,9 @@ rightside_item_order:
 
 anchor:
   # When you scroll, the URL will update according to header id.
-  auto_update: false
+  auto_update: true
   # Click the headline to scroll and update the anchor
-  click_to_scroll: false
+  click_to_scroll: true
 
 photofigcaption: false
 
@@ -478,16 +499,17 @@ busuanzi:
 # if you set it to false, it will load mathjax/katex script according to your setting (add the 'mathjax: true' or 'katex: true' in page's front-matter)
 math:
   # Choose: mathjax, katex
-  # Leave it empty if you don't need math
-  use:
-  per_page: true
+  # 💡 MathJax 对复杂数学公式支持更好，适合数学专业博客
+  use: mathjax
+  per_page: true  # 全局加载，所有页面自动支持数学公式
   hide_scrollbar: false
 
   mathjax:
-    # Enable the contextual menu
+    # Enable the contextual menu (右键菜单)
     enableMenu: true
     # Choose: all / ams / none, This controls whether equations are numbered and how
-    tags: none
+    # 💡 ams: 自动编号带标签的公式；all: 所有公式编号；none: 不编号
+    tags: ams
 
   katex:
     # Enable the copy KaTeX formula
@@ -936,7 +958,7 @@ clickShowText:
 # https://github.com/francoischalifour/medium-zoom
 # https://fancyapps.com/fancybox/
 # Leave it empty if you don't need lightbox
-lightbox:
+lightbox: fancybox
 
 # --------------------------------------
 # Tag Plugins settings
