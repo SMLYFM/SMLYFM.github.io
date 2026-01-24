@@ -10,6 +10,7 @@
 @import './variables.css';
 @import './cards.css';
 @import './animations.css';
+@import './dark-mode.css';
 
 /* ========================================
  * 全局样式增强

@@ -27,14 +27,18 @@ menu:
   Link: /link/ || fas fa-link
   About: /about/ || fas fa-heart
 
-  # 新增数学和计算机分类
+  # 数学分类
   Math||fas fa-calculator||hide:
+    数学: /categories/数学/ || fas fa-infinity
     PDE: /categories/pde/ || fas fa-wave-square
-    Functional-Analysis: /categories/functional-analysis/ || fas fa-chart-line
+
+  # 编程分类
   Computer-Science||fas fa-code||hide:
+    计算机: /categories/计算机/ || fas fa-laptop-code
     Rust: /categories/rust/ || fas fa-cogs
-    Python: /categories/python/ || fas fa-python
+    Python: /categories/python/ || fab fa-python
     LaTeX: /categories/latex/ || fas fa-file-alt
+    PyTorch: /categories/pytorch/ || fas fa-fire
 # --------------------------------------
 # Code Blocks Settings
 # --------------------------------------
@@ -117,10 +121,13 @@ cover:
   # When cover is not set, the default cover is displayed #封面显示的位置
   # 三个值可配置 left , right , both  
   default_cover:
-  - https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png
-  - https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg2.png
-  - https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg3.png
-    # - xxx.jpg
+    # 💡 使用更美观的渐变和自然风景图片
+    - https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop
+    - https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&h=400&fit=crop
+    - https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=800&h=400&fit=crop
+    - https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&h=400&fit=crop
+    - https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=400&fit=crop
+    - https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop
 
 # Replace Broken Images
 error_img:

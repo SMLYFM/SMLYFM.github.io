@@ -136,27 +136,16 @@ block content
             .nav-label 关于
             .nav-count 了解我
 
-      //- 学科分类导航
-      h4.section-title 📚 学科分类
+      //- 学科分类导航 - 动态遍历实际分类
+      h4.section-title 📚 热门分类
       .category-nav
-        a.category-item(href=url_for('/categories/pde/'))
-          span.emoji 🌊
-          span.name PDE
-        a.category-item(href=url_for('/categories/functional-analysis/'))
-          span.emoji 📊
-          span.name 泛函分析
-        a.category-item(href=url_for('/categories/rust/'))
-          span.emoji 🦀
-          span.name Rust
-        a.category-item(href=url_for('/categories/python/'))
-          span.emoji 🐍
-          span.name Python
-        a.category-item(href=url_for('/categories/latex/'))
-          span.emoji 📝
-          span.name LaTeX
-        a.category-item(href=url_for('/categories/pytorch/'))
-          span.emoji 🔥
-          span.name PyTorch
+        //- 定义分类图标映射
+        - var catIcons = {'数学': '📐', '计算机': '💻', '分析学': '📊', '泛函分析': '📈', '实分析': '📉', '偏微分方程': '🌊', '拓扑学': '🔗', '深度学习': '🧠', '机器学习': '🤖', '物理信息神经网络': '⚛️'}
+        each cat in site.categories.toArray().slice(0, 8)
+          - var icon = catIcons[cat.name] || '📁'
+          a.category-item(href=url_for(cat.path))
+            span.emoji= icon
+            span.name= cat.name
 
   //- 💡 Butterfly 原版侧边栏会通过 layout.pug 自动加载
 

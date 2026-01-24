@@ -1,0 +1,416 @@
+/**
+ * 深色模式增强 + 文章配色变化
+ * 💡 改善深色模式可读性，增加文章卡片配色多样性
+ */
+
+/* ========================================
+ * 深色模式增强 - Dark Mode Enhancement
+ * 💡 提高文字对比度，确保可读性
+ * ======================================== */
+
+/* Butterfly 主题的深色模式 */
+[data-theme="dark"] {
+    /* 💡 背景色 - 更深更舒适 */
+    --global-bg: #0d1117;
+    --card-bg: rgba(22, 27, 34, 0.95);
+
+    /* 💡 文字颜色 - 大幅提高对比度 */
+    --font-color: #e6edf3 !important;
+    --text-color: #e6edf3 !important;
+    --hr-border: rgba(255, 255, 255, 0.2);
+}
+
+/* 深色模式正文内容 - 确保白色高对比度文字 */
+[data-theme="dark"] #content-inner,
+[data-theme="dark"] .post-content,
+[data-theme="dark"] #post,
+[data-theme="dark"] article,
+[data-theme="dark"] .article-content,
+[data-theme="dark"] main {
+    color: #e6edf3 !important;
+}
+
+/* 深色模式段落文字 */
+[data-theme="dark"] p,
+[data-theme="dark"] li,
+[data-theme="dark"] span,
+[data-theme="dark"] div {
+    color: inherit;
+}
+
+/* 深色模式标题 - 更亮的白色 */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+    color: #ffffff !important;
+}
+
+/* 深色模式链接 */
+[data-theme="dark"] a {
+    color: #79c0ff !important;
+}
+
+[data-theme="dark"] a:hover {
+    color: #a5d6ff !important;
+}
+
+/* 深色模式代码块 */
+[data-theme="dark"] code {
+    background: rgba(110, 118, 129, 0.3);
+    color: #ff7b72;
+}
+
+[data-theme="dark"] pre code {
+    color: #e6edf3;
+}
+
+/* 深色模式卡片 */
+[data-theme="dark"] .modern-card {
+    background: rgba(22, 27, 34, 0.9);
+    border-color: rgba(48, 54, 61, 0.8);
+}
+
+/* 深色模式侧边栏 */
+[data-theme="dark"] #aside-content .card-widget {
+    background: rgba(22, 27, 34, 0.9);
+    color: #e6edf3;
+}
+
+[data-theme="dark"] #aside-content .card-info,
+[data-theme="dark"] #aside-content .card-announcement,
+[data-theme="dark"] #aside-content .card-recent-post,
+[data-theme="dark"] #aside-content .card-categories,
+[data-theme="dark"] #aside-content .card-tags,
+[data-theme="dark"] #aside-content .card-archives,
+[data-theme="dark"] #aside-content .card-webinfo {
+    color: #e6edf3;
+}
+
+/* 深色模式 - 文章页面专门优化 */
+[data-theme="dark"] #article-container {
+    color: #e6edf3 !important;
+}
+
+[data-theme="dark"] #article-container p,
+[data-theme="dark"] #article-container li,
+[data-theme="dark"] #article-container td,
+[data-theme="dark"] #article-container th {
+    color: #c9d1d9 !important;
+}
+
+[data-theme="dark"] #article-container blockquote {
+    background: rgba(56, 139, 253, 0.1);
+    border-left-color: #388bfd;
+    color: #c9d1d9;
+}
+
+/* 💡 文章正文增强 - 确保最高对比度 */
+[data-theme="dark"] .post-content,
+[data-theme="dark"] .post-content p,
+[data-theme="dark"] .post-content li,
+[data-theme="dark"] .post-content span {
+    color: #f0f6fc !important;
+}
+
+[data-theme="dark"] .post-content h1,
+[data-theme="dark"] .post-content h2,
+[data-theme="dark"] .post-content h3,
+[data-theme="dark"] .post-content h4,
+[data-theme="dark"] .post-content h5,
+[data-theme="dark"] .post-content h6 {
+    color: #ffffff !important;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 💡 版权声明块 */
+[data-theme="dark"] .post-copyright {
+    background: rgba(30, 35, 42, 0.8);
+    border-color: rgba(48, 54, 61, 0.6);
+    color: #c9d1d9;
+}
+
+[data-theme="dark"] .post-copyright .post-copyright-title {
+    color: #e6edf3;
+}
+
+/* 💡 文章页面背景 */
+[data-theme="dark"] #post {
+    background: rgba(22, 27, 34, 0.95);
+}
+
+/* 💡 表格样式 */
+[data-theme="dark"] table {
+    background: rgba(30, 35, 42, 0.6);
+}
+
+[data-theme="dark"] th {
+    background: rgba(48, 54, 61, 0.8);
+    color: #f0f6fc !important;
+}
+
+[data-theme="dark"] td {
+    color: #c9d1d9 !important;
+    border-color: rgba(48, 54, 61, 0.6);
+}
+
+[data-theme="dark"] tr:hover td {
+    background: rgba(48, 54, 61, 0.4);
+}
+
+/* 💡 代码块增强 */
+[data-theme="dark"] pre {
+    background: #161b22 !important;
+    border: 1px solid rgba(48, 54, 61, 0.6);
+}
+
+[data-theme="dark"] .highlight {
+    background: #161b22 !important;
+}
+
+[data-theme="dark"] code {
+    background: rgba(110, 118, 129, 0.4);
+    color: #ff7b72;
+}
+
+/* 💡 分页导航 */
+[data-theme="dark"] .pagination {
+    color: #e6edf3;
+}
+
+[data-theme="dark"] .pagination a {
+    color: #79c0ff;
+    border-color: rgba(48, 54, 61, 0.6);
+}
+
+/* 💡 目录 TOC */
+[data-theme="dark"] #card-toc .toc-content {
+    color: #c9d1d9;
+}
+
+[data-theme="dark"] #card-toc .toc-link {
+    color: #8b949e;
+}
+
+[data-theme="dark"] #card-toc .toc-link.active {
+    color: #79c0ff;
+}
+
+/* ========================================
+ * 文章卡片配色变化
+ * 💡 每篇文章使用不同的渐变主题色
+ * ======================================== */
+
+/* 配色方案定义 */
+.article-item:nth-child(6n+1) {
+    --card-accent: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --card-accent-light: rgba(102, 126, 234, 0.08);
+}
+
+.article-item:nth-child(6n+2) {
+    --card-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --card-accent-light: rgba(240, 147, 251, 0.08);
+}
+
+.article-item:nth-child(6n+3) {
+    --card-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --card-accent-light: rgba(79, 172, 254, 0.08);
+}
+
+.article-item:nth-child(6n+4) {
+    --card-accent: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    --card-accent-light: rgba(67, 233, 123, 0.08);
+}
+
+.article-item:nth-child(6n+5) {
+    --card-accent: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --card-accent-light: rgba(250, 112, 154, 0.08);
+}
+
+.article-item:nth-child(6n+6) {
+    --card-accent: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+    --card-accent-light: rgba(161, 140, 209, 0.08);
+}
+
+/* 文章项样式增强 */
+.article-card .article-item {
+    background: var(--card-accent-light, rgba(102, 126, 234, 0.05));
+    position: relative;
+    overflow: hidden;
+}
+
+.article-card .article-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--card-accent, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+    border-radius: 4px 0 0 4px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.article-card .article-item:hover::before {
+    opacity: 1;
+}
+
+.article-card .article-item:hover {
+    background: var(--card-accent-light, rgba(102, 126, 234, 0.12));
+    padding-left: 16px;
+}
+
+/* ========================================
+ * 统计卡片配色变化
+ * ======================================== */
+
+.stats-card .stat-item:nth-child(1) .stat-icon {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.stats-card .stat-item:nth-child(2) .stat-icon {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.stats-card .stat-item:nth-child(3) .stat-icon {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.stats-card .stat-item:nth-child(4) .stat-icon {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+/* 统计值配色 */
+.stats-card .stat-item:nth-child(1) .stat-value {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stats-card .stat-item:nth-child(2) .stat-value {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stats-card .stat-item:nth-child(3) .stat-value {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stats-card .stat-item:nth-child(4) .stat-value {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ========================================
+ * 导航卡片配色变化
+ * ======================================== */
+
+.quick-nav-card .nav-item:nth-child(1) .nav-icon {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.quick-nav-card .nav-item:nth-child(2) .nav-icon {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.quick-nav-card .nav-item:nth-child(3) .nav-icon {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.quick-nav-card .nav-item:nth-child(4) .nav-icon {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+/* ========================================
+ * 分类标签配色
+ * ======================================== */
+
+.category-nav .category-item:nth-child(6n+1):hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.category-nav .category-item:nth-child(6n+2):hover {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.category-nav .category-item:nth-child(6n+3):hover {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.category-nav .category-item:nth-child(6n+4):hover {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.category-nav .category-item:nth-child(6n+5):hover {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.category-nav .category-item:nth-child(6n+6):hover {
+    background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+}
+
+/* ========================================
+ * 深色模式下的配色调整
+ * ======================================== */
+
+[data-theme="dark"] .article-card .article-item {
+    background: rgba(30, 35, 42, 0.6);
+}
+
+[data-theme="dark"] .article-card .article-item:hover {
+    background: rgba(30, 35, 42, 0.9);
+}
+
+[data-theme="dark"] .article-card .article-title {
+    color: #e6edf3;
+}
+
+[data-theme="dark"] .article-card .article-meta {
+    color: #8b949e;
+}
+
+[data-theme="dark"] .modern-card {
+    background: rgba(22, 27, 34, 0.9);
+    border-color: rgba(48, 54, 61, 0.6);
+}
+
+[data-theme="dark"] .hi-card {
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.95) 0%, rgba(30, 35, 42, 0.95) 100%);
+}
+
+[data-theme="dark"] .hi-card .tagline,
+[data-theme="dark"] .hi-card .description {
+    color: #8b949e;
+}
+
+[data-theme="dark"] .card-title {
+    color: #c9d1d9;
+}
+
+[data-theme="dark"] .quick-nav-card .nav-label {
+    color: #e6edf3;
+}
+
+[data-theme="dark"] .quick-nav-card .nav-count {
+    color: #8b949e;
+}
+
+[data-theme="dark"] .stats-card .stat-label {
+    color: #8b949e;
+}
+
+[data-theme="dark"] .category-nav .category-item {
+    background: rgba(48, 54, 61, 0.5);
+    color: #e6edf3;
+}
