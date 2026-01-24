@@ -1,17 +1,163 @@
-- class_name: 1.技术支持
+# 技术支持
+- class_name: 🔧 技术支持
   class_desc: 本网站的搭建由以下开源作者提供技术支持
-  link_list: 
-    - name: Hexo 
+  link_list:
+    - name: Hexo
       link: https://hexo.io/zh-cn/
       avatar: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
       descr: 快速、简单且强大的网志框架
-      siteshot: https://source.fomal.cc/siteshot/hexo.io.jpg
-      
-- class_name: 2.友情链接
+
+# 友情链接
+- class_name: 👥 友情链接
   class_desc: 一些好朋友~~
   link_list:
     - name: Fomalhaut🥝
       link: https://fomal.cc/
       avatar: /assets/head.jpg
       descr: Future is now 🍭🍭🍭
-      siteshot: https://source.fomal.cc/siteshot/www.fomal.cn.jpg
+
+# 开发工具
+- class_name: 💻 开发工具
+  class_desc: 常用的开发平台和 AI 工具
+  link_list:
+    - name: GitHub - GoblinUnde
+      link: https://github.com/goblinunde
+      avatar: https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png
+      descr: GoblinUnde 的 GitHub 主页
+    - name: Google Gemini
+      link: https://gemini.google.com/app
+      avatar: https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg
+      descr: Google Gemini AI 助手
+    - name: Google AI Studio
+      link: https://aistudio.google.com/
+      avatar: https://lh3.googleusercontent.com/-XqGfVt7WQ0k/AAAAAAAAAAI/AAAAAAAAAAA/hNGTCgIllgE/s88-c/photo.jpg
+      descr: Google AI Studio 开发平台
+    - name: GitHub
+      link: https://github.com/
+      avatar: https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png
+      descr: 全球最大的代码托管平台
+
+# 学术数据库
+- class_name: 📚 学术数据库
+  class_desc: 论文检索与学术资源
+  link_list:
+    - name: arXiv
+      link: https://arxiv.org/
+      avatar: https://static.arxiv.org/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg
+      descr: 预印本论文库 (数学/物理/CS)
+    - name: 中国知网 (CNKI)
+      link: https://www.cnki.net/
+      avatar: https://piccache.cnki.net/kns8/images/logo-cnki.png
+      descr: 中国学术文献数据库
+    - name: Google Scholar
+      link: https://scholar.google.com/
+      avatar: https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg
+      descr: Google 学术搜索
+    - name: Semantic Scholar
+      link: https://www.semanticscholar.org/
+      avatar: https://www.semanticscholar.org/img/semantic_scholar_og.png
+      descr: AI 驱动的学术搜索引擎
+    - name: MathSciNet
+      link: https://mathscinet.ams.org/
+      avatar: https://www.ams.org/images/ams-logo.svg
+      descr: 美国数学学会数学评论
+
+# 数学顶级期刊
+- class_name: 📐 数学顶级期刊
+  class_desc: 国际数学四大顶刊及其他重要期刊
+  link_list:
+    - name: Annals of Mathematics
+      link: https://annals.math.princeton.edu/
+      avatar: https://annals.math.princeton.edu/wp-content/themes/flavor/images/pu-logo-stacked.svg
+      descr: 数学年刊 - 普林斯顿 (四大顶刊)
+    - name: Inventiones Mathematicae
+      link: https://www.springer.com/journal/222
+      avatar: https://media.springernature.com/lw300/springer-static/cover/journal/222.jpg
+      descr: 数学发明 - Springer (四大顶刊)
+    - name: Acta Mathematica
+      link: https://www.springer.com/journal/11511
+      avatar: https://media.springernature.com/lw300/springer-static/cover/journal/11511.jpg
+      descr: 数学学报 (四大顶刊)
+    - name: Journal of the AMS
+      link: https://www.ams.org/journals/jams/
+      avatar: https://www.ams.org/images/ams-logo.svg
+      descr: 美国数学学会期刊 (四大顶刊)
+    - name: Duke Mathematical Journal
+      link: https://projecteuclid.org/journals/duke-mathematical-journal
+      avatar: https://projecteuclid.org/img/pe-logo.png
+      descr: 杜克数学期刊
+    - name: Communications on Pure and Applied Mathematics
+      link: https://onlinelibrary.wiley.com/journal/10970312
+      avatar: https://onlinelibrary.wiley.com/pb-assets/journal-banners/10970312-1583847632247.jpg
+      descr: 纯粹与应用数学通讯
+
+# 计算机顶会
+- class_name: 🤖 计算机顶级会议
+  class_desc: AI/ML 领域顶级学术会议
+  link_list:
+    - name: NeurIPS
+      link: https://neurips.cc/
+      avatar: https://neurips.cc/static/core/img/NeurIPS-logo.svg
+      descr: 神经信息处理系统大会
+    - name: ICML
+      link: https://icml.cc/
+      avatar: https://icml.cc/static/core/img/ICML-logo.svg
+      descr: 国际机器学习大会
+    - name: ICLR
+      link: https://iclr.cc/
+      avatar: https://iclr.cc/static/core/img/ICLR-logo.svg
+      descr: 国际表示学习大会
+    - name: CVPR
+      link: https://cvpr.thecvf.com/
+      avatar: https://cvpr.thecvf.com/static/core/img/logo.svg
+      descr: 计算机视觉与模式识别
+    - name: ACL
+      link: https://aclanthology.org/
+      avatar: https://aclanthology.org/images/acl-logo.svg
+      descr: 计算语言学协会
+
+# 学习资源
+- class_name: 📖 学习资源
+  class_desc: 优质在线学习平台和教程
+  link_list:
+    - name: MIT OpenCourseWare
+      link: https://ocw.mit.edu/
+      avatar: https://ocw.mit.edu/static_shared/images/ocw_logo_orange.png
+      descr: MIT 开放课程
+    - name: Coursera
+      link: https://www.coursera.org/
+      avatar: https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera.s3.amazonaws.com/media/coursera-rebrand-logo-square.png
+      descr: 在线学习平台
+    - name: Khan Academy
+      link: https://www.khanacademy.org/
+      avatar: https://cdn.kastatic.org/images/khan-logo-dark-background.new.png
+      descr: 可汗学院
+    - name: 3Blue1Brown
+      link: https://www.3blue1brown.com/
+      avatar: https://www.3blue1brown.com/favicon.svg
+      descr: 可视化数学视频教程
+
+# 实用工具
+- class_name: 🛠️ 实用工具
+  class_desc: 数学、写作与开发工具
+  link_list:
+    - name: Overleaf
+      link: https://www.overleaf.com/
+      avatar: https://www.overleaf.com/img/ol-brand/overleaf_og_logo.png
+      descr: 在线 LaTeX 编辑器
+    - name: Desmos
+      link: https://www.desmos.com/
+      avatar: https://www.desmos.com/assets/img/apps/graphing/icon_192.png
+      descr: 在线图形计算器
+    - name: Wolfram Alpha
+      link: https://www.wolframalpha.com/
+      avatar: https://www.wolframalpha.com/images/spikey.en.png
+      descr: 计算知识引擎
+    - name: GeoGebra
+      link: https://www.geogebra.org/
+      avatar: https://www.geogebra.org/images/geogebra-logo.svg
+      descr: 动态数学软件
+    - name: PyTorch
+      link: https://pytorch.org/
+      avatar: https://pytorch.org/assets/images/pytorch-logo.png
+      descr: 深度学习框架
