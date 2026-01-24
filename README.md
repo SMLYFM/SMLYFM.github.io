@@ -4,17 +4,18 @@
 
 [![Hexo](https://img.shields.io/badge/Framework-Hexo%207.3-blue?logo=hexo)](https://hexo.io/)
 [![Butterfly](https://img.shields.io/badge/Theme-Butterfly%205.3.5-6513df?logo=bitdefender)](https://butterfly.js.org/)
-[![GitHub](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Deploy](https://img.shields.io/badge/Deploy-GitHub%20Pages-brightgreen?logo=github)](https://smlyfm.github.io)
+[![Deploy](https://img.shields.io/github/actions/workflow/status/SMLYFM/SMLYFM.github.io/deploy.yml?label=Deploy&logo=github)](https://github.com/SMLYFM/SMLYFM.github.io/actions)
+[![PWA](https://img.shields.io/badge/PWA-Ready-5A0FC8?logo=pwa)](https://smlyfm.github.io)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 ## 📚 目录
 
 - [快速开始](#-快速开始)
-- [项目结构](#-项目结构详解)
-- [文章管理完整指南](#-文章管理完整指南)
-- [配置说明](#-配置说明)
+- [项目结构详解](#-项目结构详解)
+- [文章管理完整指南](#️-文章管理完整指南-1)
+- [配置说明](#️-配置说明-1)
 - [分支管理](#-分支管理)
-- [常用命令](#-常用命令速查)
+- [常用命令速查](#-常用命令速查)
 
 ### 📖 详细文档
 
@@ -23,6 +24,7 @@
 | [📝 配置修改指南](docs/CONFIG_GUIDE.md) | 公告、背景、导航菜单、社交链接等修改方法 |
 | [🔧 开发指南](docs/DEVELOPMENT.md) | 本地开发环境设置和工作流程 |
 | [🚀 部署指南](docs/DEPLOYMENT.md) | GitHub Pages 部署步骤 |
+| [🖥️ 服务器部署](docs/SERVER_DEPLOYMENT.md) | Docker/VPS 服务器部署指南 |
 | [📋 Makefile 说明](docs/MAKEFILE.md) | 所有 make 命令详细说明 |
 | [🎨 主题定制](docs/THEME_CUSTOMIZATION.md) | Butterfly 主题自定义配置 |
 | [🆕 UI 更新日志](docs/MODERN_THEME_CHANGELOG.md) | 现代化 UI 改造记录 |
@@ -139,12 +141,23 @@ SMLYFM.github.io/
 │   └── ...                     #    各种自动化脚本
 │
 ├── 📂 .github/                 # ⚙️ GitHub 配置
-│   └── 📂 workflows/           # GitHub Actions 工作流
-│       └── deploy.yml          #    自动部署配置
+│   ├── 📂 workflows/           # GitHub Actions 工作流
+│   │   ├── deploy.yml          #    自动部署到 GitHub Pages
+│   │   ├── compress-images.yml #    PR 图片自动压缩
+│   │   ├── docker-build.yml    #    Docker 镜像构建
+│   │   └── lighthouse-ci.yml   #    性能监控审计
+│   └── dependabot.yml          # 依赖自动更新配置
+│
+├── 📂 docker/                  # 🐳 Docker 配置
+│   └── nginx.conf              #    Nginx 配置（含安全头）
+│
+├── 📄 Dockerfile               # Docker 镜像构建
+├── 📄 docker-compose.yml       # Docker Compose 配置
+├── 📄 lighthouserc.js          # Lighthouse CI 配置
 │
 ├── 📂 public/                  # 🌐 生成的静态网站（自动生成，勿编辑）
 ├── 📂 .deploy_git/             # 📤 部署缓存（自动生成，勿编辑）
-└── 📂 node_modules/            # 📦 Node.js 依赖（自动生成，勿编辑）
+└── 📂 node_modules/            # 📦 依赖（自动生成，勿编辑）
 ```
 
 ### 📝 关键文件说明
@@ -338,7 +351,44 @@ make clean            # 清理缓存
 make check            # 检查项目状态
 make count            # 统计文章字数
 make backup           # 备份博客
+
+# 🐳 Docker
+make docker-build     # 构建 Docker 镜像
+make docker-run       # 运行容器
+make docker-stop      # 停止容器
 ```
+
+---
+
+## 🔧 技术特性
+
+### 🔒 安全加固
+
+- **CSP** - 内容安全策略，防止 XSS 攻击
+- **HSTS** - 强制 HTTPS，预加载列表就绪
+- **Permissions-Policy** - 限制浏览器 API 权限
+- **X-Frame-Options** - 防止点击劫持
+
+### 📱 PWA 支持
+
+- **Service Worker** - 离线访问支持
+- **Web App Manifest** - 可安装到主屏幕
+- **缓存策略** - 网络优先，离线兜底
+
+### 🔄 CI/CD 自动化
+
+| 工作流 | 触发条件 | 功能 |
+|--------|----------|------|
+| `deploy.yml` | push → master | 构建验证 + 部署 |
+| `compress-images.yml` | PR 包含图片 | 自动压缩优化 |
+| `docker-build.yml` | 手动/push | GHCR 镜像发布 |
+| `lighthouse-ci.yml` | 部署后/每周 | 性能审计报告 |
+
+### 📊 监控与分析
+
+- **Lighthouse CI** - 自动性能评分
+- **Busuanzi** - 访问统计
+- **Sitemap** - 自动生成 SEO sitemap
 
 ### npm 脚本
 

@@ -2,88 +2,107 @@
 # ============================================
 # 博客内容清理和main分支重建脚本
 # ============================================
-# 作者: CJX
-# 用途: 删除所有文章并清理main分支历史
+# 💡 作者: CJX
+# 💡 用途: 删除所有文章并清理main分支历史
 
 set -e
 
-echo "============================================"
-echo "    博客内容清理脚本"
-echo "============================================"
+# ============================================
+# 颜色定义
+# ============================================
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[0;33m'
+RED='\033[0;31m'
+CYAN='\033[0;36m'
+DIM='\033[2m'
+NC='\033[0m' # No Color
+
+# ============================================
+# 工具函数
+# ============================================
+print_success() { echo -e "${GREEN}✓ $1${NC}"; }
+print_error() { echo -e "${RED}✗ $1${NC}"; }
+print_warning() { echo -e "${YELLOW}⚠ $1${NC}"; }
+print_info() { echo -e "${BLUE}ℹ $1${NC}"; }
+
+echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${BLUE}    博客内容清理脚本${NC}"
+echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo ""
 
 # 步骤1: 提交当前更改
-echo "[步骤 1/6] 提交当前更改到master分支"
+echo -e "${CYAN}[步骤 1/6]${NC} ${YELLOW}提交当前更改到master分支${NC}"
 echo ""
 
 if [ -n "$(git status --porcelain)" ]; then
-    echo "检测到未提交的更改:"
+    print_info "检测到未提交的更改:"
     git status --short
     echo ""
     
-    read -p "提交信息 [默认: Refactor: 移除颜色定义]: " commit_msg
+    read -p "$(echo -e ${CYAN}提交信息 [默认: Refactor: 移除颜色定义]:${NC} )" commit_msg
     commit_msg=${commit_msg:-"Refactor: 移除颜色定义并准备清理"}
     
     git add -A
     git commit -m "$commit_msg"
-    echo "✓ 已提交"
+    print_success "已提交"
 else
-    echo "✓ 工作区干净"
+    print_success "工作区干净"
 fi
 
 echo ""
 
 # 步骤2: 清理文章
-echo "[步骤 2/6] 清理所有文章"
+echo -e "${CYAN}[步骤 2/6]${NC} ${YELLOW}清理所有文章${NC}"
 echo ""
 
-echo "当前文章列表:"
-ls -1 source/_posts/*.md 2>/dev/null || echo "  (无文章)"
+echo -e "${BLUE}当前文章列表:${NC}"
+ls -1 source/_posts/*.md 2>/dev/null || echo -e "  ${DIM}(无文章)${NC}"
 echo ""
 
-read -p "确认删除所有文章? [y/N] " -n 1 -r
+read -p "$(echo -e ${YELLOW}确认删除所有文章? [y/N]:${NC} )" -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     rm -rf source/_posts/*.md
-    echo "✓ 所有文章已删除"
+    print_success "所有文章已删除"
 else
-    echo "! 已跳过删除文章"
+    print_warning "已跳过删除文章"
 fi
 
 echo ""
 
 # 步骤3: 清理分类和标签目录
-echo "[步骤 3/6] 清理分类和标签目录"
+echo -e "${CYAN}[步骤 3/6]${NC} ${YELLOW}清理分类和标签目录${NC}"
 echo ""
 
 rm -rf source/categories-* source/tags/
-echo "✓ 分类和标签目录已清理"
+print_success "分类和标签目录已清理"
 
 echo ""
 
 # 步骤4: 提交清理后的更改
-echo "[步骤 4/6] 提交清理后的更改"
+echo -e "${CYAN}[步骤 4/6]${NC} ${YELLOW}提交清理后的更改${NC}"
 echo ""
 
 if [ -n "$(git status --porcelain)" ]; then
     git add -A
     git commit -m "Clean: 删除所有旧文章,准备重新开始"
     git push origin master
-    echo "✓ 已提交并推送到master分支"
+    print_success "已提交并推送到master分支"
 else
-    echo "✓ 无需提交"
+    print_success "无需提交"
 fi
 
 echo ""
 
 # 步骤5: 清理main分支
-echo "[步骤 5/6] 清理main分支历史"
+echo -e "${CYAN}[步骤 5/6]${NC} ${YELLOW}清理main分支历史${NC}"
 echo ""
 
-echo "即将清理main分支的所有历史记录"
-echo "警告: 这将删除main分支的所有提交历史!"
+print_info "即将清理main分支的所有历史记录"
+print_warning "这将删除main分支的所有提交历史!"
 echo ""
-read -p "确认继续? [y/N] " -n 1 -r
+read -p "$(echo -e ${RED}确认继续? [y/N]:${NC} )" -n 1 -r
 echo
 
 if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -122,15 +141,15 @@ EOF
     
     # 强制推送到远程
     echo ""
-    echo "准备强制推送到远程..."
-    read -p "最后确认: 是否强制推送? [y/N] " -n 1 -r
+    print_info "准备强制推送到远程..."
+    read -p "$(echo -e ${RED}最后确认: 是否强制推送? [y/N]:${NC} )" -n 1 -r
     echo
     
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         git push -f origin main
-        echo "✓ main分支已清理并推送"
+        print_success "main分支已清理并推送"
     else
-        echo "! 已取消推送"
+        print_warning "已取消推送"
     fi
     
     # 切回master分支
@@ -138,35 +157,35 @@ EOF
     
     # 清理本地仓库
     git gc --aggressive --prune=now
-    echo "✓ 本地仓库已优化"
+    print_success "本地仓库已优化"
 else
-    echo "! 已取消清理main分支"
+    print_warning "已取消清理main分支"
 fi
 
 echo ""
 
 # 步骤6: 显示最终状态
-echo "[步骤 6/6] 显示最终状态"
+echo -e "${CYAN}[步骤 6/6]${NC} ${YELLOW}显示最终状态${NC}"
 echo ""
 
-echo "Git仓库大小:"
+echo -e "${BLUE}Git仓库大小:${NC}"
 du -sh .git
 
 echo ""
-echo "当前分支:"
+echo -e "${BLUE}当前分支:${NC}"
 git branch --show-current
 
 echo ""
-echo "文章统计:"
-echo "  正式文章: $(find source/_posts -name '*.md' 2>/dev/null | wc -l) 篇"
+echo -e "${BLUE}文章统计:${NC}"
+echo -e "  正式文章: ${GREEN}$(find source/_posts -name '*.md' 2>/dev/null | wc -l)${NC} 篇"
 
 echo ""
-echo "============================================"
-echo "    清理完成!"
-echo "============================================"
+echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${GREEN}    🎉 清理完成!${NC}"
+echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo ""
-echo "下一步:"
-echo "  1. 重新设计博客UI和pages"
-echo "  2. 创建新的文章"
-echo "  3. 运行 make sync 部署新网站"
+echo -e "${YELLOW}下一步:${NC}"
+echo -e "  ${CYAN}1.${NC} 重新设计博客UI和pages"
+echo -e "  ${CYAN}2.${NC} 创建新的文章"
+echo -e "  ${CYAN}3.${NC} 运行 ${GREEN}make sync${NC} 部署新网站"
 echo ""
