@@ -1,0 +1,27 @@
+<%# Gallery Card %>
+    <% var imgs=[ { url: '/img/gallery/1.jpg' , title: '数学之美' }, { url: '/img/gallery/2.jpg' , title: '代码诗意' }, {
+        url: '/img/gallery/3.jpg' , title: '学习之路' } ]; %>
+        <div class="card-container modern-card gallery-card">
+            <h3 class="card-title"><i class="fas fa-images"></i> 精选展示</h3>
+            <div class="gallery-container" id="gallery-container">
+                <div class="gallery-slides">
+                    <% imgs.forEach(function(img, i) { %>
+                        <div class="gallery-slide <%= (i===0)?'active':'' %>">
+                            <img src="<%= url_for(img.url) %>" alt="<%= img.title %>" class="gallery-image">
+                            <div class="gallery-overlay">
+                                <h4>
+                                    <%= img.title %>
+                                </h4>
+                            </div>
+                        </div>
+                        <% }); %>
+                </div>
+                <button class="gallery-nav gallery-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="gallery-nav gallery-next"><i class="fas fa-chevron-right"></i></button>
+                <div class="gallery-indicators">
+                    <% imgs.forEach(function(img, i) { %>
+                        <button class="indicator <%= (i===0)?'active':'' %>"></button>
+                        <% }); %>
+                </div>
+            </div>
+        </div>

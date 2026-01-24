@@ -4,6 +4,7 @@
 # 💡 提供完整的博客管理功能
 # 💡 作者: CJX
 # 💡 项目: SMLYFM.github.io
+# 💡 更新: 2026-01-25
 
 .PHONY: help install clean build deploy server dev new draft publish status push pull sync list check upgrade backup restore
 
@@ -34,52 +35,76 @@ TIMESTAMP := $(shell date '+%Y-%m-%d %H:%M:%S')
 DATE := $(shell date '+%Y-%m-%d')
 TIME := $(shell date '+%H:%M:%S')
 
+# 编辑器
+EDITOR := $${EDITOR:-code}
+
 # ============================================
 # 帮助信息
 # ============================================
 help: ## 显示帮助信息
-	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo "    $(PROJECT_NAME) - Hexo 博客管理系统"
-	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
-	@echo "环境信息:"
-	@echo "  Node.js: $(NODE_VERSION)"
-	@echo "  npm:     $(NPM_VERSION)"
-	@echo "  Hexo:    $(HEXO_VERSION)"
+	@echo "🚀 快速开始:  make quick-start"
 	@echo ""
-	@echo "使用方法: make [target]"
-	@echo ""
-	@echo "📦 项目管理:"
-	@awk 'BEGIN {FS = ":.*##"; category=""} \
-		/^## / {category=substr($$0, 4); next} \
-		/^[a-zA-Z_-]+:.*?##/ { \
-			if (category == "项目管理") \
-				printf "  %-15s %s\n", $$1, $$2 \
-		}' $(MAKEFILE_LIST)
+	@echo "📝 文章管理:"
+	@echo "  make new              交互式创建新文章"
+	@echo "  make new-math         创建数学文章模板"
+	@echo "  make new-code         创建编程文章模板"
+	@echo "  make list             列出所有文章"
+	@echo "  make edit             编辑最新文章"
+	@echo "  make delete           删除指定文章"
+	@echo "  make rename           重命名文章"
+	@echo "  make add-tag          给文章添加标签"
+	@echo "  make update-time      更新文章修改时间"
+	@echo "  make search           搜索文章内容"
 	@echo ""
 	@echo "🏗️  构建部署:"
-	@awk 'BEGIN {FS = ":.*##"; category=""} \
-		/^## / {category=substr($$0, 4); next} \
-		/^[a-zA-Z_-]+:.*?##/ { \
-			if (category == "构建部署") \
-				printf "  %-15s %s\n", $$1, $$2 \
-		}' $(MAKEFILE_LIST)
-	@echo ""
-	@echo "✍️  内容管理:"
-	@awk 'BEGIN {FS = ":.*##"; category=""} \
-		/^## / {category=substr($$0, 4); next} \
-		/^[a-zA-Z_-]+:.*?##/ { \
-			if (category == "内容管理") \
-				printf "  %-15s %s\n", $$1, $$2 \
-		}' $(MAKEFILE_LIST)
+	@echo "  make dev / d          开发模式(含草稿)"
+	@echo "  make server / s       启动本地服务器"
+	@echo "  make build / b        构建静态网站"
+	@echo "  make deploy / dp      部署到 main 分支"
+	@echo "  make push / p         提交源码到 master"
+	@echo "  make sync             一键同步(提交+部署)"
 	@echo ""
 	@echo "🔧 维护工具:"
-	@awk 'BEGIN {FS = ":.*##"; category=""} \
-		/^## / {category=substr($$0, 4); next} \
-		/^[a-zA-Z_-]+:.*?##/ { \
-			if (category == "维护工具") \
-				printf "  %-15s %s\n", $$1, $$2 \
-		}' $(MAKEFILE_LIST)
+	@echo "  make check            检查项目状态"
+	@echo "  make count            统计文章字数"
+	@echo "  make backup           备份博客内容"
+	@echo "  make clean / c        清理缓存"
+	@echo ""
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# ============================================
+# 🚀 快速开始（新手引导）
+# ============================================
+
+quick-start: ## 🚀 首次使用完整引导
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    🎉 欢迎使用 Hexo 博客管理系统！"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@echo "📖 新手完整工作流程:"
+	@echo ""
+	@echo "1️⃣  创建新文章:"
+	@echo "    make new                    # 交互式"
+	@echo "    make new-math TITLE=\"标题\"  # 数学模板"
+	@echo "    make new-code TITLE=\"标题\"  # 编程模板"
+	@echo ""
+	@echo "2️⃣  本地预览:"
+	@echo "    make dev"
+	@echo "    访问: http://localhost:4000"
+	@echo ""
+	@echo "3️⃣  管理文章:"
+	@echo "    make list         # 查看文章列表"
+	@echo "    make edit         # 编辑最新文章"
+	@echo "    make delete       # 删除文章"
+	@echo "    make add-tag      # 添加标签"
+	@echo "    make update-time  # 更新修改时间"
+	@echo ""
+	@echo "4️⃣  发布:"
+	@echo "    make sync         # 一键同步(提交源码+部署网站)"
 	@echo ""
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
@@ -99,26 +124,21 @@ upgrade: ## 升级依赖包
 	@echo "✓ 依赖升级完成"
 
 check: ## 检查项目状态
-	@echo "🔍 检查项目状态..."
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    🔍 项目状态检查"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
-	@echo "Node.js 环境:"
-	@echo "  Node.js: $(NODE_VERSION)"
-	@echo "  npm:     $(NPM_VERSION)"
-	@echo "  Hexo:    $(HEXO_VERSION)"
-	@echo ""
-	@echo "Git 状态:"
-	@git status --short
-	@echo ""
-	@echo "分支信息:"
-	@git branch -vv
-	@echo ""
-	@echo "文章统计:"
+	@echo "📊 文章统计:"
 	@echo "  正式文章: $$(find $(POST_DIR) -name '*.md' | wc -l) 篇"
 	@echo "  草稿:     $$(find $(DRAFT_DIR) -name '*.md' 2>/dev/null | wc -l) 篇"
 	@echo ""
+	@echo "📁 Git 状态:"
+	@git status --short
+	@echo ""
+	@echo "🌿 当前分支: $$(git branch --show-current)"
+	@echo ""
 
 status: ## 查看Git状态
-	@echo "📊 Git 状态"
 	@git status
 
 # ============================================
@@ -135,7 +155,6 @@ build: clean ## 构建静态网站
 	@echo "🏗️  构建静态网站..."
 	@npx hexo generate
 	@echo "✓ 构建完成"
-	@echo "生成文件: $(PUBLIC_DIR)/"
 
 server: ## 启动本地服务器
 	@echo "🌐 启动本地服务器..."
@@ -147,77 +166,46 @@ dev: ## 开发模式(含草稿)
 	@echo "访问: http://localhost:4000"
 	@npx hexo server --draft
 
-deploy: build ## 部署到GitHub Pages
-	@echo "🚀 部署到 GitHub Pages..."
+deploy: build ## 部署到GitHub Pages (main分支)
+	@echo "🚀 部署到 GitHub Pages ($(GIT_BRANCH_DEPLOY) 分支)..."
 	@npx hexo deploy
 	@echo "✓ 部署完成"
-	@echo "网站: https://smlyfm.github.io"
+	@echo "🌐 网站: https://smlyfm.github.io"
 
 # ============================================
-## 内容管理
+## 📝 文章管理 - 创建
 # ============================================
 
-new: ## 创建新文章 (make new TITLE="文章标题")
-	@if [ -z "$(TITLE)" ]; then \
-		bash tools/new-post.sh; \
-	else \
-		echo "✍️  创建文章: $(TITLE)"; \
-		npx hexo new post "$(TITLE)"; \
-		echo "✓ 文章已创建"; \
-	fi
-
-draft: ## 创建草稿 (make draft TITLE="草稿标题")
-	@if [ -z "$(TITLE)" ]; then \
-		echo "错误: 请指定标题"; \
-		echo "用法: make draft TITLE=\"草稿标题\""; \
-		exit 1; \
-	else \
-		echo "✍️  创建草稿: $(TITLE)"; \
-		npx hexo new draft "$(TITLE)"; \
-		echo "✓ 草稿已创建"; \
-	fi
-
-publish: ## 发布草稿 (make publish DRAFT="草稿名")
-	@if [ -z "$(DRAFT)" ]; then \
-		echo "错误: 请指定草稿名"; \
-		echo "用法: make publish DRAFT=\"草稿名\""; \
-		exit 1; \
-	else \
-		echo "📤 发布草稿: $(DRAFT)"; \
-		npx hexo publish draft "$(DRAFT)"; \
-		echo "✓ 草稿已发布"; \
-	fi
-
-list: ## 列出所有文章
-	@echo "📄 文章列表"
+new: ## 交互式创建新文章
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    ✍️  创建新文章"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
-	@echo "正式文章 ($(POST_DIR)):"
-	@find $(POST_DIR) -name '*.md' -type f -exec basename {} \; | sort
-	@echo ""
-	@echo "草稿 ($(DRAFT_DIR)):"
-	@find $(DRAFT_DIR) -name '*.md' -type f -exec basename {} \; 2>/dev/null | sort || echo "  (无草稿)"
-
-# Markdown模板创建
-template-post: ## 创建文章模板 (make template-post TITLE="标题" CAT="分类" TAGS="tag1 tag2")
-	@if [ -z "$(TITLE)" ]; then \
-		echo "错误: 请指定标题"; \
+	@read -p "📝 文章标题: " TITLE; \
+	if [ -z "$$TITLE" ]; then \
+		echo "❌ 错误: 标题不能为空"; \
 		exit 1; \
-	fi
-	@FILENAME="$(POST_DIR)/$(TITLE).md"; \
-	CATEGORY="$${CAT:-blog}"; \
-	TAGS_LIST="$${TAGS:-}"; \
-	echo "✍️  创建文章模板: $$FILENAME"; \
-	mkdir -p $(POST_DIR); \
+	fi; \
+	read -p "📂 分类 (默认: blog): " CAT; \
+	CAT=$${CAT:-blog}; \
+	read -p "🏷️  标签 (空格分隔): " TAGS; \
+	read -p "📄 描述 (可选): " DESC; \
+	echo ""; \
+	FILENAME="$(POST_DIR)/$$TITLE.md"; \
 	echo "---" > "$$FILENAME"; \
-	echo "title: $(TITLE)" >> "$$FILENAME"; \
+	echo "title: $$TITLE" >> "$$FILENAME"; \
 	echo "date: $(TIMESTAMP)" >> "$$FILENAME"; \
 	echo "updated: $(TIMESTAMP)" >> "$$FILENAME"; \
-	echo "categories: $$CATEGORY" >> "$$FILENAME"; \
+	echo "categories:" >> "$$FILENAME"; \
+	echo "  - $$CAT" >> "$$FILENAME"; \
 	echo "tags:" >> "$$FILENAME"; \
-	if [ -n "$$TAGS_LIST" ]; then \
-		for tag in $$TAGS_LIST; do \
+	if [ -n "$$TAGS" ]; then \
+		for tag in $$TAGS; do \
 			echo "  - $$tag" >> "$$FILENAME"; \
 		done; \
+	fi; \
+	if [ -n "$$DESC" ]; then \
+		echo "description: $$DESC" >> "$$FILENAME"; \
 	fi; \
 	echo "---" >> "$$FILENAME"; \
 	echo "" >> "$$FILENAME"; \
@@ -225,30 +213,388 @@ template-post: ## 创建文章模板 (make template-post TITLE="标题" CAT="分
 	echo "" >> "$$FILENAME"; \
 	echo "<!-- more -->" >> "$$FILENAME"; \
 	echo "" >> "$$FILENAME"; \
-	echo "## 内容" >> "$$FILENAME"; \
+	echo "## 正文" >> "$$FILENAME"; \
 	echo "" >> "$$FILENAME"; \
 	echo "## 总结" >> "$$FILENAME"; \
 	echo "" >> "$$FILENAME"; \
-	echo "✓ 模板已创建: $$FILENAME"
+	echo "## 参考资料" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "✅ 文章已创建: $$FILENAME"; \
+	echo ""; \
+	read -p "📝 是否立即编辑? [Y/n] " -n 1 -r EDIT; \
+	echo ""; \
+	if [[ ! $$EDIT =~ ^[Nn]$$ ]]; then \
+		$(EDITOR) "$$FILENAME"; \
+	fi
+
+new-math: ## 创建数学文章 (make new-math TITLE="标题")
+	@if [ -z "$(TITLE)" ]; then \
+		echo "❌ 用法: make new-math TITLE=\"文章标题\""; \
+		exit 1; \
+	fi
+	@FILENAME="$(POST_DIR)/$(TITLE).md"; \
+	echo "---" > "$$FILENAME"; \
+	echo "title: $(TITLE)" >> "$$FILENAME"; \
+	echo "date: $(TIMESTAMP)" >> "$$FILENAME"; \
+	echo "updated: $(TIMESTAMP)" >> "$$FILENAME"; \
+	echo "categories:" >> "$$FILENAME"; \
+	echo "  - 数学" >> "$$FILENAME"; \
+	echo "tags:" >> "$$FILENAME"; \
+	echo "  - 数学分析" >> "$$FILENAME"; \
+	echo "mathjax: true" >> "$$FILENAME"; \
+	echo "---" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 引言" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "<!-- more -->" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 定义与记号" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 主要定理" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "**定理 1.** " >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "**证明.**" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "$$\\square$$" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 应用" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 参考文献" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "✅ 数学文章已创建: $$FILENAME"
+
+new-code: ## 创建编程文章 (make new-code TITLE="标题" LANG="python")
+	@if [ -z "$(TITLE)" ]; then \
+		echo "❌ 用法: make new-code TITLE=\"文章标题\" LANG=\"python\""; \
+		exit 1; \
+	fi
+	@LANG="$${LANG:-python}"; \
+	FILENAME="$(POST_DIR)/$(TITLE).md"; \
+	echo "---" > "$$FILENAME"; \
+	echo "title: $(TITLE)" >> "$$FILENAME"; \
+	echo "date: $(TIMESTAMP)" >> "$$FILENAME"; \
+	echo "updated: $(TIMESTAMP)" >> "$$FILENAME"; \
+	echo "categories:" >> "$$FILENAME"; \
+	echo "  - 编程" >> "$$FILENAME"; \
+	echo "tags:" >> "$$FILENAME"; \
+	echo "  - $$LANG" >> "$$FILENAME"; \
+	echo "highlight_shrink: false" >> "$$FILENAME"; \
+	echo "---" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 简介" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "<!-- more -->" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 环境准备" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "\`\`\`bash" >> "$$FILENAME"; \
+	echo "# 安装依赖" >> "$$FILENAME"; \
+	echo "\`\`\`" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 代码实现" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "\`\`\`$$LANG" >> "$$FILENAME"; \
+	echo "# 代码示例" >> "$$FILENAME"; \
+	echo "\`\`\`" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 运行结果" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 总结" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 参考链接" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "✅ 编程文章已创建: $$FILENAME"
+
+draft: ## 创建草稿 (make draft TITLE="草稿标题")
+	@if [ -z "$(TITLE)" ]; then \
+		echo "❌ 用法: make draft TITLE=\"草稿标题\""; \
+		exit 1; \
+	fi
+	@mkdir -p $(DRAFT_DIR)
+	@npx hexo new draft "$(TITLE)"
+	@echo "✓ 草稿已创建"
+
+publish: ## 发布草稿 (make publish DRAFT="草稿名")
+	@if [ -z "$(DRAFT)" ]; then \
+		echo "📋 现有草稿:"; \
+		find $(DRAFT_DIR) -name '*.md' -type f -exec basename {} .md \; 2>/dev/null | sort || echo "  (无草稿)"; \
+		echo ""; \
+		echo "用法: make publish DRAFT=\"草稿名\""; \
+		exit 1; \
+	fi
+	@npx hexo publish draft "$(DRAFT)"
+	@echo "✓ 草稿已发布"
+
+# ============================================
+## 📝 文章管理 - 查看
+# ============================================
+
+list: ## 列出所有文章
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    📄 文章列表 ($$(find $(POST_DIR) -name '*.md' | wc -l) 篇)"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@echo "序号  日期        分类        标题"
+	@echo "────  ──────────  ──────────  ────────────────────────────────"
+	@NUM=1; \
+	for file in $$(ls -t $(POST_DIR)/*.md 2>/dev/null); do \
+		TITLE=$$(grep "^title:" "$$file" | head -1 | cut -d':' -f2- | xargs); \
+		FDATE=$$(grep "^date:" "$$file" | head -1 | cut -d' ' -f2); \
+		CAT=$$(grep -A1 "^categories:" "$$file" | tail -1 | sed 's/.*- //' | xargs); \
+		printf "[%2d]  %s  %-10s  %s\n" "$$NUM" "$$FDATE" "$$CAT" "$$TITLE"; \
+		NUM=$$((NUM + 1)); \
+	done
+	@echo ""
+
+list-detail: ## 详细列出文章（含标签）
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    📄 文章详情"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@for file in $$(ls -t $(POST_DIR)/*.md 2>/dev/null); do \
+		echo ""; \
+		TITLE=$$(grep "^title:" "$$file" | head -1 | cut -d':' -f2- | xargs); \
+		FDATE=$$(grep "^date:" "$$file" | head -1 | cut -d' ' -f2); \
+		UDATE=$$(grep "^updated:" "$$file" | head -1 | cut -d' ' -f2); \
+		CAT=$$(grep -A1 "^categories:" "$$file" | tail -1 | sed 's/.*- //' | xargs); \
+		TAGS=$$(awk '/^tags:/,/^[a-z]/' "$$file" | grep "  - " | sed 's/  - //' | tr '\n' ' '); \
+		echo "📝 $$TITLE"; \
+		echo "   📅 创建: $$FDATE  |  🔄 更新: $$UDATE"; \
+		echo "   📂 分类: $$CAT"; \
+		echo "   🏷️  标签: $$TAGS"; \
+		echo "   📁 文件: $$(basename $$file)"; \
+	done
+	@echo ""
+
+# ============================================
+## 📝 文章管理 - 编辑
+# ============================================
+
+edit: ## 编辑最新文章
+	@LATEST=$$(ls -t $(POST_DIR)/*.md 2>/dev/null | head -1); \
+	if [ -n "$$LATEST" ]; then \
+		echo "📝 打开最新文章: $$LATEST"; \
+		$(EDITOR) "$$LATEST"; \
+	else \
+		echo "❌ 未找到文章"; \
+	fi
+
+edit-file: ## 编辑指定文章 (make edit-file FILE="文件名")
+	@if [ -z "$(FILE)" ]; then \
+		echo "❌ 用法: make edit-file FILE=\"文件名.md\""; \
+		echo ""; \
+		echo "可用文章:"; \
+		ls $(POST_DIR)/*.md 2>/dev/null | xargs -n1 basename | head -10; \
+		exit 1; \
+	fi
+	@if [ -f "$(POST_DIR)/$(FILE)" ]; then \
+		$(EDITOR) "$(POST_DIR)/$(FILE)"; \
+	else \
+		echo "❌ 文件不存在: $(POST_DIR)/$(FILE)"; \
+	fi
+
+# ============================================
+## 📝 文章管理 - 修改
+# ============================================
+
+update-time: ## 更新文章的修改时间
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    ⏰ 更新文章修改时间"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@if [ -n "$(FILE)" ]; then \
+		if [ -f "$(FILE)" ]; then \
+			sed -i "s/^updated:.*/updated: $(TIMESTAMP)/" "$(FILE)"; \
+			echo "✅ 已更新: $(FILE)"; \
+			echo "   updated: $(TIMESTAMP)"; \
+		else \
+			echo "❌ 文件不存在: $(FILE)"; \
+		fi; \
+	else \
+		echo "选择要更新的文章:"; \
+		echo ""; \
+		NUM=1; \
+		for file in $$(ls -t $(POST_DIR)/*.md 2>/dev/null | head -10); do \
+			TITLE=$$(grep "^title:" "$$file" | head -1 | cut -d':' -f2- | xargs); \
+			printf "[%d] %s\n" "$$NUM" "$$TITLE"; \
+			NUM=$$((NUM + 1)); \
+		done; \
+		echo ""; \
+		read -p "输入序号 (1-$$((NUM-1))): " SEL; \
+		FILE=$$(ls -t $(POST_DIR)/*.md 2>/dev/null | sed -n "$${SEL}p"); \
+		if [ -n "$$FILE" ]; then \
+			sed -i "s/^updated:.*/updated: $(TIMESTAMP)/" "$$FILE"; \
+			TITLE=$$(grep "^title:" "$$FILE" | head -1 | cut -d':' -f2- | xargs); \
+			echo ""; \
+			echo "✅ 已更新: $$TITLE"; \
+			echo "   updated: $(TIMESTAMP)"; \
+		else \
+			echo "❌ 无效选择"; \
+		fi; \
+	fi
+
+add-tag: ## 给文章添加标签
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    🏷️  添加标签"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@echo "选择文章:"; \
+	NUM=1; \
+	for file in $$(ls -t $(POST_DIR)/*.md 2>/dev/null | head -10); do \
+		TITLE=$$(grep "^title:" "$$file" | head -1 | cut -d':' -f2- | xargs); \
+		printf "[%d] %s\n" "$$NUM" "$$TITLE"; \
+		NUM=$$((NUM + 1)); \
+	done; \
+	echo ""; \
+	read -p "输入序号: " SEL; \
+	FILE=$$(ls -t $(POST_DIR)/*.md 2>/dev/null | sed -n "$${SEL}p"); \
+	if [ -n "$$FILE" ]; then \
+		echo ""; \
+		echo "当前标签:"; \
+		awk '/^tags:/,/^[a-z]/' "$$FILE" | grep "  - " | sed 's/  - /  • /'; \
+		echo ""; \
+		read -p "输入新标签 (空格分隔): " NEWTAGS; \
+		if [ -n "$$NEWTAGS" ]; then \
+			for tag in $$NEWTAGS; do \
+				sed -i "/^tags:/a\\  - $$tag" "$$FILE"; \
+			done; \
+			sed -i "s/^updated:.*/updated: $(TIMESTAMP)/" "$$FILE"; \
+			echo "✅ 标签已添加"; \
+		fi; \
+	else \
+		echo "❌ 无效选择"; \
+	fi
+
+set-category: ## 修改文章分类 (make set-category FILE="xxx.md" CAT="新分类")
+	@if [ -z "$(FILE)" ] || [ -z "$(CAT)" ]; then \
+		echo "❌ 用法: make set-category FILE=\"文件名.md\" CAT=\"新分类\""; \
+		exit 1; \
+	fi
+	@if [ -f "$(POST_DIR)/$(FILE)" ]; then \
+		awk -v cat="$(CAT)" ' \
+			/^categories:/ { print; getline; print "  - " cat; next } \
+			{ print } \
+		' "$(POST_DIR)/$(FILE)" > /tmp/post_tmp.md && mv /tmp/post_tmp.md "$(POST_DIR)/$(FILE)"; \
+		sed -i "s/^updated:.*/updated: $(TIMESTAMP)/" "$(POST_DIR)/$(FILE)"; \
+		echo "✅ 分类已修改为: $(CAT)"; \
+	else \
+		echo "❌ 文件不存在: $(POST_DIR)/$(FILE)"; \
+	fi
+
+# ============================================
+## 📝 文章管理 - 删除/重命名
+# ============================================
+
+delete: ## 删除文章
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    🗑️  删除文章"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@echo "选择要删除的文章:"; \
+	NUM=1; \
+	for file in $$(ls -t $(POST_DIR)/*.md 2>/dev/null); do \
+		TITLE=$$(grep "^title:" "$$file" | head -1 | cut -d':' -f2- | xargs); \
+		printf "[%d] %s\n" "$$NUM" "$$TITLE"; \
+		NUM=$$((NUM + 1)); \
+	done; \
+	echo ""; \
+	read -p "输入序号 (0 取消): " SEL; \
+	if [ "$$SEL" = "0" ]; then \
+		echo "已取消"; \
+		exit 0; \
+	fi; \
+	FILE=$$(ls -t $(POST_DIR)/*.md 2>/dev/null | sed -n "$${SEL}p"); \
+	if [ -n "$$FILE" ]; then \
+		TITLE=$$(grep "^title:" "$$FILE" | head -1 | cut -d':' -f2- | xargs); \
+		echo ""; \
+		echo "⚠️  将删除: $$TITLE"; \
+		echo "   文件: $$FILE"; \
+		read -p "确认删除? [y/N] " -n 1 -r CONFIRM; \
+		echo ""; \
+		if [[ $$CONFIRM =~ ^[Yy]$$ ]]; then \
+			rm "$$FILE"; \
+			echo "✅ 文章已删除"; \
+		else \
+			echo "已取消"; \
+		fi; \
+	else \
+		echo "❌ 无效选择"; \
+	fi
+
+rename: ## 重命名文章
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    ✏️  重命名文章"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@echo "选择要重命名的文章:"; \
+	NUM=1; \
+	for file in $$(ls -t $(POST_DIR)/*.md 2>/dev/null | head -10); do \
+		TITLE=$$(grep "^title:" "$$file" | head -1 | cut -d':' -f2- | xargs); \
+		printf "[%d] %s\n" "$$NUM" "$$TITLE"; \
+		NUM=$$((NUM + 1)); \
+	done; \
+	echo ""; \
+	read -p "输入序号: " SEL; \
+	FILE=$$(ls -t $(POST_DIR)/*.md 2>/dev/null | sed -n "$${SEL}p"); \
+	if [ -n "$$FILE" ]; then \
+		OLD_TITLE=$$(grep "^title:" "$$FILE" | head -1 | cut -d':' -f2- | xargs); \
+		echo "当前标题: $$OLD_TITLE"; \
+		read -p "新标题: " NEW_TITLE; \
+		if [ -n "$$NEW_TITLE" ]; then \
+			sed -i "s/^title:.*/title: $$NEW_TITLE/" "$$FILE"; \
+			sed -i "s/^updated:.*/updated: $(TIMESTAMP)/" "$$FILE"; \
+			NEW_FILE="$(POST_DIR)/$$NEW_TITLE.md"; \
+			mv "$$FILE" "$$NEW_FILE"; \
+			echo "✅ 已重命名为: $$NEW_TITLE"; \
+		fi; \
+	else \
+		echo "❌ 无效选择"; \
+	fi
+
+# ============================================
+## 📝 文章管理 - 搜索
+# ============================================
+
+search: ## 搜索文章 (make search KEYWORD="关键词")
+	@if [ -z "$(KEYWORD)" ]; then \
+		read -p "🔍 搜索关键词: " KEYWORD; \
+	fi; \
+	if [ -n "$$KEYWORD" ] || [ -n "$(KEYWORD)" ]; then \
+		KW=$${KEYWORD:-$(KEYWORD)}; \
+		echo ""; \
+		echo "搜索结果: $$KW"; \
+		echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"; \
+		grep -rln "$$KW" $(POST_DIR)/*.md 2>/dev/null | while read file; do \
+			TITLE=$$(grep "^title:" "$$file" | head -1 | cut -d':' -f2- | xargs); \
+			echo "📝 $$TITLE"; \
+			echo "   $$(basename $$file)"; \
+		done || echo "未找到匹配结果"; \
+	else \
+		echo "❌ 请输入搜索关键词"; \
+	fi
 
 # ============================================
 ## 维护工具
 # ============================================
 
-push: ## 提交并推送源码到master
-	@echo "📤 提交源码到 $(GIT_BRANCH_SOURCE) 分支..."
+push: ## 提交并推送源码到 master 分支
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    📤 提交源码到 $(GIT_BRANCH_SOURCE) 分支"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
 	@if [ -n "$$(git status --porcelain)" ]; then \
-		echo ""; \
+		echo "变更文件:"; \
 		git status --short; \
 		echo ""; \
-		read -p "提交信息: " MSG; \
+		read -p "📝 提交信息 (回车使用默认): " MSG; \
 		if [ -z "$$MSG" ]; then \
 			MSG="Update: $(TIMESTAMP)"; \
 		fi; \
 		git add .; \
 		git commit -m "$$MSG"; \
 		git push $(GIT_REMOTE) $(GIT_BRANCH_SOURCE); \
-		echo "✓ 推送完成"; \
+		echo ""; \
+		echo "✅ 源码已推送到 $(GIT_BRANCH_SOURCE) 分支"; \
 	else \
 		echo "⚠️  工作区干净,无需提交"; \
 	fi
@@ -258,13 +604,42 @@ pull: ## 从远程拉取更新
 	@git pull $(GIT_REMOTE) $(GIT_BRANCH_SOURCE)
 	@echo "✓ 拉取完成"
 
-sync: push deploy ## 同步:提交源码+部署网站
-	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@echo "    ✓ 同步完成!"
-	@echo "    源码已推送到: $(GIT_BRANCH_SOURCE)"
-	@echo "    网站已部署到: $(GIT_BRANCH_DEPLOY)"
-	@echo "    访问: https://smlyfm.github.io"
-	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+sync: ## 🚀 一键同步: 提交源码(master) + 部署网站(main)
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    🚀 一键同步: 提交源码 + 部署网站"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@# Step 1: 提交源码
+	@if [ -n "$$(git status --porcelain)" ]; then \
+		echo "📤 Step 1/2: 提交源码到 $(GIT_BRANCH_SOURCE)..."; \
+		git status --short; \
+		echo ""; \
+		read -p "📝 提交信息 (回车使用默认): " MSG; \
+		if [ -z "$$MSG" ]; then \
+			MSG="Update: $(TIMESTAMP)"; \
+		fi; \
+		git add .; \
+		git commit -m "$$MSG"; \
+		git push $(GIT_REMOTE) $(GIT_BRANCH_SOURCE); \
+		echo "✅ 源码已推送"; \
+		echo ""; \
+	else \
+		echo "📤 Step 1/2: 源码无变更，跳过..."; \
+		echo ""; \
+	fi
+	@# Step 2: 部署网站
+	@echo "🚀 Step 2/2: 部署网站到 $(GIT_BRANCH_DEPLOY)..."
+	@npx hexo clean
+	@npx hexo generate
+	@npx hexo deploy
+	@echo ""
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    ✅ 同步完成!"
+	@echo ""
+	@echo "    📁 源码分支: $(GIT_BRANCH_SOURCE)"
+	@echo "    🌐 部署分支: $(GIT_BRANCH_DEPLOY)"
+	@echo "    🔗 网站地址: https://smlyfm.github.io"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 backup: ## 备份博客内容
 	@echo "💾 备份博客内容..."
@@ -275,54 +650,14 @@ backup: ## 备份博客内容
 		--exclude='public' \
 		--exclude='.deploy_git' \
 		--exclude='.git' \
-		$(SOURCE_DIR) _config*.yml package.json; \
+		$(SOURCE_DIR) _config*.yml package.json themes; \
 	echo "✓ 备份完成: $$BACKUP_FILE"; \
 	ls -lh "$$BACKUP_FILE"
 
-restore: ## 恢复最新备份
-	@echo "♻️  恢复备份..."
-	@LATEST_BACKUP=$$(ls -t $(BACKUP_DIR)/blog-backup-*.tar.gz 2>/dev/null | head -1); \
-	if [ -z "$$LATEST_BACKUP" ]; then \
-		echo "错误: 未找到备份文件"; \
-		exit 1; \
-	fi; \
-	echo "将恢复: $$LATEST_BACKUP"; \
-	read -p "是否继续? [y/N] " -n 1 -r; \
-	echo; \
-	if [[ $$REPLY =~ ^[Yy]$$ ]]; then \
-		tar -xzf "$$LATEST_BACKUP"; \
-		echo "✓ 恢复完成"; \
-	else \
-		echo "已取消"; \
-	fi
-
-# ============================================
-# 快捷命令别名
-# ============================================
-
-s: server ## 别名: server
-d: dev ## 别名: dev
-b: build ## 别名: build
-dp: deploy ## 别名: deploy
-n: new ## 别名: new
-p: push ## 别名: push
-l: list ## 别名: list
-c: clean ## 别名: clean
-
-# ============================================
-# 高级功能
-# ============================================
-
-watch: ## 监听文件变化并自动构建
-	@echo "👀 监听文件变化..."
-	@while true; do \
-		inotifywait -r -e modify,create,delete $(SOURCE_DIR) 2>/dev/null && \
-		echo "🔄 检测到变化,重新构建..." && \
-		make build; \
-	done
-
 count: ## 统计文章字数
-	@echo "📊 文章统计"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    📊 文章统计"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
 	@TOTAL_WORDS=0; \
 	TOTAL_POSTS=0; \
@@ -331,83 +666,32 @@ count: ## 统计文章字数
 			WORDS=$$(wc -w < "$$file"); \
 			TOTAL_WORDS=$$((TOTAL_WORDS + WORDS)); \
 			TOTAL_POSTS=$$((TOTAL_POSTS + 1)); \
-			printf "%-50s %6d 字\n" "$$(basename $$file)" "$$WORDS"; \
+			TITLE=$$(grep "^title:" "$$file" | head -1 | cut -d':' -f2- | xargs); \
+			printf "%-40s %6d 字\n" "$$TITLE" "$$WORDS"; \
 		fi; \
 	done; \
 	echo ""; \
+	echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"; \
 	echo "总计: $$TOTAL_POSTS 篇文章, $$TOTAL_WORDS 字"
 
-grep-posts: ## 搜索文章内容 (make grep-posts KEYWORD="关键词")
-	@if [ -z "$(KEYWORD)" ]; then \
-		echo "错误: 请指定搜索关键词"; \
-		echo "用法: make grep-posts KEYWORD=\"关键词\""; \
-		exit 1; \
-	fi
-	@echo "🔍 搜索关键词: $(KEYWORD)"
-	@echo ""
-	@grep -rn --color=always "$(KEYWORD)" $(POST_DIR)/ || echo "未找到匹配结果"
-
 # ============================================
-# CI/CD 相关
+# 快捷命令别名
 # ============================================
 
-ci-test: ## CI测试:安装依赖+构建
-	@echo "🧪 运行 CI 测试..."
-	@npm ci
-	@npx hexo clean
-	@npx hexo generate
-	@echo "✓ CI 测试通过"
-
-ci-deploy: ci-test ## CI部署:测试+部署
-	@echo "🚀 CI 部署..."
-	@npx hexo deploy
-	@echo "✓ CI 部署完成"
+s: server
+d: dev
+b: build
+dp: deploy
+n: new
+p: push
+l: list
+c: clean
 
 # ============================================
 # 版本信息
 # ============================================
 
 version: ## 显示版本信息
-	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@echo "    版本信息"
-	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@echo ""
-	@echo "环境:"
-	@echo "  Node.js:  $(NODE_VERSION)"
-	@echo "  npm:      $(NPM_VERSION)"
-	@echo "  Hexo:     $(HEXO_VERSION)"
-	@echo ""
-	@echo "Git:"
-	@echo "  Branch:   $$(git branch --show-current)"
-	@echo "  Commit:   $$(git rev-parse --short HEAD)"
-	@echo "  Remote:   $$(git remote get-url origin)"
-	@echo ""
-	@echo "项目:"
-	@echo "  名称:     $(PROJECT_NAME)"
-	@echo "  路径:     $$(pwd)"
-	@echo ""
-
-# ============================================
-# 开发辅助
-# ============================================
-
-init: ## 初始化新项目
-	@echo "🎉 初始化 Hexo 项目..."
-	@npm install
-	@git init
-	@echo "✓ 项目初始化完成"
-	@echo ""
-	@echo "下一步:"
-	@echo "  1. 配置 _config.yml"
-	@echo "  2. make new TITLE=\"第一篇文章\""
-	@echo "  3. make dev"
-
-deps-tree: ## 显示依赖树
-	@echo "📦 依赖树"
-	@npm list --depth=0
-
-audit: ## 安全审计
-	@echo "🔒 安全审计"
-	@npm audit
-	@echo ""
-	@echo "运行 'npm audit fix' 修复问题"
+	@echo "环境: Node $(NODE_VERSION), npm $(NPM_VERSION), Hexo $(HEXO_VERSION)"
+	@echo "分支: $$(git branch --show-current)"
+	@echo "提交: $$(git rev-parse --short HEAD)"

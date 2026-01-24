@@ -1,57 +1,47 @@
 <%# 现代首页布局 💡 卡片式设计，不包含完整HTML结构，由Hexo自动注入 %>
 
-  <% // 💡 卡片位置计算函数（桌面端绝对定位） function getCardPosition(cardName) { // 服务器端渲染时无window对象，直接返回绝对定位样式 var positions={ hiCard:
-    { left: '50%' , top: '50%' , transform: 'translate(-50%, -50%)' , width: '360px' }, articleCard: {
-    left: 'calc(50% + 400px)' , top: '50%' , transform: 'translate(0, -50%)' , width: '320px' }, clockCard: {
-    left: 'calc(50% - 400px)' , top: 'calc(50% - 150px)' , transform: 'translate(-100%, 0)' , width: '220px' },
-    socialCard: { left: 'calc(50% - 400px)' , top: 'calc(50% + 100px)' , transform: 'translate(-100%, 0)' ,
-    width: '220px' }, calendarCard: { left: 'calc(50% + 200px)' , top: 'calc(50% - 200px)' , width: '280px' } }; var
-    pos=positions[cardName]; if (!pos) return '' ; var styleStr='position: absolute;' ; styleStr +=' left: ' + pos.left
-    + ';' ; styleStr +=' top: ' + pos.top + ';' ; if (pos.transform) styleStr +=' transform: ' + pos.transform + ';' ;
-    if (pos.width) styleStr +=' width: ' + pos.width + ';' ; if (pos.height) styleStr +=' height: ' + pos.height + ';' ;
-    return styleStr; } %>
+  <!-- 💡 雪花背景Canvas -->
+  <div class="modern-background">
+    <canvas id="snowfall-canvas"></canvas>
+  </div>
 
-    <!-- 💡 雪花背景Canvas -->
-    <div class="modern-background">
-      <canvas id="snowfall-canvas"></canvas>
-    </div>
+  <!-- 💡 主内容区 -->
+  <main id="content-inner" class="modern-homepage">
+    <%# Hi Card - 个人介绍卡片 %>
+      <%- partial('modern-cards/hi-card') %>
 
-    <!-- 💡 主内容区 -->
-    <main id="content-inner" class="modern-homepage">
-      <%# Hi Card - 个人介绍卡片 %>
-        <%- partial('modern-cards/hi-card') %>
+        <%# Article Card - 最新文章卡片 %>
+          <%- partial('modern-cards/article-card') %>
 
-          <%# Article Card - 最新文章卡片 %>
-            <%- partial('modern-cards/article-card') %>
+            <%# Clock Card - 时钟卡片（仅桌面） %>
+              <div class="desktop-only">
+                <%- partial('modern-cards/clock-card') %>
+              </div>
 
-              <%# Clock Card - 时钟卡片（仅桌面） %>
-                <div class="desktop-only">
-                  <%- partial('modern-cards/clock-card') %>
-                </div>
+              <%# Social Card - 社交链接卡片 %>
+                <%- partial('modern-cards/social-card') %>
 
-                <%# Social Card - 社交链接卡片 %>
-                  <%- partial('modern-cards/social-card') %>
+                  <%# Calendar Card - 日历卡片（可选） %>
+                    <% if (theme.modern_cards && theme.modern_cards.calendar_enabled) { %>
+                      <div class="desktop-only">
+                        <%- partial('modern-cards/calendar-card') %>
+                      </div>
+                      <% } %>
+  </main>
 
-                    <%# Calendar Card - 日历卡片（可选） %>
-                      <% if (theme.modern_cards && theme.modern_cards.calendar_enabled) { %>
-                        <div class="desktop-only">
-                          <%- partial('modern-cards/calendar-card') %>
-                        </div>
-                        <% } %>
-    </main>
+  <!-- 💡 引入JavaScript效果 -->
+  <script src="<%= url_for('/js/effects/snowfall.js') %>"></script>
+  <script src="<%= url_for('/js/components/clock.js') %>"></script>
+  <script src="<%= url_for('/js/components/greeting.js') %>"></script>
 
-    <!-- 💡 引入JavaScript效果 -->
-    <script src="<%= url_for('/js/effects/snowfall.js') %>"></script>
-    <script src="<%= url_for('/js/components/clock.js') %>"></script>
-    <script src="<%= url_for('/js/components/greeting.js') %>"></script>
-
-    <!-- 💡 卡片加载动画 -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        var cards = document.querySelectorAll('.card-container');
-        cards.forEach(function (card, index) {
-          card.classList.add('card-stagger-animation');
-          card.style.animationDelay = (index * 0.1) + 's';
-        });
+  <!-- 💡 卡片加载动画 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 添加卡片依次加载动画
+      var cards = document.querySelectorAll('.card-container');
+      cards.forEach(function (card, index) {
+        card.classList.add('card-stagger-animation');
+        card.style.animationDelay = (index * 0.1) + 's';
       });
-    </script>
+    });
+  </script>

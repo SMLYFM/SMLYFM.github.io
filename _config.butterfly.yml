@@ -1159,3 +1159,10 @@ CDN:
     # valine:
     # waline_css:
     # waline_js:
+
+# Asset Settings
+# Use local or CDN for third-party resources
+# 💡 控制第三方资源加载方式，用于解决 busuanzi 等配置未定义的问题
+asset:
+  # 不蒜子统计：true 表示使用本地资源，false 表示使用 CDN
+  busuanzi: false

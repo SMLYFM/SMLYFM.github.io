@@ -1,0 +1,38 @@
+<%# Quick Nav Card %>
+    <div class="card-container modern-card quick-nav-card">
+        <h3 class="card-title"><i class="fas fa-compass"></i> 快速导航</h3>
+        <div class="quick-nav-list">
+            <a href="<%= url_for('/about/') %>" class="quick-nav-item">
+                <div class="nav-icon"><i class="fas fa-user-circle"></i></div>
+                <div class="nav-content">
+                    <div class="nav-label">关于我</div>
+                    <div class="nav-desc">个人简介</div>
+                </div>
+                <i class="fas fa-chevron-right nav-arrow"></i>
+            </a>
+            <a href="<%= url_for('/archives/') %>" class="quick-nav-item">
+                <div class="nav-icon"><i class="fas fa-archive"></i></div>
+                <div class="nav-content">
+                    <div class="nav-label">归档</div>
+                    <div class="nav-desc">时间轴</div>
+                </div>
+                <i class="fas fa-chevron-right nav-arrow"></i>
+            </a>
+            <a href="<%= url_for('/categories/') %>" class="quick-nav-item">
+                <div class="nav-icon"><i class="fas fa-folder"></i></div>
+                <div class="nav-content">
+                    <div class="nav-label">分类</div>
+                    <div class="nav-desc">主题分组</div>
+                </div>
+                <i class="fas fa-chevron-right nav-arrow"></i>
+            </a>
+            <a href="<%= url_for('/tags/') %>" class="quick-nav-item">
+                <div class="nav-icon"><i class="fas fa-tags"></i></div>
+                <div class="nav-content">
+                    <div class="nav-label">标签</div>
+                    <div class="nav-desc">关键词</div>
+                </div>
+                <i class="fas fa-chevron-right nav-arrow"></i>
+            </a>
+        </div>
+    </div>

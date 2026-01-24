@@ -1,0 +1,36 @@
+<%# Stats Card %>
+    <% var posts=site.posts.length; var cats=site.categories ? site.categories.length : 0; var tags=site.tags ?
+        site.tags.length : 0; %>
+        <div class="card-container modern-card stats-card">
+            <h3 class="card-title"><i class="fas fa-chart-bar"></i> 网站统计</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
+                    <div class="stat-content">
+                        <div class="stat-value" data-count="<%= posts %>">0</div>
+                        <div class="stat-label">篇文章</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-folder"></i></div>
+                    <div class="stat-content">
+                        <div class="stat-value" data-count="<%= cats %>">0</div>
+                        <div class="stat-label">个分类</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-tags"></i></div>
+                    <div class="stat-content">
+                        <div class="stat-value" data-count="<%= tags %>">0</div>
+                        <div class="stat-label">个标签</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-keyboard"></i></div>
+                    <div class="stat-content">
+                        <div class="stat-value" data-count="10">0</div>
+                        <div class="stat-label">千字</div>
+                    </div>
+                </div>
+            </div>
+        </div>

@@ -1,8 +1,8 @@
 <%# Article Card - 最新文章卡片 💡 显示最近发布的文章列表 %>
 
-    <% // 💡 获取最新文章（最多5篇） const recentPosts=site.posts.sort('date', -1).limit(5).toArray() %>
+    <% var recentPosts=site.posts.sort('date', -1).limit(5).toArray(); %>
 
-        <div class="card-container modern-card article-card" style="<%= getCardPosition('articleCard') %>">
+        <div class="card-container modern-card article-card">
             <!-- 💡 卡片标题 -->
             <h2
                 style="font-size: var(--font-size-xl); font-weight: 700; margin-bottom: var(--spacing-md); display: flex; align-items: center; gap: 0.5rem;">

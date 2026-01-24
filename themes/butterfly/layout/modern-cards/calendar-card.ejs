@@ -18,8 +18,7 @@
         var monthNames = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
         %>
 
-        <div class="card-container modern-card calendar-card"
-            style="<%= getCardPosition('calendarCard') %>; min-width: 280px;">
+        <div class="card-container modern-card calendar-card" style="min-width: 280px;">
             <h3
                 style="font-size: var(--font-size-base); font-weight: 600; margin-bottom: var(--spacing-md); color: var(--color-text-secondary);">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -32,6 +31,7 @@
                 <%= year %>年<%= monthNames[month] %>
             </h3>
 
+            <!-- 星期标题 -->
             <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 8px;">
                 <% ['日', '一' , '二' , '三' , '四' , '五' , '六' ].forEach(function(day) { %>
                     <div
@@ -41,11 +41,14 @@
                     <% }) %>
             </div>
 
+            <!-- 日历网格 -->
             <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;">
+                <!-- 月初空格 -->
                 <% for (var i=0; i < firstDay; i++) { %>
                     <div></div>
                     <% } %>
 
+                        <!-- 日期 -->
                         <% for (var day=1; day <=daysInMonth; day++) { var isToday=day===now.getDate(); var
                             hasPost=postDates.indexOf(day) !==-1; var
                             styleStr='aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-size: var(--font-size-sm);'

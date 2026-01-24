@@ -1,0 +1,181 @@
+extends includes/layout.pug
+
+block content
+  //- 💡 雪花背景Canvas
+  .modern-background
+    canvas#snowfall-canvas
+
+  //- 💡 双列布局：左侧现代卡片内容
+  .modern-main-content
+    //- Hi Card - 个人介绍卡片
+    .card-container.modern-card.hi-card.hoverable
+      - var avatarImg = theme.avatar && theme.avatar.img ? theme.avatar.img : '/img/avatar.png'
+      img.avatar(src=url_for(avatarImg) alt=config.author || 'Avatar')
+      
+      h1.greeting
+        span#greeting-text
+        br
+        | 我是 
+        span.username= config.author || 'CJX'
+        br
+        span.tagline 一个热爱数学与编程的探索者
+      
+      if config.description
+        p.description= config.description
+      
+      .quick-tags
+        span.tag 🎓 Mathematics
+        span.tag 🦀 Rust
+        span.tag 🐍 Python
+        span.tag 📐 PDE
+
+    //- 双列卡片区
+    .cards-row
+      //- Clock Card
+      .card-container.modern-card.clock-card
+        .time#clock-time 00:00:00
+        .date#clock-date --
+
+      //- Social Card
+      - var socialConfig = theme.social || {}
+      - var github = socialConfig.github || 'https://github.com'
+      - var email = socialConfig.email || ''
+      .card-container.modern-card.social-card
+        h3.card-title
+          svg(width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2")
+            path(d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z")
+            rect(x="2" y="9" width="4" height="12")
+            circle(cx="4" cy="4" r="2")
+          | 联系我
+        .social-links
+          a.social-link(href=github target="_blank" rel="noopener")
+            svg.icon(width="20" height="20" viewBox="0 0 24 24" fill="currentColor")
+              path(d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z")
+            span GitHub
+          if email
+            a.social-link(href="mailto:" + email)
+              svg.icon(width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2")
+                path(d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z")
+                polyline(points="22,6 12,13 2,6")
+              span Email
+
+    //- Article Card - 最新文章
+    - var recentPosts = site.posts.sort('date', -1).limit(6).toArray()
+    .card-container.modern-card.article-card
+      .card-header
+        h2.card-title
+          svg(width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2")
+            path(d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z")
+            polyline(points="14 2 14 8 20 8")
+          | 最新文章
+        a.view-all(href=url_for('/archives/')) 查看全部 →
+      
+      .article-list
+        each post, index in recentPosts
+          if index < 6
+            a.article-item(href=url_for(post.path))
+              .article-content
+                .article-title= post.title
+                .article-meta
+                  span.date
+                    svg(width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2")
+                      rect(x="3" y="4" width="18" height="18" rx="2" ry="2")
+                      line(x1="16" y1="2" x2="16" y2="6")
+                      line(x1="8" y1="2" x2="8" y2="6")
+                      line(x1="3" y1="10" x2="21" y2="10")
+                    = ' ' + date(post.date, 'MM-DD')
+                  if post.categories && post.categories.length
+                    span.category
+                      svg(width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2")
+                        path(d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z")
+                      = ' ' + post.categories.first().name
+
+    //- Quick Nav Card - 快速导航
+    .card-container.modern-card.quick-nav-card
+      h3.card-title
+        svg(width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2")
+          circle(cx="12" cy="12" r="10")
+          polygon(points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76")
+        | 快速导航
+      
+      .nav-grid
+        a.nav-item(href=url_for('/archives/'))
+          .nav-icon
+            svg(width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2")
+              path(d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z")
+          .nav-text
+            .nav-label 归档
+            .nav-count= site.posts.length + ' 篇'
+        
+        a.nav-item(href=url_for('/categories/'))
+          .nav-icon
+            svg(width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2")
+              rect(x="3" y="3" width="7" height="7")
+              rect(x="14" y="3" width="7" height="7")
+              rect(x="14" y="14" width="7" height="7")
+              rect(x="3" y="14" width="7" height="7")
+          .nav-text
+            .nav-label 分类
+            .nav-count= site.categories.length + ' 个'
+        
+        a.nav-item(href=url_for('/tags/'))
+          .nav-icon
+            svg(width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2")
+              path(d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z")
+              line(x1="7" y1="7" x2="7.01" y2="7")
+          .nav-text
+            .nav-label 标签
+            .nav-count= site.tags.length + ' 个'
+        
+        a.nav-item(href=url_for('/about/'))
+          .nav-icon
+            svg(width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2")
+              path(d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2")
+              circle(cx="12" cy="7" r="4")
+          .nav-text
+            .nav-label 关于
+            .nav-count 了解我
+
+      //- 学科分类导航
+      h4.section-title 📚 学科分类
+      .category-nav
+        a.category-item(href=url_for('/categories/pde/'))
+          span.emoji 🌊
+          span.name PDE
+        a.category-item(href=url_for('/categories/functional-analysis/'))
+          span.emoji 📊
+          span.name 泛函分析
+        a.category-item(href=url_for('/categories/rust/'))
+          span.emoji 🦀
+          span.name Rust
+        a.category-item(href=url_for('/categories/python/'))
+          span.emoji 🐍
+          span.name Python
+        a.category-item(href=url_for('/categories/latex/'))
+          span.emoji 📝
+          span.name LaTeX
+        a.category-item(href=url_for('/categories/pytorch/'))
+          span.emoji 🔥
+          span.name PyTorch
+
+  //- 💡 Butterfly 原版侧边栏会通过 layout.pug 自动加载
+
+  //- 💡 引入JavaScript效果
+  script(src=url_for('/js/effects/snowfall.js'))
+  script(src=url_for('/js/components/clock.js'))
+  script(src=url_for('/js/components/greeting.js'))
+
+  //- 💡 卡片加载动画
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      var cards = document.querySelectorAll('.card-container');
+      cards.forEach(function(card, index) {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        setTimeout(function() {
+          card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, index * 80);
+      });
+    });

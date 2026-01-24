@@ -1,0 +1,137 @@
+<%# 顶部导航栏 - 现代毛玻璃效果 %>
+
+    <header id="site-header" class="site-header">
+        <nav class="navbar">
+            <div class="navbar-container">
+                <!-- 💡 Logo 和站点标题 -->
+                <div class="navbar-brand">
+                    <a href="<%= url_for('/') %>" class="brand-link">
+                        <% if (theme.avatar && theme.avatar.img) { %>
+                            <img src="<%= url_for(theme.avatar.img) %>" alt="<%= config.title %>" class="brand-logo">
+                            <% } %>
+                                <span class="brand-title">
+                                    <%= config.title %>
+                                </span>
+                    </a>
+                </div>
+
+                <!-- 💡 主导航菜单 -->
+                <div class="navbar-menu" id="navbar-menu">
+                    <ul class="nav-list">
+                        <!-- 首页 -->
+                        <li class="nav-item">
+                            <a href="<%= url_for('/') %>" class="nav-link">
+                                <i class="fas fa-home"></i>
+                                <span>首页</span>
+                            </a>
+                        </li>
+
+                        <!-- 归档 -->
+                        <li class="nav-item">
+                            <a href="<%= url_for('/archives/') %>" class="nav-link">
+                                <i class="fas fa-archive"></i>
+                                <span>归档</span>
+                            </a>
+                        </li>
+
+                        <!-- 分类 -->
+                        <li class="nav-item">
+                            <a href="<%= url_for('/categories/') %>" class="nav-link">
+                                <i class="fas fa-folder-open"></i>
+                                <span>分类</span>
+                            </a>
+                        </li>
+
+                        <!-- 标签 -->
+                        <li class="nav-item">
+                            <a href="<%= url_for('/tags/') %>" class="nav-link">
+                                <i class="fas fa-tags"></i>
+                                <span>标签</span>
+                            </a>
+                        </li>
+
+                        <!-- 友链 -->
+                        <li class="nav-item">
+                            <a href="<%= url_for('/link/') %>" class="nav-link">
+                                <i class="fas fa-link"></i>
+                                <span>友链</span>
+                            </a>
+                        </li>
+
+                        <!-- 关于 -->
+                        <li class="nav-item">
+                            <a href="<%= url_for('/about/') %>" class="nav-link">
+                                <i class="fas fa-heart"></i>
+                                <span>关于</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- 💡 搜索按钮（可选） -->
+                    <div class="navbar-search">
+                        <button class="search-btn" aria-label="搜索">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 💡 移动端汉堡菜单按钮 -->
+                <button class="navbar-toggle" id="navbar-toggle" aria-label="菜单">
+                    <span class="toggle-bar"></span>
+                    <span class="toggle-bar"></span>
+                    <span class="toggle-bar"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 💡 导航栏 JavaScript -->
+    <script>
+        (function () {
+            const header = document.getElementById('site-header');
+            const toggle = document.getElementById('navbar-toggle');
+            const menu = document.getElementById('navbar-menu');
+
+            // 💡 滚动时添加背景
+            let lastScroll = 0;
+            window.addEventListener('scroll', function () {
+                const currentScroll = window.pageYOffset;
+
+                if (currentScroll > 80) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+
+                // 滚动方向检测（可选：隐藏导航栏）
+                if (currentScroll > lastScroll && currentScroll > 300) {
+                    header.classList.add('hidden');
+                } else {
+                    header.classList.remove('hidden');
+                }
+
+                lastScroll = currentScroll;
+            });
+
+            // 💡 移动端菜单切换
+            if (toggle && menu) {
+                toggle.addEventListener('click', function () {
+                    menu.classList.toggle('active');
+                    toggle.classList.toggle('active');
+                    document.body.classList.toggle('menu-open');
+                });
+            }
+
+            // 💡 下拉菜单交互（移动端点击切换）
+            const dropdowns = document.querySelectorAll('.nav-item.has-dropdown');
+            dropdowns.forEach(function (dropdown) {
+                const link = dropdown.querySelector('.nav-link');
+                link.addEventListener('click', function (e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    }
+                });
+            });
+        })();
+    </script>
