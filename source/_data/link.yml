@@ -15,6 +15,11 @@
       link: https://fomal.cc/
       avatar: /assets/head.jpg
       descr: Future is now 🍭🍭🍭
+      link_list:
+    - name: 科学空间
+      link: https://www.kexue.fm/
+      avatar: /assets/head.jpg
+      descr: 科学空间,物理数学
 
 # 开发工具
 - class_name: 💻 开发工具
