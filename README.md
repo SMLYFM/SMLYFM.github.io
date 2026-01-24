@@ -20,7 +20,12 @@
 
 | 文档 | 说明 |
 |------|------|
-| [📝 配置修改指南](docs/CONFIG_GUIDE.md) | 公告、背景、导航菜单等修改方法 |
+| [📝 配置修改指南](docs/CONFIG_GUIDE.md) | 公告、背景、导航菜单、社交链接等修改方法 |
+| [🔧 开发指南](docs/DEVELOPMENT.md) | 本地开发环境设置和工作流程 |
+| [🚀 部署指南](docs/DEPLOYMENT.md) | GitHub Pages 部署步骤 |
+| [📋 Makefile 说明](docs/MAKEFILE.md) | 所有 make 命令详细说明 |
+| [🎨 主题定制](docs/THEME_CUSTOMIZATION.md) | Butterfly 主题自定义配置 |
+| [🆕 UI 更新日志](docs/MODERN_THEME_CHANGELOG.md) | 现代化 UI 改造记录 |
 
 ---
 
