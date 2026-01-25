@@ -13,7 +13,10 @@
 - [Step 4: 修改配置](#step-4-修改配置)
 - [Step 5: 本地预览](#step-5-本地预览)
 - [Step 6: 部署到 GitHub Pages](#step-6-部署到-github-pages)
-- [Step 7: 自定义博客内容](#step-7-自定义博客内容)
+- [Step 7: 自定义博客内容](#step-7-自定义博客内容)（删除/新增文章、修改页面）
+- [Step 8: 配置评论系统（Giscus）](#step-8-配置评论系统giscus)
+- [Step 9: 其他自定义设置](#step-9-其他自定义设置)
+- [日常写作流程](#日常写作流程)
 - [常见问题](#常见问题)
 
 ---
@@ -214,32 +217,154 @@ npx hexo deploy
 
 ## Step 7: 自定义博客内容
 
-### 7.1 删除示例文章
+### 7.1 删除示例文章（重要！）
+
+Fork 后的仓库包含原作者的文章，你需要删除这些文章：
 
 ```bash
-# 删除所有示例文章
-rm source/_posts/*.md
+# 方法一：删除所有示例文章（推荐）
+rm -rf source/_posts/*.md
 
-# 或保留你想要的
+# 方法二：逐个删除
+ls source/_posts/           # 先查看有哪些文章
+rm source/_posts/xxx.md     # 删除指定文章
+
+# 方法三：使用 Makefile
+make delete                 # 交互式选择删除
+```
+
+**删除后记得清理缓存：**
+
+```bash
+make clean
+# 或
+npx hexo clean
 ```
 
 ### 7.2 创建你的第一篇文章
 
+#### 方式一：交互式创建（推荐新手）
+
 ```bash
-# 交互式创建
 make new
-
-# 或指定标题
-make new TITLE="我的第一篇博客"
-
-# 数学类文章
-make new-math TITLE="微积分入门"
-
-# 编程类文章
-make new-code TITLE="Python入门" LANG="python"
 ```
 
-### 7.3 修改关于页面
+系统会引导你输入：
+
+- 文章标题
+- 分类
+- 标签
+- 描述
+
+#### 方式二：指定标题直接创建
+
+```bash
+# 普通文章
+make new TITLE="我的第一篇博客"
+
+# 数学类文章（自动启用 MathJax）
+make new-math TITLE="微积分入门" SUB="分析学"
+
+# 编程类文章（自动添加代码块框架）
+make new-code TITLE="Python入门" LANG="python"
+
+# 科学计算类文章
+make new-sci TITLE="有限元方法入门"
+
+# 工具类文章
+make new-tool TITLE="Git使用指南"
+```
+
+#### 方式三：创建草稿（暂不发布）
+
+```bash
+make draft TITLE="未完成的文章"
+
+# 完成后发布草稿
+make publish DRAFT="未完成的文章"
+```
+
+### 7.3 文章格式详解
+
+新建的文章位于 `source/_posts/` 目录。每篇文章都是一个 `.md` 文件，格式如下：
+
+```markdown
+---
+title: 文章标题
+date: 2026-01-25 12:00:00
+updated: 2026-01-25 12:00:00
+categories:
+  - 主分类
+  - 子分类
+tags:
+  - 标签1
+  - 标签2
+description: 文章简短描述
+cover: https://example.com/image.jpg  # 封面图（可选）
+mathjax: true  # 启用数学公式（可选）
+---
+
+## 简介
+
+这里是文章摘要，会显示在首页。
+
+<!-- more -->
+
+## 正文
+
+正文内容从这里开始...
+
+## 总结
+
+总结内容...
+
+## 参考资料
+
+- [链接名](https://example.com)
+```
+
+#### Front Matter 字段说明
+
+| 字段 | 必填 | 说明 |
+|------|------|------|
+| `title` | ✅ | 文章标题 |
+| `date` | ✅ | 创建时间 |
+| `updated` | ❌ | 更新时间 |
+| `categories` | ❌ | 分类（支持多级） |
+| `tags` | ❌ | 标签（可多个） |
+| `description` | ❌ | 简短描述（用于 SEO） |
+| `cover` | ❌ | 封面图 URL |
+| `mathjax` | ❌ | 是否启用数学公式 |
+
+### 7.4 管理文章
+
+```bash
+# 列出所有文章
+make list
+
+# 列出详细信息（含标签）
+make list-detail
+
+# 编辑最新文章
+make edit
+
+# 编辑指定文章
+make edit-file FILE="文章标题.md"
+
+# 搜索文章
+make search KEYWORD="关键词"
+
+# 统计字数
+make count
+
+# 更新文章修改时间
+make update-time
+
+# 给文章添加标签
+make add-tag
+```
+
+### 7.5 修改关于页面
 
 编辑 `source/about/index.md`：
 
@@ -247,20 +372,194 @@ make new-code TITLE="Python入门" LANG="python"
 ---
 title: 关于我
 date: 2026-01-01
+type: "about"
 ---
 
 ## 👋 你好，我是 XXX
 
 在这里写你的个人介绍...
+
+### 🎓 教育背景
+
+- XX大学 XX专业
+
+### 💼 工作经历
+
+- XXXX
+
+### 🔧 技能
+
+- 编程语言：Python, JavaScript, ...
+- 框架：...
+
+### 📫 联系方式
+
+- Email: xxx@example.com
+- GitHub: [你的用户名](https://github.com/你的用户名)
 ```
 
-### 7.4 修改友链页面
+### 7.6 修改友链页面
 
-编辑 `source/link/index.md`，添加你的友链。
+编辑 `source/link/index.md`：
 
-### 7.5 修改导航菜单
+```markdown
+---
+title: 友情链接
+date: 2026-01-01
+type: "link"
+---
 
-编辑 `_config.butterfly.yml` 中的 `menu` 部分。
+{% flink %}
+- class_name: 友链
+  class_desc: 我的朋友们
+  link_list:
+    - name: 朋友A的博客
+      link: https://friend-a.com
+      avatar: https://friend-a.com/avatar.png
+      descr: 这是朋友A的博客简介
+
+    - name: 朋友B的博客
+      link: https://friend-b.com
+      avatar: https://friend-b.com/avatar.png
+      descr: 这是朋友B的博客简介
+{% endflink %}
+```
+
+### 7.7 修改导航菜单
+
+编辑 `_config.butterfly.yml` 中的 `menu` 部分：
+
+```yaml
+menu:
+  首页: / || fas fa-home
+  归档: /archives/ || fas fa-archive
+  标签: /tags/ || fas fa-tags
+  分类: /categories/ || fas fa-folder-open
+  # 可自定义添加更多
+  关于: /about/ || fas fa-heart
+  友链: /link/ || fas fa-link
+```
+
+---
+
+## Step 8: 配置评论系统（Giscus）
+
+本项目使用 **Giscus** 作为评论系统，它基于 GitHub Discussions，免费且美观。
+
+### 8.1 启用仓库 Discussions
+
+1. 访问你的仓库 → **Settings** → **General**
+2. 滚动到 **Features** 部分
+3. 勾选 **Discussions**
+
+### 8.2 安装 Giscus App
+
+1. 访问 [https://github.com/apps/giscus](https://github.com/apps/giscus)
+2. 点击 **Install**
+3. 选择你的仓库 `<用户名>.github.io`
+4. 点击 **Install**
+
+### 8.3 获取配置参数
+
+1. 访问 [https://giscus.app/](https://giscus.app/)
+2. 在 **Repository** 输入：`<你的用户名>/<你的用户名>.github.io`
+3. **Discussion Category** 选择 **Announcements**（或创建一个新分类）
+4. 其他保持默认
+5. 页面下方会生成配置代码，记录以下值：
+   - `data-repo`
+   - `data-repo-id`
+   - `data-category-id`
+
+### 8.4 修改主题配置
+
+编辑 `_config.butterfly.yml`：
+
+```yaml
+comments:
+  use: Giscus
+  text: true
+  lazyload: true
+  count: true
+  card_post_count: true
+
+giscus:
+  repo: <你的用户名>/<你的用户名>.github.io
+  repo_id: <从 giscus.app 获取的 repo_id>
+  category_id: <从 giscus.app 获取的 category_id>
+  light_theme: light
+  dark_theme: dark_dimmed
+  js:
+  option:
+    mapping: pathname
+    inputPosition: bottom
+    lang: zh-CN
+    reactions-enabled: 1
+```
+
+### 8.5 验证评论系统
+
+```bash
+# 本地预览
+make dev
+
+# 打开任意文章，滚动到底部查看评论区
+```
+
+如果显示 "使用 GitHub 登录评论"，说明配置成功！
+
+---
+
+## Step 9: 其他自定义设置
+
+### 9.1 修改网站图标（Favicon）
+
+替换 `source/img/favicon.ico` 为你的图标。
+
+### 9.2 修改侧边栏头像
+
+编辑 `_config.butterfly.yml`：
+
+```yaml
+avatar:
+  img: https://你的头像URL
+  effect: true  # 鼠标悬停旋转效果
+```
+
+### 9.3 修改侧边栏公告
+
+```yaml
+card_announcement:
+  enable: true
+  content: 欢迎来到我的博客！这里记录我的学习和思考。
+```
+
+### 9.4 修改底部 Footer
+
+```yaml
+footer:
+  owner:
+    enable: true
+    since: 2026  # 建站年份
+  custom_text: 你的自定义文字
+```
+
+### 9.5 修改社交链接
+
+```yaml
+social:
+  fab fa-github: https://github.com/<你的用户名> || Github
+  fas fa-envelope: mailto:your-email@example.com || Email
+```
+
+### 9.6 添加百度/Google 统计
+
+```yaml
+# 百度统计
+baidu_analytics: 你的百度统计ID
+
+# Google Analytics
+google_analytics: G-XXXXXXXXXX
+```
 
 ---
 
@@ -270,14 +569,16 @@ date: 2026-01-01
 # 1. 创建新文章
 make new TITLE="文章标题"
 
-# 2. 编辑文章
-# 用你喜欢的编辑器打开 source/_posts/文章标题.md
+# 2. 编辑文章（用你喜欢的编辑器）
+code source/_posts/文章标题.md
 
 # 3. 本地预览
 make dev
+# 访问 http://localhost:4000 预览效果
 
 # 4. 满意后一键发布
 make sync
+# 这会自动：提交源码 → 推送到 GitHub → 构建 → 部署
 ```
 
 ---
