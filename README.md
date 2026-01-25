@@ -12,8 +12,8 @@
 
 - [快速开始](#-快速开始)
 - [项目结构详解](#-项目结构详解)
-- [文章管理完整指南](#️-文章管理完整指南-1)
-- [配置说明](#️-配置说明-1)
+- [文章管理完整指南](#️-文章管理完整指南)
+- [配置说明](#️-配置说明)
 - [分支管理](#-分支管理)
 - [常用命令速查](#-常用命令速查)
 
@@ -28,6 +28,9 @@
 | [📋 Makefile 说明](docs/MAKEFILE.md) | 所有 make 命令详细说明 |
 | [🎨 主题定制](docs/THEME_CUSTOMIZATION.md) | Butterfly 主题自定义配置 |
 | [🆕 UI 更新日志](docs/MODERN_THEME_CHANGELOG.md) | 现代化 UI 改造记录 |
+| [🐛 CSS 加载修复](docs/BUGFIX_CSS_LOADING.md) | 现代首页样式加载问题修复记录 |
+| [🔧 EJS 语法修复](docs/BUGFIX_EJS_SYNTAX_ERROR.md) | EJS 模板语法错误分析与解决方案 |
+| [📐 UI 重构计划](docs/UI_REFACTOR_PLAN.md) | 首页 UI 重构设计计划 |
 
 ---
 
