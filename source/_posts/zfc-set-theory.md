@@ -137,10 +137,10 @@ $$|A| = \min\{\alpha : \alpha \text{ 是序数} \land \alpha \approx A\}$$
 
 无穷基数用 $\aleph$（aleph）表示：
 
-- $\aleph_0 = |\mathbb{N}|$（最小无穷基数）
-- $\aleph_1$ = 最小不可数基数
-- $\aleph_{\alpha+1}$ = $\aleph_\alpha$ 的后继基数
-- $\aleph_\lambda = \sup_{\alpha < \lambda} \aleph_\alpha$（极限情形）
+- $\aleph\_0 = |\mathbb{N}|$（最小无穷基数）
+- $\aleph\_1$ = 最小不可数基数
+- $\aleph\_{\alpha+1}$ = $\aleph\_\alpha$ 的后继基数
+- $\aleph\_\lambda = \sup\_{\alpha < \lambda} \aleph\_\alpha$（极限情形）
 
 ### 3.3 基数运算
 
@@ -161,7 +161,7 @@ $$|A| = \min\{\alpha : \alpha \text{ 是序数} \land \alpha \approx A\}$$
 
 即不存在基数严格介于 $\aleph_0$ 和 $2^{\aleph_0}$ 之间。
 
-**广义连续统假设（GCH）**：对所有序数 $\alpha$，$2^{\aleph_\alpha} = \aleph_{\alpha+1}$
+**广义连续统假设（GCH）**：对所有序数 $\alpha$，$2^{\aleph\_\alpha} = \aleph\_{\alpha+1}$
 
 **哥德尔-科恩定理**：CH 独立于 ZFC。
 
@@ -230,10 +230,10 @@ $$|A| = \min\{\alpha : \alpha \text{ 是序数} \land \alpha \approx A\}$$
 
 **构造宇宙 $L$**：
 
-- $L_0 = \emptyset$
-- $L_{\alpha+1} = \text{Def}(L_\alpha)$（$L_\alpha$ 中可定义的子集）
-- $L_\lambda = \bigcup_{\alpha < \lambda} L_\alpha$
-- $L = \bigcup_\alpha L_\alpha$
+- $L\_0 = \emptyset$
+- $L\_{\alpha+1} = \text{Def}(L\_\alpha)$（$L\_\alpha$ 中可定义的子集）
+- $L\_\lambda = \bigcup\_{\alpha < \lambda} L\_\alpha$
+- $L = \bigcup\_\alpha L\_\alpha$
 
 **性质**：在 $L$ 中，GCH 和 AC 都成立。
 
@@ -262,7 +262,7 @@ ZFC 集合论为现代数学提供了坚实的基础：
 
 ## 参考资料
 
-- Kunen, K. *Set Theory: An Introduction to Independence Proofs*, 1980
-- Jech, T. *Set Theory*, 3rd ed., 2003
-- Enderton, H. *Elements of Set Theory*, 1977
+- Kunen, K. _Set Theory: An Introduction to Independence Proofs_, 1980
+- Jech, T. _Set Theory_, 3rd ed., 2003
+- Enderton, H. _Elements of Set Theory_, 1977
 - [Stanford Encyclopedia - Set Theory](https://plato.stanford.edu/entries/set-theory/)
