@@ -44,6 +44,8 @@ menu:
   Tools||fas fa-tools||hide:
     LaTeX: /categories/工具与写作/latex/ || fas fa-file-alt
     工具与写作: /categories/工具与写作/ || fas fa-pen-fancy
+    学习资源: /resources/ || fas fa-book
+    学习时间线: /timeline/ || fas fa-history
 # --------------------------------------
 # Code Blocks Settings
 # --------------------------------------
@@ -520,8 +522,8 @@ math:
 search:
   # Choose: algolia_search / local_search / docsearch
   # leave it empty if you don't need search
-  use:
-  placeholder:
+  use: local_search
+  placeholder: 搜索文章...
 
   # Algolia Search
   algolia_search:
@@ -533,9 +535,9 @@ search:
     # Preload the search data when the page loads.
     preload: true
     # Show top n results per article, show all results by setting to -1
-    top_n_per_article: 1
+    top_n_per_article: 3
     # Unescape html strings to the readable one.
-    unescape: false
+    unescape: true
     CDN:
 
   # Docsearch
@@ -574,16 +576,16 @@ comments:
   # Leave it empty if you don't need comments
   # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Waline/Utterances/Facebook Comments/Twikoo/Giscus/Remark42/Artalk
   # Format of two comments system : Disqus,Waline
-  use:
+  use: Giscus
   # Display the comment name next to the button
   text: true
   # Lazyload: The comment system will be load when comment element enters the browser's viewport.
   # If you set it to true, the comment count will be invalid
-  lazyload: false
+  lazyload: true
   # Display comment count in post's top_img
-  count: false
+  count: true
   # Display comment count in Home Page
-  card_post_count: false
+  card_post_count: true
 
 # Disqus
 # https://disqus.com/
@@ -670,14 +672,24 @@ twikoo:
 
 # Giscus
 # https://giscus.app/
+# 💡 需要在 GitHub 仓库中启用 Discussions
 giscus:
-  repo:
-  repo_id:
-  category_id:
+  repo: SMLYFM/SMLYFM.github.io
+  repo_id: # 需要从 giscus.app 获取
+  category_id: # 需要从 giscus.app 获取
+  # 💡 主题与博客暗色模式联动
   light_theme: light
-  dark_theme: dark
+  dark_theme: dark_dimmed
   js:
   option:
+    # 💡 映射方式：根据路径名
+    mapping: pathname
+    # 💡 输入框位置：评论下方
+    inputPosition: bottom
+    # 💡 语言：跟随页面
+    lang: zh-CN
+    # 💡 启用表情反应
+    reactions-enabled: 1
 
 # Remark42
 # https://remark42.com/docs/configuration/frontend/
@@ -1054,11 +1066,11 @@ instantpage: false
 # Lazyload
 # https://github.com/verlok/vanilla-lazyload
 lazyload:
-  enable: false
+  enable: true
   # Specify the field to use lazyload (site or post)
   field: site
-  placeholder:
-  blur: false
+  placeholder: /img/loading.gif
+  blur: true
 
 # PWA
 # See https://github.com/JLHwung/hexo-offline
@@ -1118,6 +1130,10 @@ inject:
     - <script src="/js/components/clock.js"></script>
     - <script src="/js/components/greeting.js"></script>
     - <script src="/js/components/theme-toggle.js"></script>
+    - <script src="/js/components/reading-progress.js"></script>
+    - <script src="/js/components/code-enhance.js"></script>
+    - <script src="/js/components/keyboard-shortcuts.js"></script>
+    - <script src="/js/components/math-copy.js"></script>
 
 # 💡 现代卡片主题配置
 modern_cards:

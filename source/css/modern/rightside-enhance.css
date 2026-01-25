@@ -1,0 +1,155 @@
+/**
+ * 右侧边栏按钮增强样式
+ * 💡 返回顶部、隐藏侧边栏等按钮统一玻璃态设计
+ */
+
+/* ========================================
+ * 右侧边栏按钮容器
+ * ======================================== */
+
+#rightside {
+  /* 💡 调整按钮间距 */
+  position: fixed;
+}
+
+#rightside > div {
+  margin-bottom: 8px;
+}
+
+/* ========================================
+ * 所有右侧按钮的统一样式
+ * ======================================== */
+
+#rightside > div > button,
+#rightside > div > a,
+#rightside-config-hide,
+#go-up {
+  /* 💡 尺寸 */
+  width: 40px !important;
+  height: 40px !important;
+
+  /* 💡 玻璃态背景 */
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+
+  /* 💡 边框和阴影 */
+  border: none !important;
+  border-radius: 50% !important;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+
+  /* 💡 文字样式 */
+  color: #555 !important;
+  font-size: 16px !important;
+
+  /* 💡 过渡动画 */
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease,
+    background-color 0.3s ease !important;
+}
+
+#rightside > div > button:hover,
+#rightside > div > a:hover,
+#rightside-config-hide:hover,
+#go-up:hover {
+  transform: scale(1.1) !important;
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+  color: #667eea !important;
+}
+
+#rightside > div > button:active,
+#rightside > div > a:active,
+#rightside-config-hide:active,
+#go-up:active {
+  transform: scale(0.95) !important;
+}
+
+/* ========================================
+ * 返回顶部按钮特殊样式
+ * ======================================== */
+
+#go-up {
+  /* 💡 进度百分比文字 */
+  font-weight: 600 !important;
+  font-size: 12px !important;
+}
+
+/* 💡 返回顶部按钮渐变边框（当有进度时） */
+#go-up.show-percent {
+  background:
+    linear-gradient(white, white) padding-box,
+    linear-gradient(135deg, #667eea 0%, #764ba2 100%) border-box !important;
+  border: 2px solid transparent !important;
+}
+
+/* ========================================
+ * 深色模式适配
+ * ======================================== */
+
+[data-theme='dark'] #rightside > div > button,
+[data-theme='dark'] #rightside > div > a,
+[data-theme='dark'] #rightside-config-hide,
+[data-theme='dark'] #go-up {
+  background: rgba(30, 35, 42, 0.9) !important;
+  color: #e6edf3 !important;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme='dark'] #rightside > div > button:hover,
+[data-theme='dark'] #rightside > div > a:hover,
+[data-theme='dark'] #rightside-config-hide:hover,
+[data-theme='dark'] #go-up:hover {
+  color: #79c0ff !important;
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-theme='dark'] #go-up.show-percent {
+  background:
+    linear-gradient(#1e2329, #1e2329) padding-box,
+    linear-gradient(135deg, #79c0ff 0%, #a5d6ff 100%) border-box !important;
+}
+
+/* ========================================
+ * 响应式设计
+ * ======================================== */
+
+@media screen and (max-width: 768px) {
+  #rightside > div > button,
+  #rightside > div > a,
+  #rightside-config-hide,
+  #go-up {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 14px !important;
+  }
+
+  #go-up {
+    font-size: 11px !important;
+  }
+}
+
+/* ========================================
+ * 动画减弱模式
+ * ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  #rightside > div > button,
+  #rightside > div > a,
+  #rightside-config-hide,
+  #go-up {
+    transition: none !important;
+  }
+}

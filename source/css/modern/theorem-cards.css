@@ -1,0 +1,367 @@
+/**
+ * 数学定理卡片样式 - Theorem Cards
+ * 💡 定理 (Theorem) - 蓝色
+ * 💡 引理 (Lemma) - 绿色
+ * 💡 定义 (Definition) - 紫色
+ * 💡 证明 (Proof) - 灰色
+ * 💡 推论 (Corollary) - 橙色
+ * 💡 命题 (Proposition) - 青色
+ * 💡 注记 (Remark) - 粉色
+ * 💡 例子 (Example) - 黄色
+ */
+
+/* ========================================
+ * 基础卡片样式
+ * ======================================== */
+
+.math-card {
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.5rem;
+
+  /* 💡 边框和圆角 */
+  border-left: 4px solid;
+  border-radius: 0 12px 12px 0;
+
+  /* 💡 背景 */
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  /* 💡 阴影 */
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+
+  /* 💡 过渡 */
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.math-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* 💡 卡片标题 */
+.math-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.math-card-title::before {
+  font-size: 1.1em;
+}
+
+/* 💡 卡片内容 */
+.math-card-content {
+  color: #444;
+  line-height: 1.7;
+}
+
+.math-card-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* ========================================
+ * 定理 (Theorem) - 蓝色
+ * ======================================== */
+
+.math-card.theorem {
+  border-color: #667eea;
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.08) 0%,
+    rgba(118, 75, 162, 0.05) 100%
+  );
+}
+
+.math-card.theorem .math-card-title {
+  color: #5a6fd6;
+}
+
+.math-card.theorem .math-card-title::before {
+  content: '📐';
+}
+
+/* ========================================
+ * 引理 (Lemma) - 绿色
+ * ======================================== */
+
+.math-card.lemma {
+  border-color: #43e97b;
+  background: linear-gradient(
+    135deg,
+    rgba(67, 233, 123, 0.08) 0%,
+    rgba(56, 249, 215, 0.05) 100%
+  );
+}
+
+.math-card.lemma .math-card-title {
+  color: #2ecc71;
+}
+
+.math-card.lemma .math-card-title::before {
+  content: '🔧';
+}
+
+/* ========================================
+ * 定义 (Definition) - 紫色
+ * ======================================== */
+
+.math-card.definition {
+  border-color: #a18cd1;
+  background: linear-gradient(
+    135deg,
+    rgba(161, 140, 209, 0.08) 0%,
+    rgba(251, 194, 235, 0.05) 100%
+  );
+}
+
+.math-card.definition .math-card-title {
+  color: #9b59b6;
+}
+
+.math-card.definition .math-card-title::before {
+  content: '📖';
+}
+
+/* ========================================
+ * 证明 (Proof) - 灰色
+ * ======================================== */
+
+.math-card.proof {
+  border-color: #95a5a6;
+  background: rgba(149, 165, 166, 0.05);
+}
+
+.math-card.proof .math-card-title {
+  color: #7f8c8d;
+}
+
+.math-card.proof .math-card-title::before {
+  content: '✏️';
+}
+
+/* 💡 证明结束符号 */
+.math-card.proof::after {
+  content: '∎';
+  display: block;
+  text-align: right;
+  font-size: 1.2rem;
+  color: #95a5a6;
+  margin-top: 0.5rem;
+}
+
+/* ========================================
+ * 推论 (Corollary) - 橙色
+ * ======================================== */
+
+.math-card.corollary {
+  border-color: #f39c12;
+  background: linear-gradient(
+    135deg,
+    rgba(243, 156, 18, 0.08) 0%,
+    rgba(241, 196, 15, 0.05) 100%
+  );
+}
+
+.math-card.corollary .math-card-title {
+  color: #e67e22;
+}
+
+.math-card.corollary .math-card-title::before {
+  content: '💡';
+}
+
+/* ========================================
+ * 命题 (Proposition) - 青色
+ * ======================================== */
+
+.math-card.proposition {
+  border-color: #4facfe;
+  background: linear-gradient(
+    135deg,
+    rgba(79, 172, 254, 0.08) 0%,
+    rgba(0, 242, 254, 0.05) 100%
+  );
+}
+
+.math-card.proposition .math-card-title {
+  color: #3498db;
+}
+
+.math-card.proposition .math-card-title::before {
+  content: '📋';
+}
+
+/* ========================================
+ * 注记 (Remark) - 粉色
+ * ======================================== */
+
+.math-card.remark {
+  border-color: #f093fb;
+  background: linear-gradient(
+    135deg,
+    rgba(240, 147, 251, 0.08) 0%,
+    rgba(245, 87, 108, 0.05) 100%
+  );
+}
+
+.math-card.remark .math-card-title {
+  color: #e91e8c;
+}
+
+.math-card.remark .math-card-title::before {
+  content: '💭';
+}
+
+/* ========================================
+ * 例子 (Example) - 黄色
+ * ======================================== */
+
+.math-card.example {
+  border-color: #fee140;
+  background: linear-gradient(
+    135deg,
+    rgba(254, 225, 64, 0.08) 0%,
+    rgba(250, 112, 154, 0.05) 100%
+  );
+}
+
+.math-card.example .math-card-title {
+  color: #d4a017;
+}
+
+.math-card.example .math-card-title::before {
+  content: '📝';
+}
+
+/* ========================================
+ * 深色模式适配
+ * ======================================== */
+
+[data-theme='dark'] .math-card {
+  background: rgba(22, 27, 34, 0.8);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='dark'] .math-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .math-card-content {
+  color: #c9d1d9;
+}
+
+[data-theme='dark'] .math-card.theorem {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+[data-theme='dark'] .math-card.theorem .math-card-title {
+  color: #79c0ff;
+}
+
+[data-theme='dark'] .math-card.lemma {
+  background: rgba(67, 233, 123, 0.1);
+}
+
+[data-theme='dark'] .math-card.lemma .math-card-title {
+  color: #7ee787;
+}
+
+[data-theme='dark'] .math-card.definition {
+  background: rgba(161, 140, 209, 0.1);
+}
+
+[data-theme='dark'] .math-card.definition .math-card-title {
+  color: #d2a8ff;
+}
+
+[data-theme='dark'] .math-card.proof {
+  background: rgba(139, 148, 158, 0.1);
+}
+
+[data-theme='dark'] .math-card.proof .math-card-title {
+  color: #8b949e;
+}
+
+[data-theme='dark'] .math-card.proof::after {
+  color: #8b949e;
+}
+
+[data-theme='dark'] .math-card.corollary {
+  background: rgba(243, 156, 18, 0.1);
+}
+
+[data-theme='dark'] .math-card.corollary .math-card-title {
+  color: #ffa657;
+}
+
+[data-theme='dark'] .math-card.proposition {
+  background: rgba(79, 172, 254, 0.1);
+}
+
+[data-theme='dark'] .math-card.proposition .math-card-title {
+  color: #79c0ff;
+}
+
+[data-theme='dark'] .math-card.remark {
+  background: rgba(240, 147, 251, 0.1);
+}
+
+[data-theme='dark'] .math-card.remark .math-card-title {
+  color: #ff7eb6;
+}
+
+[data-theme='dark'] .math-card.example {
+  background: rgba(254, 225, 64, 0.1);
+}
+
+[data-theme='dark'] .math-card.example .math-card-title {
+  color: #f8d847;
+}
+
+/* ========================================
+ * 公式编号（与 MathJax 配合）
+ * ======================================== */
+
+.math-card .MathJax_Display {
+  margin: 1rem 0 !important;
+}
+
+.math-card .MJXc-display {
+  margin: 1rem 0 !important;
+}
+
+/* ========================================
+ * 响应式设计
+ * ======================================== */
+
+@media screen and (max-width: 768px) {
+  .math-card {
+    margin: 1rem 0;
+    padding: 1rem 1.25rem;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .math-card-title {
+    font-size: 0.95rem;
+  }
+}
+
+/* ========================================
+ * 打印样式
+ * ======================================== */
+
+@media print {
+  .math-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
+    border-left-width: 4px;
+  }
+}

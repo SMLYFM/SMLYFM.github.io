@@ -12,6 +12,12 @@
 @import './animations.css';
 @import './dark-mode.css';
 @import './theme-toggle.css';
+@import './reading-progress.css';
+@import './code-enhance.css';
+@import './shortcuts-help.css';
+@import './rightside-enhance.css';
+@import './theorem-cards.css';
+@import './math-enhance.css';
 
 /* ========================================
  * 全局样式增强

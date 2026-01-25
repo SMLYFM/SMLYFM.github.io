@@ -1,0 +1,235 @@
+/**
+ * 键盘快捷键帮助对话框样式
+ */
+
+/* ========================================
+ * 对话框容器
+ * ======================================== */
+
+.shortcuts-help-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+
+  /* 💡 半透明背景 */
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  /* 💡 居中对齐 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 💡 默认隐藏 */
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.shortcuts-help-dialog.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ========================================
+ * 对话框内容
+ * ======================================== */
+
+.shortcuts-help-content {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+
+  /* 💡 入场动画 */
+  transform: scale(0.95) translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.shortcuts-help-dialog.show .shortcuts-help-content {
+  transform: scale(1) translateY(0);
+}
+
+/* ========================================
+ * 头部
+ * ======================================== */
+
+.shortcuts-help-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shortcuts-help-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.shortcuts-help-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.shortcuts-help-close:hover {
+  color: #333;
+}
+
+/* ========================================
+ * 主体内容
+ * ======================================== */
+
+.shortcuts-help-body {
+  padding: 20px 24px;
+  overflow-y: auto;
+  max-height: calc(80vh - 70px);
+}
+
+.shortcuts-group {
+  margin-bottom: 24px;
+}
+
+.shortcuts-group:last-child {
+  margin-bottom: 0;
+}
+
+.shortcuts-group h4 {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #667eea;
+}
+
+.shortcuts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+}
+
+.shortcut-keys {
+  display: flex;
+  gap: 4px;
+}
+
+.shortcut-keys kbd {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-family: var(--font-mono, monospace);
+  font-weight: 500;
+
+  /* 💡 键盘按键样式 */
+  background: linear-gradient(180deg, #f8f8f8 0%, #e8e8e8 100%);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow:
+    0 2px 0 #bbb,
+    inset 0 1px 0 #fff;
+
+  color: #333;
+  text-transform: uppercase;
+}
+
+.shortcut-desc {
+  font-size: 14px;
+  color: #666;
+}
+
+/* ========================================
+ * 深色模式
+ * ======================================== */
+
+[data-theme='dark'] .shortcuts-help-content {
+  background: #1e2329;
+}
+
+[data-theme='dark'] .shortcuts-help-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .shortcuts-help-header h3 {
+  color: #e6edf3;
+}
+
+[data-theme='dark'] .shortcuts-help-close {
+  color: #8b949e;
+}
+
+[data-theme='dark'] .shortcuts-help-close:hover {
+  color: #e6edf3;
+}
+
+[data-theme='dark'] .shortcuts-group h4 {
+  color: #79c0ff;
+}
+
+[data-theme='dark'] .shortcut-item {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='dark'] .shortcut-keys kbd {
+  background: linear-gradient(180deg, #3d4450 0%, #2d333b 100%);
+  border-color: #444;
+  box-shadow:
+    0 2px 0 #1a1a1a,
+    inset 0 1px 0 #555;
+  color: #e6edf3;
+}
+
+[data-theme='dark'] .shortcut-desc {
+  color: #8b949e;
+}
+
+/* ========================================
+ * 响应式
+ * ======================================== */
+
+@media screen and (max-width: 480px) {
+  .shortcuts-help-content {
+    width: 95%;
+    max-height: 85vh;
+  }
+
+  .shortcuts-help-header {
+    padding: 16px 20px;
+  }
+
+  .shortcuts-help-body {
+    padding: 16px 20px;
+  }
+
+  .shortcut-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}

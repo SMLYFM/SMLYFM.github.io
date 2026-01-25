@@ -1,0 +1,124 @@
+/**
+ * 阅读进度条样式 - Reading Progress Bar Styles
+ * 💡 固定在页面顶部，渐变填充效果
+ */
+
+/* ========================================
+ * 进度条容器
+ * ======================================== */
+
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 9999;
+
+  /* 💡 背景色 */
+  background: rgba(0, 0, 0, 0.05);
+
+  /* 💡 确保在导航栏之上 */
+  pointer-events: none;
+}
+
+/* ========================================
+ * 进度填充条
+ * ======================================== */
+
+.reading-progress-fill {
+  height: 100%;
+  width: 0%;
+
+  /* 💡 渐变色 */
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-size: 200% 100%;
+
+  /* 💡 圆角右侧 */
+  border-radius: 0 2px 2px 0;
+
+  /* 💡 平滑过渡 */
+  transition: width 0.1s ease-out;
+
+  /* 💡 阴影效果 */
+  box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+}
+
+/* 💡 完成状态 - 渐变动画 */
+.reading-progress-fill.complete {
+  animation: progress-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes progress-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ========================================
+ * 深色模式适配
+ * ======================================== */
+
+[data-theme='dark'] .reading-progress-bar {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .reading-progress-fill {
+  /* 💡 深色模式使用更亮的渐变 */
+  background: linear-gradient(90deg, #79c0ff 0%, #a5d6ff 50%, #d2a8ff 100%);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px rgba(121, 192, 255, 0.5);
+}
+
+/* ========================================
+ * 导航栏固定时的调整
+ * ======================================== */
+
+/* 💡 当导航栏固定时，进度条显示在导航栏下方 */
+.nav-fixed .reading-progress-bar {
+  top: 60px;
+  /* Butterfly 默认导航栏高度 */
+}
+
+/* 💡 移动端适配 */
+@media screen and (max-width: 768px) {
+  .nav-fixed .reading-progress-bar {
+    top: 52px;
+  }
+
+  .reading-progress-bar {
+    height: 2px;
+  }
+}
+
+/* ========================================
+ * 动画减弱模式（可访问性）
+ * ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .reading-progress-fill {
+    transition: none;
+  }
+
+  .reading-progress-fill.complete {
+    animation: none;
+  }
+}
+
+/* ========================================
+ * 打印样式（隐藏进度条）
+ * ======================================== */
+
+@media print {
+  .reading-progress-bar {
+    display: none !important;
+  }
+}
