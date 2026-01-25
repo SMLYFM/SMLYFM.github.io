@@ -353,3 +353,404 @@
       link: https://www.diagrams.net/
       avatar: https://www.diagrams.net/images/favicon.ico
       descr: 在线流程图工具
+
+# 代码探索工具
+- class_name: 🔍 代码探索工具
+  class_desc: 代码搜索、理解与文档生成工具
+  link_list:
+    - name: DeepWiki
+      link: https://deepwiki.com/
+      avatar: https://deepwiki.com/favicon.ico
+      descr: AI 驱动的代码仓库文档生成
+    - name: Sourcegraph
+      link: https://sourcegraph.com/
+      avatar: https://sourcegraph.com/.assets/img/sourcegraph-mark.svg
+      descr: 代码智能搜索与导航平台
+    - name: GitHub Code Search
+      link: https://github.com/search
+      avatar: https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png
+      descr: GitHub 代码搜索
+    - name: grep.app
+      link: https://grep.app/
+      avatar: https://grep.app/favicon.ico
+      descr: 跨 50 万 Git 仓库搜索代码
+    - name: Searchcode
+      link: https://searchcode.com/
+      avatar: https://searchcode.com/static/favicon.ico
+      descr: 400 亿行代码搜索引擎
+    - name: GitPod
+      link: https://www.gitpod.io/
+      avatar: https://www.gitpod.io/favicon192.png
+      descr: 云端开发环境
+    - name: Replit
+      link: https://replit.com/
+      avatar: https://replit.com/public/images/favicon.ico
+      descr: 在线 IDE 与协作平台
+    - name: CodeSandbox
+      link: https://codesandbox.io/
+      avatar: https://codesandbox.io/favicon.ico
+      descr: 在线代码沙盒
+
+# 学术发现工具
+- class_name: 🎯 学术发现工具
+  class_desc: AI 驱动的论文发现与研究助手
+  link_list:
+    - name: SciRate
+      link: https://scirate.com/
+      avatar: https://scirate.com/favicon.ico
+      descr: arXiv 论文社区评分与讨论
+    - name: Research Rabbit
+      link: https://www.researchrabbit.ai/
+      avatar: https://www.researchrabbit.ai/favicon.ico
+      descr: AI 论文推荐与文献网络
+    - name: Consensus
+      link: https://consensus.app/
+      avatar: https://consensus.app/favicon.ico
+      descr: AI 搜索科学研究共识
+    - name: Inciteful
+      link: https://inciteful.xyz/
+      avatar: https://inciteful.xyz/favicon.ico
+      descr: 论文引用网络分析
+    - name: Litmaps
+      link: https://www.litmaps.com/
+      avatar: https://www.litmaps.com/favicon.ico
+      descr: 可视化文献发现地图
+    - name: Scite.ai
+      link: https://scite.ai/
+      avatar: https://scite.ai/favicon.ico
+      descr: 智能引用分析 (支持/反对)
+    - name: Dimensions
+      link: https://www.dimensions.ai/
+      avatar: https://www.dimensions.ai/favicon.ico
+      descr: 全球研究知识数据库
+    - name: Unpaywall
+      link: https://unpaywall.org/
+      avatar: https://unpaywall.org/favicon.ico
+      descr: 查找开放获取论文版本
+    - name: CORE
+      link: https://core.ac.uk/
+      avatar: https://core.ac.uk/favicon.ico
+      descr: 开放获取论文聚合器
+    - name: BASE (Bielefeld)
+      link: https://www.base-search.net/
+      avatar: https://www.base-search.net/favicon.ico
+      descr: 学术搜索引擎 (3亿+文档)
+
+# 编程练习平台
+- class_name: ⚡ 编程练习平台
+  class_desc: 算法训练与编程挑战
+  link_list:
+    - name: LeetCode
+      link: https://leetcode.com/
+      avatar: https://leetcode.com/favicon.ico
+      descr: 算法与数据结构练习
+    - name: LeetCode CN
+      link: https://leetcode.cn/
+      avatar: https://leetcode.cn/favicon.ico
+      descr: 力扣中国站
+    - name: Codeforces
+      link: https://codeforces.com/
+      avatar: https://codeforces.com/favicon.ico
+      descr: 竞争性编程平台
+    - name: AtCoder
+      link: https://atcoder.jp/
+      avatar: https://atcoder.jp/favicon.ico
+      descr: 日本算法竞赛平台
+    - name: HackerRank
+      link: https://www.hackerrank.com/
+      avatar: https://www.hackerrank.com/favicon.ico
+      descr: 编程技能练习与认证
+    - name: Codewars
+      link: https://www.codewars.com/
+      avatar: https://www.codewars.com/favicon.ico
+      descr: 代码 Kata 练习
+    - name: Project Euler
+      link: https://projecteuler.net/
+      avatar: https://projecteuler.net/favicon.ico
+      descr: 数学编程挑战
+    - name: Exercism
+      link: https://exercism.org/
+      avatar: https://exercism.org/favicon.ico
+      descr: 多语言代码练习与导师
+    - name: Advent of Code
+      link: https://adventofcode.com/
+      avatar: https://adventofcode.com/favicon.ico
+      descr: 年度编程挑战赛
+    - name: Rustlings
+      link: https://github.com/rust-lang/rustlings
+      avatar: https://www.rust-lang.org/favicon.ico
+      descr: Rust 语言小练习
+
+# 视频学习平台
+- class_name: 🎬 视频学习平台
+  class_desc: 优质视频教程与学习资源
+  link_list:
+    - name: YouTube
+      link: https://www.youtube.com/
+      avatar: https://www.youtube.com/favicon.ico
+      descr: 全球最大视频平台
+    - name: Bilibili
+      link: https://www.bilibili.com/
+      avatar: https://www.bilibili.com/favicon.ico
+      descr: B站 - 学习与娱乐
+    - name: edX
+      link: https://www.edx.org/
+      avatar: https://www.edx.org/favicon.ico
+      descr: 名校在线课程平台
+    - name: Udemy
+      link: https://www.udemy.com/
+      avatar: https://www.udemy.com/favicon.ico
+      descr: 技能学习市场
+    - name: Udacity
+      link: https://www.udacity.com/
+      avatar: https://www.udacity.com/favicon.ico
+      descr: 纳米学位技术课程
+    - name: fast.ai
+      link: https://www.fast.ai/
+      avatar: https://www.fast.ai/favicon.ico
+      descr: 深度学习免费课程
+    - name: FreeCodeCamp
+      link: https://www.freecodecamp.org/
+      avatar: https://www.freecodecamp.org/favicon.ico
+      descr: 免费编程学习
+    - name: Brilliant
+      link: https://brilliant.org/
+      avatar: https://brilliant.org/favicon.ico
+      descr: 交互式 STEM 学习
+    - name: DataCamp
+      link: https://www.datacamp.com/
+      avatar: https://www.datacamp.com/favicon.ico
+      descr: 数据科学学习平台
+
+# 开源模型与数据集
+- class_name: 🗂️ 开源模型与数据集
+  class_desc: 预训练模型、训练数据与基准测试
+  link_list:
+    - name: Hugging Face Hub
+      link: https://huggingface.co/models
+      avatar: https://huggingface.co/front/assets/huggingface_logo.svg
+      descr: 最大的开源模型仓库
+    - name: Hugging Face Datasets
+      link: https://huggingface.co/datasets
+      avatar: https://huggingface.co/front/assets/huggingface_logo.svg
+      descr: 开源数据集中心
+    - name: ModelScope (魔搭)
+      link: https://www.modelscope.cn/
+      avatar: https://www.modelscope.cn/favicon.ico
+      descr: 阿里开源模型社区
+    - name: Kaggle Datasets
+      link: https://www.kaggle.com/datasets
+      avatar: https://www.kaggle.com/favicon.ico
+      descr: Kaggle 数据集
+    - name: UCI ML Repository
+      link: https://archive.ics.uci.edu/
+      avatar: https://archive.ics.uci.edu/favicon.ico
+      descr: 经典机器学习数据集
+    - name: Common Crawl
+      link: https://commoncrawl.org/
+      avatar: https://commoncrawl.org/favicon.ico
+      descr: 开放网页抓取数据
+    - name: The Pile
+      link: https://pile.eleuther.ai/
+      avatar: https://pile.eleuther.ai/favicon.ico
+      descr: EleutherAI 训练语料库
+    - name: RedPajama
+      link: https://www.together.ai/blog/redpajama
+      avatar: https://www.together.ai/favicon.ico
+      descr: LLaMA 复现训练数据
+    - name: LAION
+      link: https://laion.ai/
+      avatar: https://laion.ai/favicon.ico
+      descr: 大规模图文数据集
+    - name: Open LLM Leaderboard
+      link: https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard
+      avatar: https://huggingface.co/front/assets/huggingface_logo.svg
+      descr: 开源 LLM 排行榜
+    - name: LMSYS Chatbot Arena
+      link: https://chat.lmsys.org/
+      avatar: https://chat.lmsys.org/favicon.ico
+      descr: LLM 聊天竞技场
+    - name: OpenCompass
+      link: https://opencompass.org.cn/
+      avatar: https://opencompass.org.cn/favicon.ico
+      descr: 大模型评测平台
+    - name: C4 Dataset
+      link: https://www.tensorflow.org/datasets/catalog/c4
+      avatar: https://www.tensorflow.org/images/tf_logo_social.png
+      descr: Colossal Clean Crawled Corpus
+    - name: Together AI
+      link: https://www.together.ai/
+      avatar: https://www.together.ai/favicon.ico
+      descr: 开源模型推理平台
+
+# 提示词工程
+- class_name: 💬 提示词工程
+  class_desc: Prompt 技巧、模板与最佳实践
+  link_list:
+    - name: AiShort (ChatGPT Shortcut)
+      link: https://www.aishort.top/
+      avatar: https://www.aishort.top/favicon.ico
+      descr: ChatGPT 快捷指令大全
+    - name: PromptPerfect
+      link: https://promptperfect.jina.ai/
+      avatar: https://promptperfect.jina.ai/favicon.ico
+      descr: AI 提示词优化器
+    - name: FlowGPT
+      link: https://flowgpt.com/
+      avatar: https://flowgpt.com/favicon.ico
+      descr: Prompt 分享社区
+    - name: PromptBase
+      link: https://promptbase.com/
+      avatar: https://promptbase.com/favicon.ico
+      descr: Prompt 市场
+    - name: Learn Prompting
+      link: https://learnprompting.org/
+      avatar: https://learnprompting.org/favicon.ico
+      descr: Prompt 工程学习指南
+    - name: Prompt Engineering Guide
+      link: https://www.promptingguide.ai/
+      avatar: https://www.promptingguide.ai/favicon.ico
+      descr: DAIR.AI 提示词指南
+    - name: Awesome ChatGPT Prompts
+      link: https://github.com/f/awesome-chatgpt-prompts
+      avatar: https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png
+      descr: ChatGPT 提示词精选
+    - name: PromptHero
+      link: https://prompthero.com/
+      avatar: https://prompthero.com/favicon.ico
+      descr: AI 图像提示词搜索
+    - name: Civitai
+      link: https://civitai.com/
+      avatar: https://civitai.com/favicon.ico
+      descr: Stable Diffusion 模型与提示词
+    - name: OpenArt
+      link: https://openart.ai/
+      avatar: https://openart.ai/favicon.ico
+      descr: AI 艺术生成与提示词
+
+# 科研写作工具
+- class_name: ✍️ 科研写作工具
+  class_desc: 论文写作、引用管理与协作工具
+  link_list:
+    - name: Zotero
+      link: https://www.zotero.org/
+      avatar: https://www.zotero.org/favicon.ico
+      descr: 免费开源文献管理
+    - name: Mendeley
+      link: https://www.mendeley.com/
+      avatar: https://www.mendeley.com/favicon.ico
+      descr: 参考文献管理器
+    - name: EndNote
+      link: https://endnote.com/
+      avatar: https://endnote.com/favicon.ico
+      descr: 专业文献管理软件
+    - name: Grammarly
+      link: https://www.grammarly.com/
+      avatar: https://www.grammarly.com/favicon.ico
+      descr: AI 写作助手
+    - name: Writefull
+      link: https://www.writefull.com/
+      avatar: https://www.writefull.com/favicon.ico
+      descr: 学术写作 AI 助手
+    - name: Quillbot
+      link: https://quillbot.com/
+      avatar: https://quillbot.com/favicon.ico
+      descr: AI 改写与润色
+    - name: Notion
+      link: https://www.notion.so/
+      avatar: https://www.notion.so/favicon.ico
+      descr: 协作笔记与知识库
+    - name: Obsidian
+      link: https://obsidian.md/
+      avatar: https://obsidian.md/favicon.ico
+      descr: 本地知识图谱笔记
+
+# 数学与科学计算
+- class_name: 🧮 数学与科学计算
+  class_desc: 符号计算、数值模拟与可视化
+  link_list:
+    - name: SageMath
+      link: https://www.sagemath.org/
+      avatar: https://www.sagemath.org/favicon.ico
+      descr: 开源数学软件系统
+    - name: SymPy
+      link: https://www.sympy.org/
+      avatar: https://www.sympy.org/favicon.ico
+      descr: Python 符号计算库
+    - name: Mathematica
+      link: https://www.wolfram.com/mathematica/
+      avatar: https://www.wolfram.com/favicon.ico
+      descr: 商业符号计算软件
+    - name: MATLAB
+      link: https://www.mathworks.com/products/matlab.html
+      avatar: https://www.mathworks.com/favicon.ico
+      descr: 数值计算与工程仿真
+    - name: Julia
+      link: https://julialang.org/
+      avatar: https://julialang.org/favicon.ico
+      descr: 高性能科学计算语言
+    - name: NumPy
+      link: https://numpy.org/
+      avatar: https://numpy.org/favicon.ico
+      descr: Python 数值计算基础
+    - name: SciPy
+      link: https://scipy.org/
+      avatar: https://scipy.org/favicon.ico
+      descr: Python 科学计算库
+    - name: Matplotlib
+      link: https://matplotlib.org/
+      avatar: https://matplotlib.org/favicon.ico
+      descr: Python 可视化库
+    - name: Manim
+      link: https://www.manim.community/
+      avatar: https://www.manim.community/favicon.ico
+      descr: 3Blue1Brown 数学动画库
+    - name: OEIS
+      link: https://oeis.org/
+      avatar: https://oeis.org/favicon.ico
+      descr: 在线整数序列百科
+
+# 开发者社区
+- class_name: 👨‍💻 开发者社区
+  class_desc: 技术问答、博客与开发者资源
+  link_list:
+    - name: Stack Overflow
+      link: https://stackoverflow.com/
+      avatar: https://stackoverflow.com/favicon.ico
+      descr: 程序员问答社区
+    - name: Dev.to
+      link: https://dev.to/
+      avatar: https://dev.to/favicon.ico
+      descr: 开发者博客社区
+    - name: Hacker News
+      link: https://news.ycombinator.com/
+      avatar: https://news.ycombinator.com/favicon.ico
+      descr: 技术资讯与讨论
+    - name: Reddit Programming
+      link: https://www.reddit.com/r/programming/
+      avatar: https://www.reddit.com/favicon.ico
+      descr: Reddit 编程板块
+    - name: V2EX
+      link: https://www.v2ex.com/
+      avatar: https://www.v2ex.com/favicon.ico
+      descr: 创意工作者社区
+    - name: SegmentFault
+      link: https://segmentfault.com/
+      avatar: https://segmentfault.com/favicon.ico
+      descr: 思否技术问答
+    - name: 掘金
+      link: https://juejin.cn/
+      avatar: https://juejin.cn/favicon.ico
+      descr: 开发者技术社区
+    - name: CSDN
+      link: https://www.csdn.net/
+      avatar: https://www.csdn.net/favicon.ico
+      descr: 中文技术博客
+    - name: InfoQ
+      link: https://www.infoq.cn/
+      avatar: https://www.infoq.cn/favicon.ico
+      descr: 技术资讯与架构
+    - name: Product Hunt
+      link: https://www.producthunt.com/
+      avatar: https://www.producthunt.com/favicon.ico
+      descr: 新产品发布平台
