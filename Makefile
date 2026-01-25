@@ -1089,7 +1089,7 @@ podman-quadlet: ## 🦭 安装 Quadlet 配置 (Fedora 推荐)
 .PHONY: container-helper
 
 container-helper: ## 🔧 使用统一容器管理脚本
-	@./scripts/container-helper.sh help
+	@./tools/container-helper.sh help
 
 # ============================================
 # 🔍 诊断与工具
