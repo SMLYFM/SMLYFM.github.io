@@ -13,6 +13,7 @@
 - [快速开始](#-快速开始)
 - [项目结构详解](#-项目结构详解)
 - [文章管理完整指南](#️-文章管理完整指南)
+- [文章管理系统](#-文章管理系统)（Hash 追踪 & ID 管理）
 - [配置说明](#️-配置说明)
 - [分支管理](#-分支管理)
 - [常用命令速查](#-常用命令速查)
@@ -21,6 +22,7 @@
 
 | 文档 | 说明 |
 |------|------|
+| [🚀 新手指南](docs/GETTING_STARTED.md) | Fork/Clone 到部署的完整流程 |
 | [📝 配置修改指南](docs/CONFIG_GUIDE.md) | 公告、背景、导航菜单、社交链接等修改方法 |
 | [🔧 开发指南](docs/DEVELOPMENT.md) | 本地开发环境设置和工作流程 |
 | [🚀 部署指南](docs/DEPLOYMENT.md) | GitHub Pages 部署步骤 |
@@ -336,10 +338,25 @@ aside:
 make new              # 交互式创建文章
 make new-math TITLE="标题"   # 数学文章模板
 make new-code TITLE="标题"   # 编程文章模板
-make list             # 列出所有文章
+make list             # 列出所有文章（含 Hash 状态）
+make list-detail      # 详细列表（含 Hash 和标签）
 make edit             # 编辑最新文章
+make edit-file FILE="xxx.md"  # 编辑指定文章
 make delete           # 删除文章
 make search KEYWORD="关键词"  # 搜索文章
+
+# 📋 文章 ID 系统
+make article-id-init        # 初始化 ID 系统
+make article-id-list        # 列出所有文章 ID
+make article-info ID=1      # 按 ID 查看文章详情
+make article-info FILE="xxx.md"  # 按文件名查看详情
+make article-id-sync        # 同步 ID（新增/删除）
+
+# 🔐 Hash 追踪系统
+make article-init           # 初始化 Hash 记录
+make article-check          # 检查哪些文章被修改
+make article-update         # 更新已修改文章的时间戳
+make article-show FILE="xxx.md"  # 显示文章 Hash 信息
 
 # 🏗️ 构建部署
 make dev              # 开发服务器（含草稿）
@@ -360,6 +377,55 @@ make docker-build     # 构建 Docker 镜像
 make docker-run       # 运行容器
 make docker-stop      # 停止容器
 ```
+
+---
+
+## 📋 文章管理系统
+
+### Hash 追踪系统
+
+自动检测文章内容变化，帮助你管理文章更新：
+
+```bash
+# 初始化（首次使用）
+make article-init
+
+# 检查哪些文章被修改
+make article-check
+# 输出: [MODIFIED] python-decorators.md
+#       新文章: 0 | 已修改: 1 | 未变化: 18
+
+# 更新已修改文章的时间戳
+make article-update
+
+# 查看文章列表（带状态）
+make list
+# 输出带有 ✓/MOD/NEW 状态标识
+```
+
+### ID 管理系统
+
+为每篇文章分配唯一 ID，方便引用和管理：
+
+```bash
+# 初始化（首次使用）
+make article-id-init
+
+# 列出所有文章 ID
+make article-id-list
+# 输出: #1 卷积神经网络... cnn-deep-dive.md
+#       #2 复分析入门... complex-analysis-intro.md
+
+# 查看文章详情
+make article-info ID=19
+# 显示：基本信息、时间、分类标签、统计、Hash、Git 提交记录
+```
+
+**ID 规则：**
+
+- ✅ 文章内容修改时，ID 保持不变
+- ✅ 删除文章时，ID 被释放可供新文章使用
+- ✅ 优先使用小的 ID 号（1 → 2 → 3...）
 
 ---
 
