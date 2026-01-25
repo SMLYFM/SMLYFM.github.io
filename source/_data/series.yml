@@ -1,0 +1,88 @@
+# 文章系列配置
+# 💡 在文章 front matter 中添加 series: "系列名称" 即可归入对应系列
+
+# PDE 从理论到实践系列
+pde_series:
+  name:
+    zh-CN: 'PDE 从理论到实践'
+    zh-TW: 'PDE 從理論到實踐'
+    en: 'PDE: From Theory to Practice'
+  description:
+    zh-CN: '从偏微分方程理论基础到数值方法实现的完整学习路径'
+    zh-TW: '從偏微分方程理論基礎到數值方法實現的完整學習路徑'
+    en: 'A complete learning path from PDE theory to numerical implementation'
+  icon: 'fas fa-wave-square'
+  color: '#667eea'
+  posts:
+    - pde-numerical-methods
+    - pde-finite-difference
+    - pinns-introduction
+    - lebesgue-measure-theory
+
+# 深度学习入门系列
+deep_learning_series:
+  name:
+    zh-CN: '深度学习入门'
+    zh-TW: '深度學習入門'
+    en: 'Deep Learning Fundamentals'
+  description:
+    zh-CN: '从神经网络基础到高级模型架构的系统学习'
+    zh-TW: '從神經網路基礎到高級模型架構的系統學習'
+    en: 'Systematic learning from neural network basics to advanced architectures'
+  icon: 'fas fa-brain'
+  color: '#f093fb'
+  posts:
+    - cnn-deep-dive
+    - rnn-sequence-modeling
+    - deep-learning-optimizers
+    - ml-regularization
+    - pytorch-autograd
+
+# Rust 入门系列
+rust_series:
+  name:
+    zh-CN: 'Rust 入门'
+    zh-TW: 'Rust 入門'
+    en: 'Getting Started with Rust'
+  description:
+    zh-CN: '安全、高效的系统编程语言入门指南'
+    zh-TW: '安全、高效的系統程式語言入門指南'
+    en: 'A guide to the safe and efficient systems programming language'
+  icon: 'fas fa-cogs'
+  color: '#f5576c'
+  posts:
+    - rust-ownership
+
+# 数学基础系列
+math_foundations_series:
+  name:
+    zh-CN: '数学基础'
+    zh-TW: '數學基礎'
+    en: 'Mathematical Foundations'
+  description:
+    zh-CN: '现代数学的核心理论基础'
+    zh-TW: '現代數學的核心理論基礎'
+    en: 'Core theoretical foundations of modern mathematics'
+  icon: 'fas fa-infinity'
+  color: '#4facfe'
+  posts:
+    - functional-analysis-basics
+    - topology-basics
+    - zfc-set-theory
+    - complex-analysis-intro
+
+# LaTeX 写作系列
+latex_series:
+  name:
+    zh-CN: 'LaTeX 写作'
+    zh-TW: 'LaTeX 寫作'
+    en: 'LaTeX Writing'
+  description:
+    zh-CN: '学术论文排版与数学写作技巧'
+    zh-TW: '學術論文排版與數學寫作技巧'
+    en: 'Academic paper typesetting and mathematical writing skills'
+  icon: 'fas fa-file-alt'
+  color: '#43e97b'
+  posts:
+    - latex-math-guide
+    - latex-advanced-writing

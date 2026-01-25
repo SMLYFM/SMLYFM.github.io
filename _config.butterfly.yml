@@ -673,10 +673,11 @@ twikoo:
 # Giscus
 # https://giscus.app/
 # 💡 需要在 GitHub 仓库中启用 Discussions
+# 💡 安装 Giscus App: https://github.com/apps/giscus
 giscus:
   repo: SMLYFM/SMLYFM.github.io
-  repo_id: # 需要从 giscus.app 获取
-  category_id: # 需要从 giscus.app 获取
+  repo_id: R_kgDOOah4_w
+  category_id: DIC_kwDOOah4_84C1Y78
   # 💡 主题与博客暗色模式联动
   light_theme: light
   dark_theme: dark_dimmed
@@ -1134,6 +1135,7 @@ inject:
     - <script src="/js/components/code-enhance.js"></script>
     - <script src="/js/components/keyboard-shortcuts.js"></script>
     - <script src="/js/components/math-copy.js"></script>
+    - <script src="/js/components/math-tools.js"></script>
 
 # 💡 现代卡片主题配置
 modern_cards:

@@ -1,0 +1,156 @@
+/**
+ * 交互式数学工具样式
+ */
+
+/* ========================================
+ * Desmos 图形容器
+ * ======================================== */
+
+.desmos-graph {
+  width: 100%;
+  min-height: 400px;
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================
+ * GeoGebra 容器
+ * ======================================== */
+
+.geogebra-applet {
+  width: 100%;
+  min-height: 450px;
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================
+ * LaTeX Playground
+ * ======================================== */
+
+.latex-playground-wrapper {
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.latex-playground-wrapper label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.latex-input-section {
+  margin-bottom: 1rem;
+}
+
+.latex-input {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  font-family: var(--font-mono, 'Consolas', monospace);
+  font-size: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+.latex-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.latex-output-section {
+  margin-bottom: 1rem;
+}
+
+.latex-output {
+  min-height: 60px;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.latex-copy-section {
+  text-align: right;
+}
+
+.latex-copy-btn {
+  padding: 8px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.latex-copy-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.latex-copy-btn:active {
+  transform: translateY(0);
+}
+
+/* ========================================
+ * 深色模式适配
+ * ======================================== */
+
+[data-theme='dark'] .latex-playground-wrapper {
+  background: rgba(22, 27, 34, 0.9);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .latex-playground-wrapper label {
+  color: #e6edf3;
+}
+
+[data-theme='dark'] .latex-input {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #e6edf3;
+}
+
+[data-theme='dark'] .latex-input:focus {
+  border-color: #79c0ff;
+  box-shadow: 0 0 0 3px rgba(121, 192, 255, 0.1);
+}
+
+[data-theme='dark'] .latex-output {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ========================================
+ * 响应式设计
+ * ======================================== */
+
+@media screen and (max-width: 768px) {
+  .desmos-graph,
+  .geogebra-applet {
+    min-height: 300px;
+  }
+
+  .latex-playground-wrapper {
+    padding: 1rem;
+  }
+}
