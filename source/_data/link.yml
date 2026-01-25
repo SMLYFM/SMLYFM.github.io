@@ -67,6 +67,55 @@
       avatar: https://www.ams.org/images/ams-logo.svg
       descr: 美国数学学会数学评论
 
+# arXiv 相关工具
+- class_name: 📄 arXiv 相关工具
+  class_desc: arXiv 论文检索、评论和 AI 解读工具
+  link_list:
+    - name: arXiv Sanity
+      link: https://arxiv-sanity-lite.com/
+      avatar: https://arxiv.org/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg
+      descr: Andrej Karpathy 的论文筛选工具
+    - name: Papers With Code
+      link: https://paperswithcode.com/
+      avatar: https://paperswithcode.com/static/logo.png
+      descr: 论文+代码+排行榜
+    - name: Connected Papers
+      link: https://www.connectedpapers.com/
+      avatar: https://www.connectedpapers.com/favicon.ico
+      descr: 论文引用关系可视化
+    - name: Elicit
+      link: https://elicit.org/
+      avatar: https://elicit.org/favicon.ico
+      descr: AI 驱动的论文搜索与摘要
+    - name: SciSpace (Typeset)
+      link: https://typeset.io/
+      avatar: https://typeset.io/resources/content/images/2023/04/logo-1.png
+      descr: AI 论文阅读与问答
+    - name: Arxiv Vanity
+      link: https://www.arxiv-vanity.com/
+      avatar: https://arxiv.org/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg
+      descr: 将 arXiv 论文渲染为网页
+    - name: ar5iv
+      link: https://ar5iv.labs.arxiv.org/
+      avatar: https://arxiv.org/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg
+      descr: arXiv 论文 HTML5 版本
+    - name: OpenReview
+      link: https://openreview.net/
+      avatar: https://openreview.net/images/openreview_logo.svg
+      descr: 顶会论文评审与讨论
+    - name: AlphaXiv
+      link: https://alphaxiv.org/
+      avatar: https://arxiv.org/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg
+      descr: arXiv 论文评论社区
+    - name: ExplainPaper
+      link: https://www.explainpaper.com/
+      avatar: https://www.explainpaper.com/favicon.ico
+      descr: AI 逐段解释论文
+    - name: ChatPDF
+      link: https://www.chatpdf.com/
+      avatar: https://www.chatpdf.com/favicon.ico
+      descr: 与 PDF 论文对话
+
 # 数学顶级期刊
 - class_name: 📐 数学顶级期刊
   class_desc: 国际数学四大顶刊及其他重要期刊
@@ -95,6 +144,30 @@
       link: https://onlinelibrary.wiley.com/journal/10970312
       avatar: https://onlinelibrary.wiley.com/pb-assets/journal-banners/10970312-1583847632247.jpg
       descr: 纯粹与应用数学通讯
+    - name: Mathematische Annalen
+      link: https://www.springer.com/journal/208
+      avatar: https://media.springernature.com/lw300/springer-static/cover/journal/208.jpg
+      descr: 数学年鉴 - Springer
+    - name: Advances in Mathematics
+      link: https://www.sciencedirect.com/journal/advances-in-mathematics
+      avatar: https://cdn.elsevier.com/verona/includes/svg/logo-ses-alt.svg
+      descr: 数学进展 - Elsevier
+    - name: Geometry & Topology
+      link: https://msp.org/gt/
+      avatar: https://msp.org/images/msp-logo.svg
+      descr: 几何与拓扑
+    - name: Journal of Differential Geometry
+      link: https://projecteuclid.org/journals/journal-of-differential-geometry
+      avatar: https://projecteuclid.org/img/pe-logo.png
+      descr: 微分几何期刊
+    - name: SIAM Review
+      link: https://epubs.siam.org/journal/siread
+      avatar: https://www.siam.org/images/siam/brand/siam-logo-padded.png
+      descr: SIAM 工业与应用数学评论
+    - name: Journal of Computational Physics
+      link: https://www.sciencedirect.com/journal/journal-of-computational-physics
+      avatar: https://cdn.elsevier.com/verona/includes/svg/logo-ses-alt.svg
+      descr: 计算物理期刊
 
 # 计算机顶会
 - class_name: 🤖 计算机顶级会议
@@ -121,10 +194,75 @@
       avatar: https://aclanthology.org/images/acl-logo.svg
       descr: 计算语言学协会
 
-# 学习资源
-- class_name: 📖 学习资源
+# 深度学习框架
+- class_name: 🔥 深度学习框架
+  class_desc: 主流深度学习框架与工具
+  link_list:
+    - name: PyTorch
+      link: https://pytorch.org/
+      avatar: https://pytorch.org/assets/images/pytorch-logo.png
+      descr: Meta 开源的深度学习框架
+    - name: TensorFlow
+      link: https://www.tensorflow.org/
+      avatar: https://www.tensorflow.org/images/tf_logo_social.png
+      descr: Google 开源的 ML 框架
+    - name: JAX
+      link: https://jax.readthedocs.io/
+      avatar: https://raw.githubusercontent.com/google/jax/main/images/jax_logo_250px.png
+      descr: Google 高性能数值计算库
+    - name: Keras
+      link: https://keras.io/
+      avatar: https://keras.io/img/logo.png
+      descr: 高级神经网络 API
+    - name: Hugging Face
+      link: https://huggingface.co/
+      avatar: https://huggingface.co/front/assets/huggingface_logo.svg
+      descr: 预训练模型与数据集
+    - name: Lightning
+      link: https://lightning.ai/
+      avatar: https://lightning.ai/favicon.ico
+      descr: PyTorch 训练框架
+    - name: Flax
+      link: https://github.com/google/flax
+      avatar: https://raw.githubusercontent.com/google/flax/main/images/flax_logo_250px.png
+      descr: JAX 神经网络库
+    - name: DeepMind Haiku
+      link: https://github.com/deepmind/dm-haiku
+      avatar: https://raw.githubusercontent.com/deepmind/dm-haiku/main/images/haiku_logo_light.png
+      descr: DeepMind 的 JAX 库
+    - name: ONNX
+      link: https://onnx.ai/
+      avatar: https://onnx.ai/images/favicon.png
+      descr: 开放神经网络交换格式
+    - name: Weights & Biases
+      link: https://wandb.ai/
+      avatar: https://assets.website-files.com/5ac6b7f2924c656f2b13a88c/5e555e8c9bab3a1f2b3b54f7_wandb_icon_black.svg
+      descr: ML 实验跟踪平台
+    - name: MLflow
+      link: https://mlflow.org/
+      avatar: https://mlflow.org/docs/latest/_static/MLflow-logo-final-black.png
+      descr: ML 生命周期管理
+
+# 编程学习资源
+- class_name: 📖 编程学习资源
   class_desc: 优质在线学习平台和教程
   link_list:
+    - name: Hello 算法
+      link: https://www.hello-algo.com/
+      avatar: https://www.hello-algo.com/assets/images/logo.svg
+      descr: 动画图解数据结构与算法
+    - name: 动手学深度学习 (d2l)
+      link: https://zh.d2l.ai/
+      avatar: https://zh.d2l.ai/_static/logo-with-text.png
+      descr: 李沐深度学习教程
+    - name: Rusty 课程
+      link: https://rusty.course.rs/
+      avatar: https://course.rs/favicon.ico
+      descr: Rust 语言中文教程
+    - name: Rust 语言圣经
+      link: https://course.rs/
+      avatar: https://course.rs/favicon.ico
+      descr: Rust 语言权威教程
     - name: MIT OpenCourseWare
       link: https://ocw.mit.edu/
       avatar: https://ocw.mit.edu/static_shared/images/ocw_logo_orange.png
@@ -141,6 +279,43 @@
       link: https://www.3blue1brown.com/
       avatar: https://www.3blue1brown.com/favicon.svg
       descr: 可视化数学视频教程
+    - name: The Missing Semester
+      link: https://missing.csail.mit.edu/
+      avatar: https://missing.csail.mit.edu/favicon-32x32.png
+      descr: MIT 缺失的 CS 课程
+
+# AI 效率工具
+- class_name: 🚀 AI 效率工具
+  class_desc: AI 驱动的效率提升工具
+  link_list:
+    - name: AiShort
+      link: https://www.aishort.top/
+      avatar: https://www.aishort.top/favicon.ico
+      descr: ChatGPT 快捷指令
+    - name: Quick Reference
+      link: https://wangchujiang.com/reference/
+      avatar: https://wangchujiang.com/reference/favicon.ico
+      descr: 开发人员速查手册
+    - name: ChatGPT
+      link: https://chat.openai.com/
+      avatar: https://chat.openai.com/favicon.ico
+      descr: OpenAI 对话 AI
+    - name: Claude
+      link: https://claude.ai/
+      avatar: https://claude.ai/favicon.ico
+      descr: Anthropic AI 助手
+    - name: Perplexity
+      link: https://www.perplexity.ai/
+      avatar: https://www.perplexity.ai/favicon.ico
+      descr: AI 搜索引擎
+    - name: Phind
+      link: https://www.phind.com/
+      avatar: https://www.phind.com/favicon.ico
+      descr: 开发者 AI 搜索
+    - name: Ollama
+      link: https://ollama.ai/
+      avatar: https://ollama.ai/favicon.ico
+      descr: 本地运行大语言模型
 
 # 实用工具
 - class_name: 🛠️ 实用工具
@@ -162,7 +337,19 @@
       link: https://www.geogebra.org/
       avatar: https://www.geogebra.org/images/geogebra-logo.svg
       descr: 动态数学软件
-    - name: PyTorch
-      link: https://pytorch.org/
-      avatar: https://pytorch.org/assets/images/pytorch-logo.png
-      descr: 深度学习框架
+    - name: TikZ.net
+      link: https://tikz.net/
+      avatar: https://tikz.net/favicon.ico
+      descr: TikZ 示例与教程
+    - name: Mathpix
+      link: https://mathpix.com/
+      avatar: https://mathpix.com/images/favicon.ico
+      descr: 公式识别与转换
+    - name: Excalidraw
+      link: https://excalidraw.com/
+      avatar: https://excalidraw.com/favicon.ico
+      descr: 手绘风格白板
+    - name: Diagrams.net
+      link: https://www.diagrams.net/
+      avatar: https://www.diagrams.net/images/favicon.ico
+      descr: 在线流程图工具
