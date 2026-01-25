@@ -109,6 +109,30 @@ help: ## 显示帮助信息
 	@echo "    make version                显示版本信息"
 	@echo ""
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "  📤 文章导出/归档/备份"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@echo "  导出:"
+	@echo "    make export-md FILE=\"...\"     导出为 Markdown"
+	@echo "    make export-pdf FILE=\"...\"    导出为 PDF (需 pandoc)"
+	@echo "    make export-all-md            批量导出所有文章"
+	@echo ""
+	@echo "  批量操作:"
+	@echo "    make batch-delete ARGS=\"--category 测试\""
+	@echo "    make batch-add-tag TAG=\"...\" CATEGORY=\"...\""
+	@echo "    make batch-stats              分类/标签统计"
+	@echo ""
+	@echo "  归档:"
+	@echo "    make archive-move             归档文章 (不参与构建)"
+	@echo "    make archive-restore          恢复归档文章"
+	@echo "    make archive-list             列出归档文章"
+	@echo ""
+	@echo "  备份:"
+	@echo "    make backup-full              完整备份"
+	@echo "    make backup-incremental       增量备份"
+	@echo "    make restore-full             从备份恢复"
+	@echo ""
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo "  📂 分类结构 (5 大类)"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
@@ -1312,4 +1336,155 @@ analyze: build ## 📊 分析构建产物大小
 	@echo "  JS:   $$(find $(PUBLIC_DIR) -name '*.js' | wc -l) 个"
 	@echo "  图片: $$(find $(PUBLIC_DIR) \( -name '*.png' -o -name '*.jpg' -o -name '*.gif' -o -name '*.webp' \) | wc -l) 个"
 	@echo ""
+
+# ============================================
+# 📤 文章导出
+# ============================================
+
+.PHONY: export-md export-md-clean export-pdf export-all-md export-all-pdf export-list export-clean
+
+export-md: ## 📤 导出文章为 Markdown (make export-md FILE="xxx.md")
+	@if [ -z "$(FILE)" ]; then \
+		echo "用法: make export-md FILE=\"文件名.md\""; \
+		exit 1; \
+	fi
+	@./tools/article-export.sh md $(FILE)
+
+export-md-clean: ## 📤 导出文章为 Markdown（不含 Front Matter）
+	@if [ -z "$(FILE)" ]; then \
+		echo "用法: make export-md-clean FILE=\"文件名.md\""; \
+		exit 1; \
+	fi
+	@./tools/article-export.sh md-clean $(FILE)
+
+export-pdf: ## 📤 导出文章为 PDF (需要 pandoc)
+	@if [ -z "$(FILE)" ]; then \
+		echo "用法: make export-pdf FILE=\"文件名.md\""; \
+		exit 1; \
+	fi
+	@./tools/article-export.sh pdf $(FILE)
+
+export-all-md: ## 📤 批量导出所有文章为 Markdown
+	@./tools/article-export.sh all-md
+
+export-all-md-clean: ## 📤 批量导出所有文章（不含 Front Matter）
+	@./tools/article-export.sh all-md-clean
+
+export-all-pdf: ## 📤 批量导出所有文章为 PDF
+	@./tools/article-export.sh all-pdf
+
+export-list: ## 📤 查看已导出文件
+	@./tools/article-export.sh list
+
+export-clean: ## 📤 清理导出目录
+	@./tools/article-export.sh clean
+
+# ============================================
+# 📦 批量操作
+# ============================================
+
+.PHONY: batch-delete batch-modify-category batch-add-tag batch-remove-tag batch-update-time batch-stats
+
+batch-delete: ## 📦 批量删除文章 (--category/--tag/--before)
+	@./tools/article-batch.sh delete $(ARGS)
+
+batch-modify-category: ## 📦 批量修改分类 (FROM="原" TO="新")
+	@if [ -z "$(FROM)" ] || [ -z "$(TO)" ]; then \
+		echo "用法: make batch-modify-category FROM=\"原分类\" TO=\"新分类\""; \
+		exit 1; \
+	fi
+	@./tools/article-batch.sh modify-category --from "$(FROM)" --to "$(TO)"
+
+batch-add-tag: ## 📦 批量添加标签 (TAG="标签" CATEGORY="分类" 或 ALL=1)
+	@if [ -z "$(TAG)" ]; then \
+		echo "用法: make batch-add-tag TAG=\"标签\" CATEGORY=\"分类\""; \
+		echo "      make batch-add-tag TAG=\"标签\" ALL=1"; \
+		exit 1; \
+	fi
+	@if [ -n "$(CATEGORY)" ]; then \
+		./tools/article-batch.sh add-tag --tag "$(TAG)" --category "$(CATEGORY)"; \
+	elif [ "$(ALL)" = "1" ]; then \
+		./tools/article-batch.sh add-tag --tag "$(TAG)" --all; \
+	else \
+		echo "请指定 CATEGORY 或 ALL=1"; \
+		exit 1; \
+	fi
+
+batch-remove-tag: ## 📦 批量移除标签 (TAG="标签")
+	@if [ -z "$(TAG)" ]; then \
+		echo "用法: make batch-remove-tag TAG=\"标签\""; \
+		exit 1; \
+	fi
+	@./tools/article-batch.sh remove-tag --tag "$(TAG)"
+
+batch-update-time: ## 📦 批量更新时间戳 (CATEGORY="分类" 或 ALL=1)
+	@if [ -n "$(CATEGORY)" ]; then \
+		./tools/article-batch.sh update-time --category "$(CATEGORY)"; \
+	elif [ "$(ALL)" = "1" ]; then \
+		./tools/article-batch.sh update-time --all; \
+	else \
+		echo "用法: make batch-update-time CATEGORY=\"分类\""; \
+		echo "      make batch-update-time ALL=1"; \
+		exit 1; \
+	fi
+
+batch-stats: ## 📦 显示分类/标签统计
+	@./tools/article-batch.sh stats
+
+# ============================================
+# 📁 文章归档
+# ============================================
+
+.PHONY: archive-move archive-restore archive-list archive-batch archive-clean
+
+archive-move: ## 📁 归档文章 (FILE="xxx.md" 或交互式)
+	@./tools/article-archive.sh move $(FILE)
+
+archive-restore: ## 📁 恢复归档文章 (FILE="xxx.md" 或交互式)
+	@./tools/article-archive.sh restore $(FILE)
+
+archive-list: ## 📁 列出所有归档文章
+	@./tools/article-archive.sh list
+
+archive-batch: ## 📁 批量归档 (CATEGORY="分类" 或 BEFORE="日期")
+	@if [ -n "$(CATEGORY)" ]; then \
+		./tools/article-archive.sh batch --category "$(CATEGORY)"; \
+	elif [ -n "$(BEFORE)" ]; then \
+		./tools/article-archive.sh batch --before "$(BEFORE)"; \
+	else \
+		echo "用法: make archive-batch CATEGORY=\"分类\""; \
+		echo "      make archive-batch BEFORE=\"2025-01-01\""; \
+		exit 1; \
+	fi
+
+archive-clean: ## 📁 永久删除所有归档文章
+	@./tools/article-archive.sh clean
+
+# ============================================
+# 💾 备份/恢复
+# ============================================
+
+.PHONY: backup-full backup-incremental backup-single backup-list backup-clean
+.PHONY: restore-full restore-single
+
+backup-full: ## 💾 完整备份所有文章
+	@./tools/article-backup.sh full
+
+backup-incremental: ## 💾 增量备份（仅已修改/新增文章）
+	@./tools/article-backup.sh incremental
+
+backup-single: ## 💾 备份单篇文章 (FILE="xxx.md" 或交互式)
+	@./tools/article-backup.sh single $(FILE)
+
+backup-list: ## 💾 列出所有备份
+	@./tools/article-backup.sh list
+
+backup-clean: ## 💾 清理旧备份 (KEEP=n 保留最近 n 个，默认 5)
+	@./tools/article-backup.sh clean --keep $(KEEP)
+
+restore-full: ## 💾 从完整备份恢复 (BACKUP="备份文件" 或交互式)
+	@./tools/article-backup.sh restore-full $(BACKUP)
+
+restore-single: ## 💾 恢复单篇文章 (BACKUP="备份文件" 或交互式)
+	@./tools/article-backup.sh restore-single $(BACKUP)
 

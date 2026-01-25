@@ -372,6 +372,26 @@ make check            # 检查项目状态
 make count            # 统计文章字数
 make backup           # 备份博客
 
+# 📤 导出
+make export-md FILE="xxx.md"    # 导出为 Markdown
+make export-pdf FILE="xxx.md"   # 导出为 PDF
+make export-all-md              # 批量导出所有
+
+# 📦 批量操作
+make batch-stats                # 分类/标签统计
+make batch-add-tag TAG="..." CATEGORY="..."
+make batch-delete ARGS="--category 测试"
+
+# 📁 归档
+make archive-move               # 归档文章
+make archive-restore            # 恢复归档
+make archive-list               # 列出归档
+
+# 💾 备份/恢复
+make backup-full                # 完整备份
+make backup-incremental         # 增量备份
+make restore-full               # 从备份恢复
+
 # 🐳 Docker
 make docker-build     # 构建 Docker 镜像
 make docker-run       # 运行容器
