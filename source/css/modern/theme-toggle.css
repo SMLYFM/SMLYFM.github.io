@@ -1,0 +1,484 @@
+/**
+ * 主题切换按钮样式 - Theme Toggle Styles
+ * 💡 现代化设计：玻璃态、平滑动画、响应式
+ */
+
+/* ========================================
+ * 全局过渡效果
+ * 💡 主题切换时的平滑过渡
+ * ======================================== */
+
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition:
+    background-color 0.3s ease-out,
+    border-color 0.3s ease-out,
+    color 0.3s ease-out,
+    fill 0.3s ease-out,
+    stroke 0.3s ease-out,
+    box-shadow 0.3s ease-out !important;
+}
+
+/* ========================================
+ * 浮动切换按钮
+ * 💡 固定在右下角，玻璃态设计
+ * ======================================== */
+
+.theme-toggle-btn {
+  position: fixed;
+  bottom: 100px;
+  /* 💡 避免与 Butterfly 右下角按钮重叠 */
+  right: 20px;
+  z-index: 1000;
+
+  /* 💡 尺寸和形状 */
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+
+  /* 💡 玻璃态背景 */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+  /* 💡 交互样式 */
+  cursor: pointer;
+  outline: none;
+
+  /* 💡 内容布局 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 💡 过渡动画 */
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+/* 💡 隐藏标签文字（只在菜单中显示） */
+.theme-toggle-btn .theme-toggle-label {
+  display: none;
+}
+
+/* 💡 图标样式 */
+.theme-toggle-btn .theme-toggle-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+.theme-toggle-btn .theme-toggle-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* 💡 悬停效果 */
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.theme-toggle-btn:hover .theme-toggle-icon {
+  transform: rotate(15deg);
+}
+
+/* 💡 点击效果 */
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+/* 💡 焦点状态（键盘导航可访问性） */
+.theme-toggle-btn:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 3px;
+}
+
+/* ========================================
+ * 深色模式下的按钮样式
+ * ======================================== */
+
+[data-theme='dark'] .theme-toggle-btn {
+  background: rgba(30, 35, 42, 0.9);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .theme-toggle-btn .theme-toggle-icon {
+  color: #e6edf3;
+}
+
+[data-theme='dark'] .theme-toggle-btn:hover {
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* ========================================
+ * 不同模式下的图标动画
+ * ======================================== */
+
+/* 💡 浅色模式 - 太阳旋转 */
+.theme-toggle-btn[data-mode='light'] .theme-toggle-icon svg {
+  animation: sun-rotate 10s linear infinite;
+}
+
+/* 💡 深色模式 - 月亮摇摆 */
+.theme-toggle-btn[data-mode='dark'] .theme-toggle-icon svg {
+  animation: moon-wobble 3s ease-in-out infinite;
+}
+
+/* 💡 系统模式 - 脉冲 */
+.theme-toggle-btn[data-mode='system'] .theme-toggle-icon svg {
+  animation: system-pulse 2s ease-in-out infinite;
+}
+
+@keyframes sun-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moon-wobble {
+  0%,
+  100% {
+    transform: rotate(-5deg);
+  }
+
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes system-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ========================================
+ * 切换提示 Toast
+ * ======================================== */
+
+.theme-toast {
+  position: fixed;
+  bottom: 160px;
+  right: 20px;
+  z-index: 1001;
+
+  /* 💡 布局 */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+
+  /* 💡 玻璃态样式 */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 12px;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.05);
+
+  /* 💡 文字样式 */
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+
+  /* 💡 初始状态（隐藏）*/
+  opacity: 0;
+  transform: translateX(20px) scale(0.95);
+  pointer-events: none;
+
+  /* 💡 过渡动画 */
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.theme-toast-show {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.theme-toast-icon {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #667eea;
+}
+
+.theme-toast-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* 💡 深色模式下的 Toast */
+[data-theme='dark'] .theme-toast {
+  background: rgba(30, 35, 42, 0.95);
+  color: #e6edf3;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='dark'] .theme-toast-icon {
+  color: #79c0ff;
+}
+
+/* ========================================
+ * 模式选择菜单
+ * ======================================== */
+
+.theme-mode-menu {
+  position: fixed;
+  z-index: 1002;
+
+  /* 💡 布局 */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  min-width: 140px;
+
+  /* 💡 玻璃态样式 */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(0, 0, 0, 0.1);
+
+  /* 💡 入场动画 */
+  animation: menu-appear 0.2s ease-out;
+}
+
+@keyframes menu-appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.theme-mode-item {
+  /* 💡 布局 */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+
+  /* 💡 样式 */
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+
+  /* 💡 文字 */
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  text-align: left;
+
+  /* 💡 过渡 */
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.theme-mode-item .mode-icon {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.theme-mode-item .mode-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.theme-mode-item:hover {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+}
+
+.theme-mode-item.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.theme-mode-item:active {
+  transform: scale(0.98);
+}
+
+/* 💡 深色模式下的菜单 */
+[data-theme='dark'] .theme-mode-menu {
+  background: rgba(30, 35, 42, 0.95);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .theme-mode-item {
+  color: #c9d1d9;
+}
+
+[data-theme='dark'] .theme-mode-item:hover {
+  background: rgba(121, 192, 255, 0.15);
+  color: #79c0ff;
+}
+
+/* ========================================
+ * 响应式设计
+ * ======================================== */
+
+/* 💡 移动端适配 */
+@media (max-width: 768px) {
+  .theme-toggle-btn {
+    width: 44px;
+    height: 44px;
+    bottom: 90px;
+    right: 15px;
+  }
+
+  .theme-toggle-btn .theme-toggle-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .theme-toast {
+    bottom: 145px;
+    right: 15px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .theme-mode-menu {
+    min-width: 130px;
+  }
+}
+
+/* 💡 超小屏幕 */
+@media (max-width: 480px) {
+  .theme-toggle-btn {
+    width: 40px;
+    height: 40px;
+    bottom: 80px;
+    right: 12px;
+  }
+
+  .theme-toast {
+    bottom: 130px;
+    right: 12px;
+    left: auto;
+    max-width: calc(100vw - 24px);
+  }
+}
+
+/* ========================================
+ * 动画减弱模式（可访问性）
+ * 💡 尊重用户的动画偏好设置
+ * ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transitioning,
+  html.theme-transitioning *,
+  html.theme-transitioning *::before,
+  html.theme-transitioning *::after {
+    transition: none !important;
+  }
+
+  .theme-toggle-btn,
+  .theme-toast,
+  .theme-mode-menu,
+  .theme-mode-item {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .theme-toggle-btn[data-mode='light'] .theme-toggle-icon svg,
+  .theme-toggle-btn[data-mode='dark'] .theme-toggle-icon svg,
+  .theme-toggle-btn[data-mode='system'] .theme-toggle-icon svg {
+    animation: none !important;
+  }
+}
+
+/* ========================================
+ * 高对比度模式（可访问性）
+ * ======================================== */
+
+@media (prefers-contrast: high) {
+  .theme-toggle-btn {
+    background: white;
+    border: 2px solid #333;
+  }
+
+  [data-theme='dark'] .theme-toggle-btn {
+    background: #1a1a1a;
+    border: 2px solid #e0e0e0;
+  }
+
+  .theme-mode-item.active {
+    background: #333;
+  }
+
+  [data-theme='dark'] .theme-mode-item.active {
+    background: #e0e0e0;
+    color: #000;
+  }
+}
+
+/* ========================================
+ * 打印样式（隐藏切换按钮）
+ * ======================================== */
+
+@media print {
+  .theme-toggle-btn,
+  .theme-toast,
+  .theme-mode-menu {
+    display: none !important;
+  }
+}

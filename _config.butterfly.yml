@@ -69,9 +69,8 @@ code_blocks:
 social:
   fab fa-github: https://github.com/SMLYFM || Github || '#24292e'
   fas fa-envelope: mailto:sudocjx@gmail.com || Email || '#4a7dbe'
-  github: https://github.com/SMLYFM  # 💡 供Social Card使用
-  email: sudocjx@gmail.com  # 💡 供Social Card使用
-
+  github: https://github.com/SMLYFM # 💡 供Social Card使用
+  email: sudocjx@gmail.com # 💡 供Social Card使用
 
 # --------------------------------------
 # Image Settings
@@ -124,7 +123,7 @@ cover:
   aside_enable: true
   archives_enable: true
   # When cover is not set, the default cover is displayed #封面显示的位置
-  # 三个值可配置 left , right , both  
+  # 三个值可配置 left , right , both
   default_cover:
     # 💡 高品质自然风景图片（Unsplash）
     # 山脉系列
@@ -165,11 +164,11 @@ post_meta:
   # Home Page
   page:
     # Choose: created / updated / both
-    date_type: both  # 💡 同时显示创建和更新时间
+    date_type: both # 💡 同时显示创建和更新时间
     # Choose: date / relative
     date_format: date
     categories: true
-    tags: true  # 💡 首页也显示标签
+    tags: true # 💡 首页也显示标签
     label: true
   post:
     # Choose: left / center
@@ -211,8 +210,8 @@ subtitle:
   source: false
   # If you close the typewriter effect, the subtitle will only show the first line of sub
   sub:
-    - "Welcome to Fomalhaut🥝のTiny Home!🤣🤣🤣"
-    - "Hope you have a nice day!🍭🍭🍭"
+    - 'Welcome to Fomalhaut🥝のTiny Home!🤣🤣🤣'
+    - 'Hope you have a nice day!🍭🍭🍭'
 # Article layout on the homepage
 # 1: Cover on the left, info on the right
 # 2: Cover on the right, info on the left
@@ -239,7 +238,7 @@ index_post_content:
 
 toc:
   post: true # 文章页是否显示 TOC
-  page: false  # 普通页面是否显示 TOC
+  page: false # 普通页面是否显示 TOC
   number: true # 是否显示章节数
   expand: true # 是否展开 TOC
   # Only for post
@@ -466,7 +465,6 @@ anchor:
 
 photofigcaption: false
 
-
 # copy settings
 # copyright: Add the copyright information after copied content (复制的内容后面加上版权信息)
 copy:
@@ -487,9 +485,9 @@ wordcount:
 
 # Busuanzi count for PV / UV in site
 busuanzi:
-  site_uv: true  # 本站总访客数
-  site_pv: true  # 本站总访问量 
-  page_pv: true  # 本文总阅读量
+  site_uv: true # 本站总访客数
+  site_pv: true # 本站总访问量
+  page_pv: true # 本文总阅读量
 # --------------------------------------
 # Math
 # --------------------------------------
@@ -501,7 +499,7 @@ math:
   # Choose: mathjax, katex
   # 💡 MathJax 对复杂数学公式支持更好，适合数学专业博客
   use: mathjax
-  per_page: true  # 全局加载，所有页面自动支持数学公式
+  per_page: true # 全局加载，所有页面自动支持数学公式
   hide_scrollbar: false
 
   mathjax:
@@ -872,7 +870,7 @@ font:
   # consolas, ZhuZiAWan_light, "Microsoft YaHei", Menlo, "PingFang SC", "Microsoft JhengHei", sans-serif
   # Consolas_1, ZhuZiAWan_light, "Microsoft YaHei", Menlo, "PingFang SC", "Microsoft JhengHei", sans-serif
   code-font-family: Consolas_1, var(--global-font), "Microsoft YaHei", Menlo, "PingFang SC", "Microsoft JhengHei", sans-serif
-  
+
 # Font settings for the site title and site subtitle
 blog_title_font:
   font_link:
@@ -1097,6 +1095,21 @@ css_prefix: true
 # Insert the code to head (before '</head>' tag) and the bottom (before '</body>' tag)
 inject:
   head:
+    # 💡 防闪烁：在 CSS 加载前立即应用保存的主题
+    - |
+      <script>
+        (function() {
+          const followsSystem = localStorage.getItem('theme-follows-system') === 'true';
+          let theme = 'light';
+          if (followsSystem) {
+            theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          } else {
+            theme = localStorage.getItem('theme') || 
+              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          }
+          document.documentElement.setAttribute('data-theme', theme);
+        })();
+      </script>
     # 💡 现代主题样式
     - <link rel="stylesheet" href="/css/modern/index.css">
   bottom:
@@ -1104,6 +1117,7 @@ inject:
     - <script src="/js/effects/snowfall.js"></script>
     - <script src="/js/components/clock.js"></script>
     - <script src="/js/components/greeting.js"></script>
+    - <script src="/js/components/theme-toggle.js"></script>
 
 # 💡 现代卡片主题配置
 modern_cards:
@@ -1113,7 +1127,6 @@ modern_cards:
   calendar_enabled: true
   # 是否显示雪花背景
   snowfall_enabled: true
-
 
 # CDN Settings
 # Don't modify the following settings unless you know how they work
