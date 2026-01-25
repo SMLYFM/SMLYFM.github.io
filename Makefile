@@ -738,6 +738,38 @@ article-show: ## 📋 显示指定文章的 hash 信息 (make article-show FILE=
 	@./tools/article-hash.sh show $(FILE)
 
 # ============================================
+## 📝 文章管理 - ID 系统
+# ============================================
+
+.PHONY: article-id-init article-id-list article-info article-id-sync
+
+article-id-init: ## 📋 初始化文章 ID 系统
+	@./tools/article-id.sh init
+
+article-id-list: ## 📋 列出所有文章 ID
+	@./tools/article-id.sh list
+
+article-info: ## 📋 查看文章详情 (make article-info ID=1 或 FILE="xxx.md")
+	@if [ -n "$(ID)" ]; then \
+		./tools/article-id.sh info $(ID); \
+	elif [ -n "$(FILE)" ]; then \
+		./tools/article-id.sh info $(FILE); \
+	else \
+		echo "❌ 用法: make article-info ID=1 或 FILE=\"文件名.md\""; \
+		echo ""; \
+		echo "示例:"; \
+		echo "  make article-info ID=1"; \
+		echo "  make article-info FILE=\"zfc-set-theory.md\""; \
+		exit 1; \
+	fi
+
+article-id-sync: ## 📋 同步文章 ID（分配新文章，释放已删除）
+	@./tools/article-id.sh sync
+
+article-id-clean: ## 📋 清理无效的 ID 记录
+	@./tools/article-id.sh clean
+
+# ============================================
 ## 📝 文章管理 - 删除/重命名
 # ============================================
 
