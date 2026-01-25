@@ -499,8 +499,8 @@ busuanzi:
 # if you set it to false, it will load mathjax/katex script according to your setting (add the 'mathjax: true' or 'katex: true' in page's front-matter)
 math:
   # Choose: mathjax, katex
-  # 💡 MathJax 对复杂数学公式支持更好，适合数学专业博客
-  use: mathjax
+  # 💡 KaTeX 渲染更快,配合 markdown-it-katex 实现原生 LaTeX 效果
+  use: katex
   per_page: true # 全局加载，所有页面自动支持数学公式
   hide_scrollbar: false
 
@@ -1125,6 +1125,10 @@ inject:
       </script>
     # 💡 现代主题样式
     - <link rel="stylesheet" href="/css/modern/index.css">
+    # 💡 KaTeX 公式增强样式
+    - <link rel="stylesheet" href="/css/modern/katex-enhance.css">
+    # 💡 定理环境样式
+    - <link rel="stylesheet" href="/css/modern/theorem-env.css">
   bottom:
     # 💡 现代主题JavaScript效果
     - <script src="/js/effects/snowfall.js"></script>
@@ -1134,7 +1138,10 @@ inject:
     - <script src="/js/components/reading-progress.js"></script>
     - <script src="/js/components/code-enhance.js"></script>
     - <script src="/js/components/keyboard-shortcuts.js"></script>
+    # 💡 KaTeX 增强功能
+    - <script src="/js/components/katex-macros.js"></script>
     - <script src="/js/components/math-copy.js"></script>
+    - <script src="/js/components/equation-numbering.js"></script>
     - <script src="/js/components/math-tools.js"></script>
 
 # 💡 现代卡片主题配置

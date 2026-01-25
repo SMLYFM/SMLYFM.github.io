@@ -1,19 +1,73 @@
-//- Mathjax 3
+//- Mathjax 3 - Enhanced Professional Typesetting
 - const { tags, enableMenu } = theme.math.mathjax
 script.
   (() => {
     const loadMathjax = () => {
       if (!window.MathJax) {
         window.MathJax = {
+          // 💡 TeX 输入配置 - 专业学术排版
           tex: {
             inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true,
             tags: '!{tags}',
+            // 💡 加载 AMS 数学扩展包以获得专业排版
+            packages: {'[+]': ['ams', 'noerrors', 'noundefined']},
+            // 💡 专业数学宏定义
+            macros: {
+              // 数集
+              R: '\\mathbb{R}',
+              N: '\\mathbb{N}',
+              Z: '\\mathbb{Z}',
+              C: '\\mathbb{C}',
+              // 微分
+              dd: '\\mathrm{d}',
+              pdv: ['\\frac{\\partial #1}{\\partial #2}', 2],
+              dv: ['\\frac{\\mathrm{d} #1}{\\mathrm{d} #2}', 2],
+              // 向量/矩阵
+              bm: ['\\boldsymbol{#1}', 1],
+              mat: ['\\mathbf{#1}', 1],
+              // 概率
+              E: '\\mathbb{E}',
+              Var: '\\operatorname{Var}',
+              Prob: '\\mathbb{P}'
+            }
           },
+          // 💡 CHTML 输出配置 - 优化字体和间距
           chtml: {
-            scale: 1.1
+            scale: 1.05,                    // 稍微缩小，更精致
+            minScale: 0.5,
+            mtextInheritFont: false,        // 使用 MathJax 字体
+            merrorInheritFont: false,
+            mathmlSpacing: false,           // 使用 TeX 间距规则
+            skipAttributes: {},
+            exFactor: 0.5,
+            displayAlign: 'center',
+            displayIndent: '0'
           },
+          // 💡 SVG 输出配置（备选）
+          svg: {
+            scale: 1.0,
+            minScale: 0.5,
+            mtextInheritFont: false,
+            merrorInheritFont: false,
+            mathmlSpacing: false,
+            skipAttributes: {},
+            exFactor: 0.5,
+            displayAlign: 'center',
+            displayIndent: '0',
+            fontCache: 'global'
+          },
+          // 💡 选项配置
           options: {
             enableMenu: !{enableMenu},
+            menuOptions: {
+              settings: {
+                zoom: 'Click',
+                zscale: '200%'
+              }
+            },
             renderActions: {
               findScript: [10, doc => {
                 for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
@@ -26,6 +80,13 @@ script.
                   doc.math.push(math)
                 }
               }, '']
+            }
+          },
+          // 💡 启动配置
+          startup: {
+            ready: () => {
+              MathJax.startup.defaultReady();
+              console.log('💡 MathJax 专业排版已加载');
             }
           }
         }

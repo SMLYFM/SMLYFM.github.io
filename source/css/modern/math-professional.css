@@ -1,0 +1,368 @@
+/**
+ * 专业数学公式样式 - Professional Math Styles
+ * 💡 学术级 LaTeX 公式渲染效果
+ * 💡 支持 MathJax 3.x / KaTeX
+ */
+
+/* ========================================
+ * CSS 变量 - 公式专用
+ * ======================================== */
+
+:root {
+  /* 💡 专业蓝色调色板 */
+  --math-primary: #3b82f6;
+  --math-primary-light: #60a5fa;
+  --math-primary-dark: #2563eb;
+
+  /* 公式文字 */
+  --math-text: #1e293b;
+
+  /* 💡 更明显的背景和边框 */
+  --math-bg-start: rgba(59, 130, 246, 0.06);
+  --math-bg-end: rgba(99, 102, 241, 0.03);
+  --math-border-color: #3b82f6;
+  --math-hover-bg: rgba(59, 130, 246, 0.1);
+
+  /* 💡 阴影 */
+  --math-shadow: 0 2px 8px rgba(59, 130, 246, 0.12);
+  --math-shadow-hover: 0 4px 16px rgba(59, 130, 246, 0.18);
+
+  /* 公式编号 */
+  --math-number-color: #64748b;
+  --math-number-bg: rgba(100, 116, 139, 0.1);
+
+  /* 间距 */
+  --math-block-margin: 1.5rem;
+  --math-block-padding: 1.25rem 1.75rem;
+  --math-inline-padding: 0.1em 0.25em;
+}
+
+[data-theme='dark'] {
+  --math-primary: #60a5fa;
+  --math-primary-light: #93c5fd;
+  --math-primary-dark: #3b82f6;
+
+  --math-text: #e2e8f0;
+
+  --math-bg-start: rgba(96, 165, 250, 0.1);
+  --math-bg-end: rgba(129, 140, 248, 0.05);
+  --math-border-color: #60a5fa;
+  --math-hover-bg: rgba(96, 165, 250, 0.15);
+
+  --math-shadow: 0 2px 8px rgba(96, 165, 250, 0.15);
+  --math-shadow-hover: 0 4px 16px rgba(96, 165, 250, 0.25);
+
+  --math-number-color: #94a3b8;
+  --math-number-bg: rgba(148, 163, 184, 0.15);
+}
+
+/* ========================================
+ * 行间公式 (Display Math) - 核心样式
+ * ======================================== */
+
+/* 💡 包装公式块的容器（Pandoc 生成的 span.math.display） */
+.math.display,
+p:has(> mjx-container[display='true']),
+.MathJax_Display {
+  display: block;
+  position: relative;
+  margin: var(--math-block-margin) 0;
+  padding: var(--math-block-padding);
+
+  /* 💡 渐变背景 - 更明显 */
+  background: linear-gradient(
+    135deg,
+    var(--math-bg-start) 0%,
+    var(--math-bg-end) 100%
+  );
+
+  /* 💡 左侧粗装饰边框 */
+  border-left: 4px solid var(--math-border-color);
+  border-radius: 0 12px 12px 0;
+
+  /* 💡 柔和阴影 */
+  box-shadow: var(--math-shadow);
+
+  /* 💡 过渡动效 */
+  transition: all 0.25s ease;
+}
+
+/* 💡 MathJax 容器直接样式 */
+mjx-container[jax='CHTML'][display='true'] {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 💡 悬浮效果 */
+.math.display:hover,
+p:has(> mjx-container[display='true']):hover,
+.MathJax_Display:hover {
+  background: linear-gradient(
+    135deg,
+    var(--math-hover-bg) 0%,
+    rgba(99, 102, 241, 0.06) 100%
+  );
+  box-shadow: var(--math-shadow-hover);
+  transform: translateX(3px);
+  border-left-width: 5px;
+}
+
+/* 💡 公式内容居中 */
+.math.display mjx-container,
+mjx-container[jax='CHTML'][display='true'] mjx-math {
+  display: flex !important;
+  justify-content: center;
+}
+
+/* ========================================
+ * 行内公式 (Inline Math)
+ * ======================================== */
+
+/* 💡 行内公式容器 */
+.math.inline,
+mjx-container[jax='CHTML']:not([display='true']),
+.MathJax:not(.MathJax_Display) {
+  display: inline-block;
+  padding: var(--math-inline-padding);
+  margin: 0 0.1em;
+  vertical-align: baseline;
+
+  /* 💡 轻微背景 */
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 4px;
+
+  /* 💡 过渡 */
+  transition: background 0.2s ease;
+}
+
+mjx-container[jax='CHTML']:not([display='true']):hover,
+.math.inline:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+/* 💡 深色模式行内公式 */
+[data-theme='dark'] .math.inline,
+[data-theme='dark'] mjx-container[jax='CHTML']:not([display='true']),
+[data-theme='dark'] .MathJax:not(.MathJax_Display) {
+  background: rgba(96, 165, 250, 0.08);
+}
+
+[data-theme='dark'] mjx-container[jax='CHTML']:not([display='true']):hover,
+[data-theme='dark'] .math.inline:hover {
+  background: rgba(96, 165, 250, 0.15);
+}
+
+/* ========================================
+ * 公式编号样式
+ * ======================================== */
+
+mjx-container[jax='CHTML'][display='true'] mjx-mtd.mjx-eqn-num,
+.MathJax_Display .mjx-eqn-num,
+span.eqno,
+.tag {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+
+  /* 💡 编号样式 */
+  font-size: 0.85em;
+  font-weight: 500;
+  color: var(--math-number-color);
+  padding: 0.25em 0.6em;
+  background: var(--math-number-bg);
+  border-radius: 6px;
+
+  /* 💡 字体 */
+  font-family: var(--font-mono, 'Consolas', monospace);
+}
+
+/* ========================================
+ * 修复 MathJax 特殊字符显示
+ * ======================================== */
+
+/* 💡 修复星号等特殊字符的颜色 (不要显示红色) */
+mjx-mo,
+mjx-mi,
+mjx-mn,
+.MathJax .mo,
+.MathJax .mi,
+.MathJax .mn {
+  color: inherit !important;
+}
+
+/* 💡 移除 MathJax 默认的红色错误样式 */
+mjx-merror,
+.MathJax_Error {
+  color: var(--math-text) !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* ========================================
+ * 公式元素增强
+ * ======================================== */
+
+/* 💡 分数线 */
+mjx-frac mjx-line,
+.mfrac .frac-line {
+  border-top-width: 1.2px !important;
+  border-color: var(--math-text) !important;
+}
+
+/* 💡 积分/求和符号放大 */
+mjx-mo.mjx-n > mjx-c[c='∫'],
+mjx-mo.mjx-n > mjx-c[c='∑'],
+mjx-mo.mjx-n > mjx-c[c='∏'] {
+  font-size: 1.15em;
+}
+
+/* 💡 括号颜色 - 使用主题蓝色 */
+mjx-mrow > mjx-mo.mjx-stretch,
+.mopen,
+.mclose {
+  color: var(--math-primary) !important;
+  opacity: 0.9;
+}
+
+/* ========================================
+ * 多行公式环境
+ * ======================================== */
+
+/* 💡 align/gather 环境 */
+mjx-mtable.mjx-aling {
+  margin: var(--math-block-margin) auto;
+}
+
+/* 💡 cases 环境 */
+mjx-table.mjx-cases {
+  margin-left: 0.5em;
+}
+
+/* 💡 行间距优化 */
+mjx-mtable mjx-mtr {
+  margin: 0.25em 0;
+}
+
+/* ========================================
+ * 重要公式高亮
+ * ======================================== */
+
+.math-important .math.display,
+.math-important p:has(> mjx-container[display='true']) {
+  border-left-color: #f59e0b;
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.08) 0%,
+    rgba(245, 158, 11, 0.03) 100%
+  );
+}
+
+.math-important .math.display:hover,
+.math-important p:has(> mjx-container[display='true']):hover {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.12) 0%,
+    rgba(245, 158, 11, 0.06) 100%
+  );
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
+}
+
+/* ========================================
+ * 公式溢出处理
+ * ======================================== */
+
+.post-content .math.display,
+.post-content p:has(> mjx-container[display='true']) {
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* 💡 隐藏滚动条但保留功能 */
+  scrollbar-width: thin;
+  scrollbar-color: var(--math-border-color) transparent;
+}
+
+.post-content .math.display::-webkit-scrollbar,
+.post-content p:has(> mjx-container[display='true'])::-webkit-scrollbar {
+  height: 6px;
+}
+
+.post-content .math.display::-webkit-scrollbar-thumb,
+.post-content p:has(> mjx-container[display='true'])::-webkit-scrollbar-thumb {
+  background: var(--math-border-color);
+  border-radius: 3px;
+  opacity: 0.5;
+}
+
+/* ========================================
+ * 响应式设计
+ * ======================================== */
+
+@media screen and (max-width: 768px) {
+  .math.display,
+  p:has(> mjx-container[display='true']),
+  .MathJax_Display {
+    margin: 1rem 0;
+    padding: 1rem 1.25rem;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.92em;
+  }
+
+  /* 💡 移动端公式编号 */
+  mjx-container[jax='CHTML'][display='true'] mjx-mtd.mjx-eqn-num,
+  span.eqno,
+  .tag {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    display: block;
+    text-align: right;
+    margin-top: 0.5rem;
+  }
+}
+
+/* ========================================
+ * 打印样式
+ * ======================================== */
+
+@media print {
+  .math.display,
+  p:has(> mjx-container[display='true']),
+  .MathJax_Display {
+    background: none !important;
+    border-left: 2px solid #000 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+
+  .math.inline,
+  mjx-container[jax='CHTML']:not([display='true']) {
+    background: none !important;
+  }
+}
+
+/* ========================================
+ * 动画效果
+ * ======================================== */
+
+@keyframes mathSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.math.display,
+p:has(> mjx-container[display='true']) {
+  animation: mathSlideIn 0.4s ease-out;
+}

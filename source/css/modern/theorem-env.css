@@ -1,0 +1,372 @@
+/**
+ * 定理环境样式
+ * 💡 专业数学文档的定理、引理、证明等环境
+ */
+
+/* ========================================
+ * CSS 变量
+ * ======================================== */
+
+:root {
+  /* 定理 - 蓝色 */
+  --theorem-bg: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.08),
+    rgba(99, 102, 241, 0.04)
+  );
+  --theorem-border: #3b82f6;
+  --theorem-title-bg: linear-gradient(135deg, #3b82f6, #6366f1);
+
+  /* 引理/命题 - 青色 */
+  --lemma-bg: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.08),
+    rgba(20, 184, 166, 0.04)
+  );
+  --lemma-border: #06b6d4;
+  --lemma-title-bg: linear-gradient(135deg, #06b6d4, #14b8a6);
+
+  /* 定义 - 紫色 */
+  --definition-bg: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.08),
+    rgba(168, 85, 247, 0.04)
+  );
+  --definition-border: #8b5cf6;
+  --definition-title-bg: linear-gradient(135deg, #8b5cf6, #a855f7);
+
+  /* 证明 - 灰色 */
+  --proof-bg: rgba(100, 116, 139, 0.05);
+  --proof-border: #64748b;
+
+  /* 推论 - 绿色 */
+  --corollary-bg: linear-gradient(
+    135deg,
+    rgba(34, 197, 94, 0.08),
+    rgba(16, 185, 129, 0.04)
+  );
+  --corollary-border: #22c55e;
+  --corollary-title-bg: linear-gradient(135deg, #22c55e, #10b981);
+
+  /* 例题 - 橙色 */
+  --example-bg: linear-gradient(
+    135deg,
+    rgba(249, 115, 22, 0.08),
+    rgba(245, 158, 11, 0.04)
+  );
+  --example-border: #f97316;
+  --example-title-bg: linear-gradient(135deg, #f97316, #f59e0b);
+
+  /* 注意/备注 - 黄色 */
+  --remark-bg: linear-gradient(
+    135deg,
+    rgba(234, 179, 8, 0.08),
+    rgba(250, 204, 21, 0.04)
+  );
+  --remark-border: #eab308;
+  --remark-title-bg: linear-gradient(135deg, #eab308, #facc15);
+}
+
+[data-theme='dark'] {
+  --theorem-bg: linear-gradient(
+    135deg,
+    rgba(96, 165, 250, 0.12),
+    rgba(129, 140, 248, 0.06)
+  );
+  --theorem-border: #60a5fa;
+
+  --lemma-bg: linear-gradient(
+    135deg,
+    rgba(34, 211, 238, 0.12),
+    rgba(45, 212, 191, 0.06)
+  );
+  --lemma-border: #22d3ee;
+
+  --definition-bg: linear-gradient(
+    135deg,
+    rgba(167, 139, 250, 0.12),
+    rgba(192, 132, 252, 0.06)
+  );
+  --definition-border: #a78bfa;
+
+  --proof-bg: rgba(148, 163, 184, 0.08);
+  --proof-border: #94a3b8;
+
+  --corollary-bg: linear-gradient(
+    135deg,
+    rgba(74, 222, 128, 0.12),
+    rgba(52, 211, 153, 0.06)
+  );
+  --corollary-border: #4ade80;
+
+  --example-bg: linear-gradient(
+    135deg,
+    rgba(251, 146, 60, 0.12),
+    rgba(251, 191, 36, 0.06)
+  );
+  --example-border: #fb923c;
+
+  --remark-bg: linear-gradient(
+    135deg,
+    rgba(250, 204, 21, 0.12),
+    rgba(253, 224, 71, 0.06)
+  );
+  --remark-border: #facc15;
+}
+
+/* ========================================
+ * 基础环境样式
+ * ======================================== */
+
+.math-env {
+  position: relative;
+  margin: 1.5em 0;
+  padding: 1.25em 1.5em 1.25em 1.5em;
+  border-radius: 0 12px 12px 0;
+  border-left: 4px solid;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+}
+
+.math-env:hover {
+  transform: translateX(3px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* 环境标题 */
+.math-env-title {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.9em;
+  color: white;
+  padding: 0.3em 0.8em;
+  border-radius: 4px;
+  margin-bottom: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 环境编号 */
+.math-env-number {
+  font-weight: 400;
+  margin-left: 0.5em;
+}
+
+/* 环境名称 (如定理名) */
+.math-env-name {
+  font-style: italic;
+  font-weight: 400;
+  margin-left: 0.5em;
+  opacity: 0.9;
+}
+
+/* 环境内容 */
+.math-env-content {
+  line-height: 1.7;
+}
+
+.math-env-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* ========================================
+ * 定理 (Theorem)
+ * ======================================== */
+
+.theorem,
+.math-env-theorem {
+  background: var(--theorem-bg);
+  border-color: var(--theorem-border);
+}
+
+.theorem .math-env-title,
+.math-env-theorem .math-env-title {
+  background: var(--theorem-title-bg);
+}
+
+/* ========================================
+ * 引理 (Lemma)
+ * ======================================== */
+
+.lemma,
+.math-env-lemma {
+  background: var(--lemma-bg);
+  border-color: var(--lemma-border);
+}
+
+.lemma .math-env-title,
+.math-env-lemma .math-env-title {
+  background: var(--lemma-title-bg);
+}
+
+/* ========================================
+ * 定义 (Definition)
+ * ======================================== */
+
+.definition,
+.math-env-definition {
+  background: var(--definition-bg);
+  border-color: var(--definition-border);
+}
+
+.definition .math-env-title,
+.math-env-definition .math-env-title {
+  background: var(--definition-title-bg);
+}
+
+/* ========================================
+ * 证明 (Proof)
+ * ======================================== */
+
+.proof,
+.math-env-proof {
+  background: var(--proof-bg);
+  border-color: var(--proof-border);
+  font-style: normal;
+}
+
+.proof .math-env-title,
+.math-env-proof .math-env-title {
+  background: linear-gradient(135deg, #64748b, #475569);
+}
+
+/* 证明结束标记 (QED) */
+.proof::after,
+.math-env-proof::after {
+  content: '□';
+  display: block;
+  text-align: right;
+  font-size: 1.2em;
+  color: var(--proof-border);
+  margin-top: 0.5em;
+}
+
+/* ========================================
+ * 推论 (Corollary)
+ * ======================================== */
+
+.corollary,
+.math-env-corollary {
+  background: var(--corollary-bg);
+  border-color: var(--corollary-border);
+}
+
+.corollary .math-env-title,
+.math-env-corollary .math-env-title {
+  background: var(--corollary-title-bg);
+}
+
+/* ========================================
+ * 例题 (Example)
+ * ======================================== */
+
+.example,
+.math-env-example {
+  background: var(--example-bg);
+  border-color: var(--example-border);
+}
+
+.example .math-env-title,
+.math-env-example .math-env-title {
+  background: var(--example-title-bg);
+}
+
+/* ========================================
+ * 备注 (Remark)
+ * ======================================== */
+
+.remark,
+.math-env-remark {
+  background: var(--remark-bg);
+  border-color: var(--remark-border);
+}
+
+.remark .math-env-title,
+.math-env-remark .math-env-title {
+  background: var(--remark-title-bg);
+}
+
+/* ========================================
+ * 命题 (Proposition)
+ * ======================================== */
+
+.proposition,
+.math-env-proposition {
+  background: var(--lemma-bg);
+  border-color: var(--lemma-border);
+}
+
+.proposition .math-env-title,
+.math-env-proposition .math-env-title {
+  background: var(--lemma-title-bg);
+}
+
+/* ========================================
+ * Markdown 容器支持 (:::theorem)
+ * ======================================== */
+
+/* hexo-admonition 插件兼容 */
+.admonition.theorem,
+.admonition-theorem {
+  background: var(--theorem-bg);
+  border-left-color: var(--theorem-border);
+}
+
+.admonition.lemma,
+.admonition-lemma {
+  background: var(--lemma-bg);
+  border-left-color: var(--lemma-border);
+}
+
+.admonition.definition,
+.admonition-definition {
+  background: var(--definition-bg);
+  border-left-color: var(--definition-border);
+}
+
+.admonition.proof,
+.admonition-proof {
+  background: var(--proof-bg);
+  border-left-color: var(--proof-border);
+}
+
+.admonition.proof::after {
+  content: '□';
+  display: block;
+  text-align: right;
+  font-size: 1.2em;
+  color: var(--proof-border);
+}
+
+/* ========================================
+ * 响应式
+ * ======================================== */
+
+@media (max-width: 768px) {
+  .math-env {
+    margin: 1em 0;
+    padding: 1em;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .math-env-title {
+    font-size: 0.85em;
+    padding: 0.25em 0.6em;
+  }
+}
+
+/* ========================================
+ * 打印样式
+ * ======================================== */
+
+@media print {
+  .math-env {
+    break-inside: avoid;
+    box-shadow: none;
+    border-left-width: 2px;
+  }
+
+  .math-env:hover {
+    transform: none;
+  }
+}

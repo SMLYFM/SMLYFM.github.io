@@ -29,19 +29,19 @@ permalink: :year/:title/
 
 # 💡 URL美化选项
 pretty_urls:
-  trailing_index: false  # 移除链接末尾的 index.html
-  trailing_html: false   # 移除链接末尾的 .html
+  trailing_index: false # 移除链接末尾的 index.html
+  trailing_html: false # 移除链接末尾的 .html
 
 # ============================================
 # 目录结构
 # ============================================
-source_dir: source          # 源文件目录
-public_dir: public          # 生成文件目录
-tag_dir: tags              # 标签目录
-archive_dir: archives      # 归档目录
-category_dir: categories   # 分类目录
-code_dir: downloads/code   # 代码片段目录
-i18n_dir: :lang            # 国际化目录
+source_dir: source # 源文件目录
+public_dir: public # 生成文件目录
+tag_dir: tags # 标签目录
+archive_dir: archives # 归档目录
+category_dir: categories # 分类目录
+code_dir: downloads/code # 代码片段目录
+i18n_dir: :lang # 国际化目录
 
 # 💡 跳过渲染的文件(保持原样)
 skip_render:
@@ -67,8 +67,8 @@ titlecase: false
 
 # 💡 外部链接配置
 external_link:
-  enable: true      # 自动为外部链接添加 target="_blank"
-  field: site       # site=仅站外链接, post=所有链接
+  enable: true # 自动为外部链接添加 target="_blank"
+  field: site # site=仅站外链接, post=所有链接
   exclude: ''
 
 # 💡 文件名小写(1=强制小写, 0=保持原样, 2=大写)
@@ -91,25 +91,25 @@ syntax_highlighter: highlight.js
 
 # highlight.js 配置
 highlight:
-  line_number: true    # 显示行号
-  auto_detect: false   # 自动检测语言(可能影响性能)
-  tab_replace: ''      # Tab替换字符
-  wrap: true           # 代码折行
-  hljs: false          # 使用hljs类名
+  line_number: true # 显示行号
+  auto_detect: false # 自动检测语言(可能影响性能)
+  tab_replace: '' # Tab替换字符
+  wrap: true # 代码折行
+  hljs: false # 使用hljs类名
 
 # prismjs 配置(备用)
 prismjs:
-  preprocess: true     # 预处理
-  line_number: true    # 显示行号
-  tab_replace: ''      # Tab替换字符
+  preprocess: true # 预处理
+  line_number: true # 显示行号
+  tab_replace: '' # Tab替换字符
 
 # ============================================
 # 首页设置
 # ============================================
 index_generator:
-  path: ''             # 首页路径
-  per_page: 8          # 每页文章数(建议8-12篇)
-  order_by: -date      # 排序方式(-date=最新在前)
+  path: '' # 首页路径
+  per_page: 8 # 每页文章数(建议8-12篇)
+  order_by: -date # 排序方式(-date=最新在前)
 
 # ============================================
 # 分类 & 标签
@@ -182,9 +182,9 @@ theme: butterfly
 
 # 💡 搜索配置
 search:
-  path: search.xml      # 搜索数据文件
-  field: post           # 搜索范围(post/page/all)
-  content: true         # 是否包含文章内容
+  path: search.xml # 搜索数据文件
+  field: post # 搜索范围(post/page/all)
+  content: true # 是否包含文章内容
 
 # ============================================
 # 部署配置
@@ -214,37 +214,35 @@ deploy:
 #   enable: true
 
 # ============================================
-# Marked 渲染器配置（解决 LaTeX 公式渲染问题）
+# Markdown-it 渲染器配置
 # ============================================
-# 💡 禁用某些 Markdown 特性，避免与 MathJax LaTeX 语法冲突
-marked:
-  gfm: true           # 启用 GitHub Flavored Markdown
-  pedantic: false
-  breaks: false       # 💡 关键：禁用自动换行，避免公式内 \n 变成 <br>
-  smartLists: true
-  smartypants: false  # 禁用智能引号（避免与 LaTeX 冲突）
-  modifyAnchors: 0
-  autolink: true
-  mangle: false       # 不转义邮箱地址
-  sanitizeUrl: false
-  headerIds: true
-  lazyload: false
-  prependRoot: false
-  postAsset: false
-  descriptionLists: true
-
-# ============================================
-# hexo-filter-mathjax 配置
-# ============================================
-# 💡 在 Markdown 渲染前预处理 LaTeX 公式，避免符号转义
-mathjax:
-  tags: ams           # 公式编号：ams / all / none
-  single_dollars: true  # 允许 $...$ 行内公式
-  chtml:
-    scale: 1.0
-    matchFontHeight: false
-    mtextInheritFont: false
-  svg:
-    scale: 1.0
-    matchFontHeight: false
-    mtextInheritFont: false
+# 💡 使用 hexo-renderer-markdown-it 渲染 Markdown
+# 💡 禁用单下划线斜体,避免与 LaTeX 下标 _ 冲突
+markdown:
+  preset: 'default'
+  render:
+    html: true # 允许 HTML 标签
+    xhtmlOut: false
+    langPrefix: 'language-'
+    breaks: true # 换行符转为 <br>
+    linkify: true # 自动链接 URL
+    typographer: true # 智能标点
+  # 💡 关键配置：禁用单下划线斜体，解决 LaTeX 下标问题
+  enable_rules:
+  disable_rules:
+  plugins:
+    - '@neilsustc/markdown-it-katex'
+  anchors:
+    level: 1
+    collisionSuffix: ''
+    permalink: false
+    permalinkClass: 'header-anchor'
+    permalinkSide: 'left'
+    permalinkSymbol: ''
+    case: 0
+    separator: '-'
+  # 💡 图片配置
+  images:
+    lazyload: false
+    prepend_root: false
+    post_asset: false

@@ -54,22 +54,22 @@ $$
 
 ### 1.2 神经网络近似
 
-PINNs 使用神经网络 $u\_\theta(\mathbf{x}, t)$ 来近似 PDE 的解 $u(\mathbf{x}, t)$，其中 $\theta$ 表示网络参数（权重和偏置）。
+PINNs 使用神经网络 $u_\theta(\mathbf{x}, t)$ 来近似 PDE 的解 $u(\mathbf{x}, t)$，其中 $\theta$ 表示网络参数（权重和偏置）。
 
 对于一个 $L$ 层的全连接网络：
 
 $$
-u\_\theta(\mathbf{x}, t) = \mathcal{NN}\_\theta(\mathbf{x}, t) = \sigma\_L \circ \mathbf{W}\_L \circ \sigma\_{L-1} \circ \cdots \circ \sigma\_1 \circ \mathbf{W}\_1 (\mathbf{x}, t)
+u_\theta(\mathbf{x}, t) = \mathcal{NN}_\theta(\mathbf{x}, t) = \sigma_L \circ \mathbf{W}_L \circ \sigma_{L-1} \circ \cdots \circ \sigma_1 \circ \mathbf{W}_1 (\mathbf{x}, t)
 $$
 
-其中 $\sigma\_i$ 是激活函数，$\mathbf{W}\_i$ 是仿射变换。
+其中 $\sigma_i$ 是激活函数，$\mathbf{W}_i$ 是仿射变换。
 
 ### 1.3 自动微分
 
 PINNs 的关键在于利用**自动微分**（Automatic Differentiation）计算网络输出对输入的偏导数：
 
 $$
-\frac{\partial u\_\theta}{\partial x}, \quad \frac{\partial u\_\theta}{\partial t}, \quad \frac{\partial^2 u\_\theta}{\partial x^2}, \quad \ldots
+\frac{\partial u_\theta}{\partial x}, \quad \frac{\partial u_\theta}{\partial t}, \quad \frac{\partial^2 u_\theta}{\partial x^2}, \quad \ldots
 $$
 
 这与数值微分不同，自动微分是**精确的**（机器精度内）。
@@ -83,35 +83,35 @@ $$
 PINNs 的总损失函数由多个部分组成：
 
 $$
-\mathcal{L}(\theta) = \lambda\_{data} \mathcal{L}\_{data} + \lambda\_{PDE} \mathcal{L}\_{PDE} + \lambda\_{BC} \mathcal{L}\_{BC} + \lambda\_{IC} \mathcal{L}\_{IC}
+\mathcal{L}(\theta) = \lambda_{data} \mathcal{L}_{data} + \lambda_{PDE} \mathcal{L}_{PDE} + \lambda_{BC} \mathcal{L}_{BC} + \lambda_{IC} \mathcal{L}_{IC}
 $$
 
-其中 $\lambda\_\*$ 是权重超参数，用于平衡各项损失。
+其中 $\lambda_{*}$ 是权重超参数，用于平衡各项损失。
 
 ### 2.2 数据拟合损失
 
-当有观测数据 $\{(\mathbf{x}\_i^{data}, t\_i^{data}, u\_i^{data})\}\_{i=1}^{N\_{data}}$ 时：
+当有观测数据 $\{(\mathbf{x}_i^{data}, t_i^{data}, u_i^{data})\}_{i=1}^{N_{data}}$ 时：
 
 $$
-\mathcal{L}\_{data} = \frac{1}{N\_{data}} \sum\_{i=1}^{N\_{data}} \left| u\_\theta(\mathbf{x}\_i^{data}, t\_i^{data}) - u\_i^{data} \right|^2
+\mathcal{L}_{data} = \frac{1}{N_{data}} \sum_{i=1}^{N_{data}} \left| u_\theta(\mathbf{x}_i^{data}, t_i^{data}) - u_i^{data} \right|^2
 $$
 
 ### 2.3 PDE 残差损失
 
-在计算域内采样 $N\_r$ 个**配点**（collocation points）：
+在计算域内采样 $N_r$ 个**配点**（collocation points）：
 
 $$
-\mathcal{L}\_{PDE} = \frac{1}{N\_r} \sum\_{i=1}^{N\_r} \left| \mathcal{N}[u\_\theta(\mathbf{x}\_i^r, t\_i^r)] - f(\mathbf{x}\_i^r, t\_i^r) \right|^2
+\mathcal{L}_{PDE} = \frac{1}{N_r} \sum_{i=1}^{N_r} \left| \mathcal{N}[u_\theta(\mathbf{x}_i^r, t_i^r)] - f(\mathbf{x}_i^r, t_i^r) \right|^2
 $$
 
 这是 PINNs 的核心——**物理约束损失**。
 
 ### 2.4 边界条件损失
 
-在边界 $\partial\Omega$ 上采样 $N\_{BC}$ 个点：
+在边界 $\partial\Omega$ 上采样 $N_{BC}$ 个点：
 
 $$
-\mathcal{L}\_{BC} = \frac{1}{N\_{BC}} \sum\_{i=1}^{N\_{BC}} \left| \mathcal{B}[u\_\theta(\mathbf{x}\_i^{BC}, t\_i^{BC})] - g(\mathbf{x}\_i^{BC}, t\_i^{BC}) \right|^2
+\mathcal{L}_{BC} = \frac{1}{N_{BC}} \sum_{i=1}^{N_{BC}} \left| \mathcal{B}[u_\theta(\mathbf{x}_i^{BC}, t_i^{BC})] - g(\mathbf{x}_i^{BC}, t_i^{BC}) \right|^2
 $$
 
 常见边界条件类型：
@@ -122,10 +122,10 @@ $$
 
 ### 2.5 初始条件损失
 
-在 $t=0$ 时采样 $N\_{IC}$ 个点：
+在 $t=0$ 时采样 $N_{IC}$ 个点：
 
 $$
-\mathcal{L}\_{IC} = \frac{1}{N\_{IC}} \sum\_{i=1}^{N\_{IC}} \left| u\_\theta(\mathbf{x}\_i^{IC}, 0) - h(\mathbf{x}\_i^{IC}) \right|^2
+\mathcal{L}_{IC} = \frac{1}{N_{IC}} \sum_{i=1}^{N_{IC}} \left| u_\theta(\mathbf{x}_i^{IC}, 0) - h(\mathbf{x}_i^{IC}) \right|^2
 $$
 
 ---

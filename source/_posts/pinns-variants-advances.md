@@ -40,7 +40,7 @@ $$
 强形式需要计算 $\nabla^2 u$。而弱形式为：
 
 $$
-\int\_\Omega k \nabla u \cdot \nabla v \, d\mathbf{x} = \int\_\Omega f v \, d\mathbf{x}, \quad \forall v \in V
+\int_\Omega k \nabla u \cdot \nabla v \, d\mathbf{x} = \int_\Omega f v \, d\mathbf{x}, \quad \forall v \in V
 $$
 
 只需要一阶导数 $\nabla u$。
@@ -96,26 +96,26 @@ class VPINNLoss:
 将 $\Omega$ 分解为 $K$ 个子域：
 
 $$
-\Omega = \bigcup\_{k=1}^K \Omega\_k, \quad \Gamma\_{ij} = \partial\Omega\_i \cap \partial\Omega\_j
+\Omega = \bigcup_{k=1}^K \Omega_k, \quad \Gamma_{ij} = \partial\Omega_i \cap \partial\Omega_j
 $$
 
-每个子域使用独立的神经网络 $u\_k^\theta$。
+每个子域使用独立的神经网络 $u_k^\theta$。
 
 ### 2.3 界面条件
 
-在子域界面 $\Gamma\_{ij}$ 上施加连续性约束：
+在子域界面 $\Gamma_{ij}$ 上施加连续性约束：
 
 $$
 \begin{cases}
-u\_i(\mathbf{x}) = u\_j(\mathbf{x}), & \mathbf{x} \in \Gamma\_{ij} \\
-\frac{\partial u\_i}{\partial n\_i}(\mathbf{x}) = -\frac{\partial u\_j}{\partial n\_j}(\mathbf{x}), & \mathbf{x} \in \Gamma\_{ij}
+u_i(\mathbf{x}) = u_j(\mathbf{x}), & \mathbf{x} \in \Gamma_{ij} \\
+\frac{\partial u_i}{\partial n_i}(\mathbf{x}) = -\frac{\partial u_j}{\partial n_j}(\mathbf{x}), & \mathbf{x} \in \Gamma_{ij}
 \end{cases}
 $$
 
 ### 2.4 损失函数
 
 $$
-\mathcal{L} = \sum\_{k=1}^K \mathcal{L}\_k^{PDE} + \sum\_{i<j} \left( \mathcal{L}\_{ij}^{cont} + \mathcal{L}\_{ij}^{flux} \right)
+\mathcal{L} = \sum_{k=1}^K \mathcal{L}_k^{PDE} + \sum_{i<j} \left( \mathcal{L}_{ij}^{cont} + \mathcal{L}_{ij}^{flux} \right)
 $$
 
 ```python
@@ -161,14 +161,14 @@ class XPINN:
 Chen & Chen (1995) 证明：任意连续算子 $G$ 可以表示为：
 
 $$
-G(u)(y) \approx \sum\_{k=1}^p \underbrace{b\_k(u(x\_1), ..., u(x\_m))}\_{\text{Branch Net}} \cdot \underbrace{t\_k(y)}\_{\text{Trunk Net}}
+G(u)(y) \approx \sum_{k=1}^p \underbrace{b_k(u(x_1), ..., u(x_m))}_{\text{Branch Net}} \cdot \underbrace{t_k(y)}_{\text{Trunk Net}}
 $$
 
 ### 3.3 架构
 
 DeepONet 包含两个子网络：
 
-1. **Branch Net**：编码输入函数 $u$ 在传感器点 $\{x\_i\}$ 处的值
+1. **Branch Net**：编码输入函数 $u$ 在传感器点 $\{x_i\}$ 处的值
 2. **Trunk Net**：编码查询位置 $y$
 
 ```python
@@ -245,10 +245,10 @@ def train_deeponet(model, data_loader, epochs=10000):
 结合 PINNs 和 DeepONet：
 
 $$
-\mathcal{L} = \mathcal{L}\_{data} + \lambda\_{physics} \mathcal{L}\_{physics}
+\mathcal{L} = \mathcal{L}_{data} + \lambda_{physics} \mathcal{L}_{physics}
 $$
 
-其中 $\mathcal{L}\_{physics}$ 是 PDE 残差损失。
+其中 $\mathcal{L}_{physics}$ 是 PDE 残差损失。
 
 ---
 
@@ -263,10 +263,10 @@ DeepONet 在实践中有时受限于点评估。**FNO** 直接在傅里叶空间
 FNO 的核心是**谱卷积层**：
 
 $$
-(\mathcal{K}(\phi)v)(x) = \mathcal{F}^{-1}\left( R\_\phi \cdot \mathcal{F}(v) \right)(x)
+(\mathcal{K}(\phi)v)(x) = \mathcal{F}^{-1}\left( R_\phi \cdot \mathcal{F}(v) \right)(x)
 $$
 
-其中 $\mathcal{F}$ 是傅里叶变换，$R\_\phi$ 是可学习的傅里叶空间权重。
+其中 $\mathcal{F}$ 是傅里叶变换，$R_\phi$ 是可学习的傅里叶空间权重。
 
 ### 4.3 PyTorch 实现
 
@@ -392,7 +392,7 @@ class FNO2d(nn.Module):
 针对守恒律方程，强制满足守恒性质：
 
 $$
-\frac{d}{dt}\int\_\Omega u \, dx = -\oint\_{\partial\Omega} \mathbf{F} \cdot \mathbf{n} \, dS
+\frac{d}{dt}\int_\Omega u \, dx = -\oint_{\partial\Omega} \mathbf{F} \cdot \mathbf{n} \, dS
 $$
 
 ### 5.2 Gradient-Enhanced PINNs
@@ -400,7 +400,7 @@ $$
 利用梯度信息增强训练：
 
 $$
-\mathcal{L}\_{grad} = \sum\_i \left| \frac{\partial u\_\theta}{\partial x\_i} - \frac{\partial u\_{data}}{\partial x\_i} \right|^2
+\mathcal{L}_{grad} = \sum_i \left| \frac{\partial u_\theta}{\partial x_i} - \frac{\partial u_{data}}{\partial x_i} \right|^2
 $$
 
 ### 5.3 Hard-Constrained PINNs
@@ -408,7 +408,7 @@ $$
 通过网络架构**硬编码**边界条件：
 
 $$
-u\_\theta(x) = B(x) + D(x) \cdot N\_\theta(x)
+u_\theta(x) = B(x) + D(x) \cdot N_\theta(x)
 $$
 
 其中 $B(x)$ 满足边界条件，$D(x)$ 在边界处为零。
@@ -448,7 +448,7 @@ class HardConstrainedPINN(nn.Module):
 ### 6.1 开源框架
 
 | 框架 | 特点 | 链接 |
-|------|------|------|
+| ------ | ------ | ------ |
 | DeepXDE | 多后端支持，易用 | [deepxde.readthedocs.io](https://deepxde.readthedocs.io/) |
 | NVIDIA Modulus | 工业级，多GPU | [developer.nvidia.com/modulus](https://developer.nvidia.com/modulus) |
 | SciANN | Keras 接口 | [github.com/sciann/sciann](https://github.com/sciann/sciann) |
@@ -470,7 +470,7 @@ class HardConstrainedPINN(nn.Module):
 PINNs 家族正在快速发展：
 
 | 变体 | 核心改进 | 适用场景 |
-|------|----------|----------|
+| ------ | ---------- | ---------- |
 | hp-VPINNs | 弱形式 | 非光滑解、复杂边界 |
 | XPINN | 区域分解 | 大规模问题 |
 | DeepONet | 算子学习 | 参数化问题族 |

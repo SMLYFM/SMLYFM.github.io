@@ -134,6 +134,9 @@
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 500;
+  /* 💡 确保标签使用相对定位,避免堆叠重叠 */
+  position: relative !important;
+  display: inline-block;
 }
 
 /* ========================================
