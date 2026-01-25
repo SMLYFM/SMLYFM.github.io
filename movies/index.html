@@ -1,0 +1,296 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Movies | Hexo-CJX Blog</title><meta name="author" content="CJX"><meta name="copyright" content="CJX"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="🎬 电影推荐 这里是我喜欢的电影收藏。 科幻电影  星际穿越 (Interstellar) 盗梦空间 (Inception) 黑客帝国 (The Matrix) 2001太空漫游 (2001: A Space Odyssey)  纪录片  徒手攀岩 (Free Solo) 我们的星球 (Our Planet)  动画电影  千与千寻 你的名字 机器人总动员 (WALL-E)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Movies">
+<meta property="og:url" content="https://smlyfm.github.io/movies/">
+<meta property="og:site_name" content="Hexo-CJX Blog">
+<meta property="og:description" content="🎬 电影推荐 这里是我喜欢的电影收藏。 科幻电影  星际穿越 (Interstellar) 盗梦空间 (Inception) 黑客帝国 (The Matrix) 2001太空漫游 (2001: A Space Odyssey)  纪录片  徒手攀岩 (Free Solo) 我们的星球 (Our Planet)  动画电影  千与千寻 你的名字 机器人总动员 (WALL-E)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://smlyfm.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-01-24T17:26:00.000Z">
+<meta property="article:modified_time" content="2026-01-24T17:27:21.424Z">
+<meta property="article:author" content="CJX">
+<meta property="article:tag" content="Math, Programming, Hexo, Blog, Technology, Rust, Python, LaTeX">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://smlyfm.github.io/img/butterfly-icon.png"><link rel="icon" href="/img/favicon.png"><link rel="canonical" href="https://smlyfm.github.io/movies/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":3,"unescape":true,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":1500,"languages":{"author":"作者: CJX","link":"链接: ","source":"来源: Hexo-CJX Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Movies',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'page'
+}</script><script>
+  (function() {
+    const followsSystem = localStorage.getItem('theme-follows-system') === 'true';
+    let theme = 'light';
+    if (followsSystem) {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    } else {
+      theme = localStorage.getItem('theme') || 
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+<link rel="stylesheet" href="/css/modern/index.css"><link rel="stylesheet" href="/css/modern/katex-enhance.css"><link rel="stylesheet" href="/css/modern/theorem-env.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "/img/loading.gif" data-lazy-src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-calculator"></i><span> Math</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%95%B0%E5%AD%A6/"><i class="fa-fw fas fa-infinity"></i><span> 数学</span></a></li><li><a class="site-page child" href="/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/"><i class="fa-fw fas fa-wave-square"></i><span> 科学计算</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-code"></i><span> Computer-Science</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"><i class="fa-fw fas fa-laptop-code"></i><span> 计算机</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"><i class="fa-fw fas fa-code"></i><span> 编程语言</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/rust/"><i class="fa-fw fas fa-cogs"></i><span> Rust</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"><i class="fa-fw fab fa-python"></i><span> Python</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/pytorch/"><i class="fa-fw fas fa-fire"></i><span> PyTorch</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-tools"></i><span> Tools</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%99%E4%BD%9C/latex/"><i class="fa-fw fas fa-file-alt"></i><span> LaTeX</span></a></li><li><a class="site-page child" href="/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%99%E4%BD%9C/"><i class="fa-fw fas fa-pen-fancy"></i><span> 工具与写作</span></a></li><li><a class="site-page child" href="/resources/"><i class="fa-fw fas fa-book"></i><span> 学习资源</span></a></li><li><a class="site-page child" href="/timeline/"><i class="fa-fw fas fa-history"></i><span> 学习时间线</span></a></li></ul></div></div></div></div><div class="page type-movies" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo-CJX Blog</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-calculator"></i><span> Math</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%95%B0%E5%AD%A6/"><i class="fa-fw fas fa-infinity"></i><span> 数学</span></a></li><li><a class="site-page child" href="/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/"><i class="fa-fw fas fa-wave-square"></i><span> 科学计算</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-code"></i><span> Computer-Science</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"><i class="fa-fw fas fa-laptop-code"></i><span> 计算机</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"><i class="fa-fw fas fa-code"></i><span> 编程语言</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/rust/"><i class="fa-fw fas fa-cogs"></i><span> Rust</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"><i class="fa-fw fab fa-python"></i><span> Python</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/pytorch/"><i class="fa-fw fas fa-fire"></i><span> PyTorch</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-tools"></i><span> Tools</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%99%E4%BD%9C/latex/"><i class="fa-fw fas fa-file-alt"></i><span> LaTeX</span></a></li><li><a class="site-page child" href="/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%99%E4%BD%9C/"><i class="fa-fw fas fa-pen-fancy"></i><span> 工具与写作</span></a></li><li><a class="site-page child" href="/resources/"><i class="fa-fw fas fa-book"></i><span> 学习资源</span></a></li><li><a class="site-page child" href="/timeline/"><i class="fa-fw fas fa-history"></i><span> 学习时间线</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">Movies</h1></header><main class="layout" id="content-inner"><div id="page"><div class="page-title">Movies</div><div class="container" id="article-container"><h1 id="🎬-电影推荐">🎬 电影推荐</h1>
+<p>这里是我喜欢的电影收藏。</p>
+<h2 id="科幻电影">科幻电影</h2>
+<ul>
+<li>星际穿越 (Interstellar)</li>
+<li>盗梦空间 (Inception)</li>
+<li>黑客帝国 (The Matrix)</li>
+<li>2001太空漫游 (2001: A Space Odyssey)</li>
+</ul>
+<h2 id="纪录片">纪录片</h2>
+<ul>
+<li>徒手攀岩 (Free Solo)</li>
+<li>我们的星球 (Our Planet)</li>
+</ul>
+<h2 id="动画电影">动画电影</h2>
+<ul>
+<li>千与千寻</li>
+<li>你的名字</li>
+<li>机器人总动员 (WALL-E)</li>
+</ul>
+</div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "/img/loading.gif" data-lazy-src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">CJX</div><div class="author-info-description">一个数学和程序语言爱好者的个人博客,分享技术心得、学习笔记和生活感悟。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KS-MATH"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SMLYFM" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:sudocjx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://github.com/SMLYFM" target="_blank" title=""><i class="github"></i></a><a class="social-icon" href="/sudocjx@gmail.com" target="_blank" title=""><i class="email"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/littlewood-three-principles/" title="Littlewood 三性原理与实分析中的逼近定理"><img src= "/img/loading.gif" data-lazy-src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&amp;h=400&amp;fit=crop" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Littlewood 三性原理与实分析中的逼近定理"/></a><div class="content"><a class="title" href="/2026/littlewood-three-principles/" title="Littlewood 三性原理与实分析中的逼近定理">Littlewood 三性原理与实分析中的逼近定理</a><time datetime="2026-01-25T10:55:00.000Z" title="发表于 2026-01-25 18:55:00">2026-01-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/pinns-variants-advances/" title="PINNs 变体与前沿进展：从基础到 DeepONet"><img src= "/img/loading.gif" data-lazy-src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&amp;h=400&amp;fit=crop" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PINNs 变体与前沿进展：从基础到 DeepONet"/></a><div class="content"><a class="title" href="/2026/pinns-variants-advances/" title="PINNs 变体与前沿进展：从基础到 DeepONet">PINNs 变体与前沿进展：从基础到 DeepONet</a><time datetime="2026-01-25T06:20:00.000Z" title="发表于 2026-01-25 14:20:00">2026-01-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/pinns-deep-dive/" title="物理信息神经网络 (PINNs) 深入解析：理论、实现与应用"><img src= "/img/loading.gif" data-lazy-src="https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&amp;h=400&amp;fit=crop" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="物理信息神经网络 (PINNs) 深入解析：理论、实现与应用"/></a><div class="content"><a class="title" href="/2026/pinns-deep-dive/" title="物理信息神经网络 (PINNs) 深入解析：理论、实现与应用">物理信息神经网络 (PINNs) 深入解析：理论、实现与应用</a><time datetime="2026-01-25T06:15:00.000Z" title="发表于 2026-01-25 14:15:00">2026-01-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/tikz-advanced-techniques/" title="TikZ 高级绘图技巧：从基础到精通"><img src= "/img/loading.gif" data-lazy-src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=800&amp;h=400&amp;fit=crop" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="TikZ 高级绘图技巧：从基础到精通"/></a><div class="content"><a class="title" href="/2026/tikz-advanced-techniques/" title="TikZ 高级绘图技巧：从基础到精通">TikZ 高级绘图技巧：从基础到精通</a><time datetime="2026-01-25T06:10:00.000Z" title="发表于 2026-01-25 14:10:00">2026-01-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/rnn-sequence-modeling/" title="循环神经网络 (RNN) 与序列建模"><img src= "/img/loading.gif" data-lazy-src="https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=800" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="循环神经网络 (RNN) 与序列建模"/></a><div class="content"><a class="title" href="/2026/rnn-sequence-modeling/" title="循环神经网络 (RNN) 与序列建模">循环神经网络 (RNN) 与序列建模</a><time datetime="2026-01-24T19:06:00.000Z" title="发表于 2026-01-25 03:06:00">2026-01-25</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%99%E4%BD%9C/"><span class="card-category-list-name">工具与写作</span><span class="card-category-list-count">3</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%99%E4%BD%9C/latex/"><span class="card-category-list-name">LaTeX</span><span class="card-category-list-count">3</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="card-category-list-name">数学</span><span class="card-category-list-count">8</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/%E5%88%86%E6%9E%90%E5%AD%A6/"><span class="card-category-list-name">分析学</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/%E5%AE%9E%E5%88%86%E6%9E%90/"><span class="card-category-list-name">实分析</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/%E6%8B%93%E6%89%91%E5%AD%A6/"><span class="card-category-list-name">拓扑学</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/%E6%B3%9B%E5%87%BD%E5%88%86%E6%9E%90/"><span class="card-category-list-name">泛函分析</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/"><span class="card-category-list-name">科学计算</span><span class="card-category-list-count">4</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/cnn/" style="font-size: 1.1em; color: #999">CNN</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE/" style="font-size: 1.1em; color: #999">科学绘图</a> <a href="/tags/latex/" style="font-size: 1.3em; color: #99a1ac">LaTeX</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 1.1em; color: #999">计算机视觉</a> <a href="/tags/pinns/" style="font-size: 1.3em; color: #99a1ac">PINNs</a> <a href="/tags/bibtex/" style="font-size: 1.1em; color: #999">BibTeX</a> <a href="/tags/littlewood/" style="font-size: 1.1em; color: #999">Littlewood</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/" style="font-size: 1.3em; color: #99a1ac">科学计算</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86/" style="font-size: 1.2em; color: #999da3">自动微分</a> <a href="/tags/%E6%AD%A3%E5%88%99%E5%8C%96/" style="font-size: 1.1em; color: #999">正则化</a> <a href="/tags/%E7%AE%97%E5%AD%90%E7%90%86%E8%AE%BA/" style="font-size: 1.1em; color: #999">算子理论</a> <a href="/tags/%E6%B3%9B%E5%87%BD%E5%88%86%E6%9E%90/" style="font-size: 1.1em; color: #999">泛函分析</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 1.1em; color: #999">数论</a> <a href="/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" style="font-size: 1.1em; color: #999">优化算法</a> <a href="/tags/sgd/" style="font-size: 1.1em; color: #999">SGD</a> <a href="/tags/%E8%BF%9E%E7%BB%AD%E6%80%A7/" style="font-size: 1.1em; color: #999">连续性</a> <a href="/tags/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/" style="font-size: 1.1em; color: #999">时间序列</a> <a href="/tags/%E5%A4%96%E7%A7%AF/" style="font-size: 1.1em; color: #999">外积</a> <a href="/tags/tikz/" style="font-size: 1.2em; color: #999da3">TikZ</a> <a href="/tags/l1%E6%AD%A3%E5%88%99/" style="font-size: 1.1em; color: #999">L1正则</a> <a href="/tags/%E6%95%B0%E5%80%BC%E6%96%B9%E6%B3%95/" style="font-size: 1.2em; color: #999da3">数值方法</a> <a href="/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/" style="font-size: 1.2em; color: #999da3">偏微分方程</a> <a href="/tags/%E9%80%89%E6%8B%A9%E5%85%AC%E7%90%86/" style="font-size: 1.1em; color: #999">选择公理</a> <a href="/tags/%E5%BC%80%E9%9B%86/" style="font-size: 1.1em; color: #999">开集</a> <a href="/tags/zfc%E5%85%AC%E7%90%86/" style="font-size: 1.1em; color: #999">ZFC公理</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/" style="font-size: 1.1em; color: #999">图像识别</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" style="font-size: 1.2em; color: #999da3">数学基础</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.5em; color: #99a9bf">深度学习</a> <a href="/tags/%E6%B5%8B%E5%BA%A6%E8%AE%BA/" style="font-size: 1.2em; color: #999da3">测度论</a> <a href="/tags/pytorch/" style="font-size: 1.4em; color: #99a5b6">PyTorch</a> <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" style="font-size: 1.1em; color: #999">函数式编程</a> <a href="/tags/%E6%8B%93%E6%89%91%E7%A9%BA%E9%97%B4/" style="font-size: 1.1em; color: #999">拓扑空间</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 1.1em; color: #999">数学建模</a> <a href="/tags/%E5%85%A8%E7%BA%AF%E5%87%BD%E6%95%B0/" style="font-size: 1.1em; color: #999">全纯函数</a> <a href="/tags/%E6%9F%AF%E8%A5%BF%E5%AE%9A%E7%90%86/" style="font-size: 1.1em; color: #999">柯西定理</a> <a href="/tags/rust/" style="font-size: 1.1em; color: #999">Rust</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E7%8C%9C%E6%83%B3/" style="font-size: 1.1em; color: #999">数学猜想</a> <a href="/tags/%E8%B4%B9%E9%A9%AC%E5%A4%A7%E5%AE%9A%E7%90%86/" style="font-size: 1.1em; color: #999">费马大定理</a> <a href="/tags/egoroff%E5%AE%9A%E7%90%86/" style="font-size: 1.1em; color: #999">Egoroff定理</a> <a href="/tags/rnn/" style="font-size: 1.1em; color: #999">RNN</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              一月 2026
+            </span>
+            <span class="card-archive-list-count">23</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">23</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">30.5k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-01-25T15:36:10.161Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2026 By CJX</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text">I wish you to become your own sun, no need to rely on who's light.<p><a target="_blank" href="https://hexo.io/"><img src= "/img/loading.gif" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src= "/img/loading.gif" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用butterfly"></a>&nbsp;<a target="_blank" href="https://www.jsdelivr.com/"><img src= "/img/loading.gif" data-lazy-src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&logo=jsDelivr" title="本站使用JsDelivr为静态资源提供CDN加速"></a> &nbsp;<a target="_blank" href="https://vercel.com/ "><img src= "/img/loading.gif" data-lazy-src="https://img.shields.io/badge/Hosted-Vervel-brightgreen?style=flat&logo=Vercel" title="本站采用双线部署，默认线路托管于Vercel"></a>&nbsp;<a target="_blank" href="https://vercel.com/ "><img src= "/img/loading.gif" data-lazy-src="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&logo=Codio" title="本站采用双线部署，联通线路托管于Coding"></a>&nbsp;<a target="_blank" href="https://github.com/"><img src= "/img/loading.gif" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src= "/img/loading.gif" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"mapping":"pathname","inputPosition":"bottom","lang":"zh-CN","reactions-enabled":1}
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark_dimmed' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'SMLYFM/SMLYFM.github.io',
+      'data-repo-id': 'R_kgDOOah4_w',
+      'data-category-id': 'DIC_kwDOOah4_84C1Y78',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !true) {
+    if (true) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><script src="/js/effects/snowfall.js"></script><script src="/js/components/clock.js"></script><script src="/js/components/greeting.js"></script><script src="/js/components/theme-toggle.js"></script><script src="/js/components/reading-progress.js"></script><script src="/js/components/code-enhance.js"></script><script src="/js/components/keyboard-shortcuts.js"></script><script src="/js/components/katex-macros.js"></script><script src="/js/components/math-copy.js"></script><script src="/js/components/equation-numbering.js"></script><script src="/js/components/math-tools.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章..." type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Python装饰器深入理解 | Hexo-CJX Blog</title><meta name="author" content="CJX"><meta name="copyright" content="CJX"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="简介 装饰器是 Python 中强大而优雅的特性，它允许你在不修改原函数代码的情况下扩展函数的功能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python装饰器深入理解">
+<meta property="og:url" content="https://smlyfm.github.io/2026/python-decorators/">
+<meta property="og:site_name" content="Hexo-CJX Blog">
+<meta property="og:description" content="简介 装饰器是 Python 中强大而优雅的特性，它允许你在不修改原函数代码的情况下扩展函数的功能。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop">
+<meta property="article:published_time" content="2026-01-24T17:27:00.000Z">
+<meta property="article:modified_time" content="2026-01-24T17:27:00.000Z">
+<meta property="article:author" content="CJX">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="装饰器">
+<meta property="article:tag" content="函数式编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Python装饰器深入理解",
+  "url": "https://smlyfm.github.io/2026/python-decorators/",
+  "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop",
+  "datePublished": "2026-01-24T17:27:00.000Z",
+  "dateModified": "2026-01-24T17:27:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "CJX",
+      "url": "https://smlyfm.github.io/"
+    }
+  ]
+}</script><link rel="icon" href="/img/favicon.png"><link rel="canonical" href="https://smlyfm.github.io/2026/python-decorators/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":3,"unescape":true,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":1500,"languages":{"author":"作者: CJX","link":"链接: ","source":"来源: Hexo-CJX Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python装饰器深入理解',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><script>
+  (function() {
+    const followsSystem = localStorage.getItem('theme-follows-system') === 'true';
+    let theme = 'light';
+    if (followsSystem) {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    } else {
+      theme = localStorage.getItem('theme') || 
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+<link rel="stylesheet" href="/css/modern/index.css"><link rel="stylesheet" href="/css/modern/katex-enhance.css"><link rel="stylesheet" href="/css/modern/theorem-env.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "/img/loading.gif" data-lazy-src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-calculator"></i><span> Math</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%95%B0%E5%AD%A6/"><i class="fa-fw fas fa-infinity"></i><span> 数学</span></a></li><li><a class="site-page child" href="/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/"><i class="fa-fw fas fa-wave-square"></i><span> 科学计算</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-code"></i><span> Computer-Science</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"><i class="fa-fw fas fa-laptop-code"></i><span> 计算机</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"><i class="fa-fw fas fa-code"></i><span> 编程语言</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/rust/"><i class="fa-fw fas fa-cogs"></i><span> Rust</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"><i class="fa-fw fab fa-python"></i><span> Python</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/pytorch/"><i class="fa-fw fas fa-fire"></i><span> PyTorch</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-tools"></i><span> Tools</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%99%E4%BD%9C/latex/"><i class="fa-fw fas fa-file-alt"></i><span> LaTeX</span></a></li><li><a class="site-page child" href="/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%99%E4%BD%9C/"><i class="fa-fw fas fa-pen-fancy"></i><span> 工具与写作</span></a></li><li><a class="site-page child" href="/resources/"><i class="fa-fw fas fa-book"></i><span> 学习资源</span></a></li><li><a class="site-page child" href="/timeline/"><i class="fa-fw fas fa-history"></i><span> 学习时间线</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo-CJX Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">Python装饰器深入理解</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-calculator"></i><span> Math</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%95%B0%E5%AD%A6/"><i class="fa-fw fas fa-infinity"></i><span> 数学</span></a></li><li><a class="site-page child" href="/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/"><i class="fa-fw fas fa-wave-square"></i><span> 科学计算</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-code"></i><span> Computer-Science</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"><i class="fa-fw fas fa-laptop-code"></i><span> 计算机</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"><i class="fa-fw fas fa-code"></i><span> 编程语言</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/rust/"><i class="fa-fw fas fa-cogs"></i><span> Rust</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"><i class="fa-fw fab fa-python"></i><span> Python</span></a></li><li><a class="site-page child" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/pytorch/"><i class="fa-fw fas fa-fire"></i><span> PyTorch</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-tools"></i><span> Tools</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%99%E4%BD%9C/latex/"><i class="fa-fw fas fa-file-alt"></i><span> LaTeX</span></a></li><li><a class="site-page child" href="/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%99%E4%BD%9C/"><i class="fa-fw fas fa-pen-fancy"></i><span> 工具与写作</span></a></li><li><a class="site-page child" href="/resources/"><i class="fa-fw fas fa-book"></i><span> 学习资源</span></a></li><li><a class="site-page child" href="/timeline/"><i class="fa-fw fas fa-history"></i><span> 学习时间线</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Python装饰器深入理解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-24T17:27:00.000Z" title="发表于 2026-01-25 01:27:00">2026-01-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-24T17:27:00.000Z" title="更新于 2026-01-25 01:27:00">2026-01-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/">Python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">286</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:3650,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2026-01-25 01:27:00&quot;}" hidden></div><h2 id="简介">简介</h2>
+<p>装饰器是 Python 中强大而优雅的特性，它允许你在不修改原函数代码的情况下扩展函数的功能。</p>
+<span id="more"></span>
+<h2 id="基本概念">基本概念</h2>
+<p>装饰器本质上是一个接受函数并返回新函数的高阶函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">my_decorator</span>(<span class="params">func</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;函数调用前&quot;</span>)</span><br><span class="line">        result = func(*args, **kwargs)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;函数调用后&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@my_decorator</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">say_hello</span>(<span class="params">name</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Hello, <span class="subst">&#123;name&#125;</span>!&quot;</span>)</span><br><span class="line"></span><br><span class="line">say_hello(<span class="string">&quot;World&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="带参数的装饰器">带参数的装饰器</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">repeat</span>(<span class="params">times</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">decorator</span>(<span class="params">func</span>):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">            <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(times):</span><br><span class="line">                result = func(*args, **kwargs)</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line">    <span class="keyword">return</span> decorator</span><br><span class="line"></span><br><span class="line"><span class="meta">@repeat(<span class="params"><span class="number">3</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">greet</span>(<span class="params">name</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Hi, <span class="subst">&#123;name&#125;</span>!&quot;</span>)</span><br><span class="line"></span><br><span class="line">greet(<span class="string">&quot;Python&quot;</span>)  <span class="comment"># 输出 3 次</span></span><br></pre></td></tr></table></figure>
+<h2 id="保留原函数信息">保留原函数信息</h2>
+<p>使用 <code>functools.wraps</code> 保留原函数的元信息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">my_decorator</span>(<span class="params">func</span>):</span><br><span class="line"><span class="meta">    @wraps(<span class="params">func</span>)</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">        <span class="keyword">return</span> func(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+<h2 id="类装饰器">类装饰器</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CountCalls</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, func</span>):</span><br><span class="line">        <span class="variable language_">self</span>.func = func</span><br><span class="line">        <span class="variable language_">self</span>.count = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self, *args, **kwargs</span>):</span><br><span class="line">        <span class="variable language_">self</span>.count += <span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;调用次数: <span class="subst">&#123;self.count&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.func(*args, **kwargs)</span><br><span class="line"></span><br><span class="line"><span class="meta">@CountCalls</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">say_hello</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hello!&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="总结">总结</h2>
+<p>装饰器是 Python 中实现 AOP（面向切面编程）的重要工具。</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.python.org/3/glossary.html#term-decorator">Python 官方文档 - 装饰器</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://smlyfm.github.io">CJX</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://smlyfm.github.io/2026/python-decorators/">https://smlyfm.github.io/2026/python-decorators/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://smlyfm.github.io" target="_blank">Hexo-CJX Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">Python</a><a class="post-meta__tags" href="/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/">装饰器</a><a class="post-meta__tags" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">函数式编程</a></div><div class="post-share"><div class="social-share" data-image="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&amp;h=400&amp;fit=crop" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/pytorch-autograd/" title="PyTorch自动微分机制详解"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&amp;h=400&amp;fit=crop" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">PyTorch自动微分机制详解</div></div><div class="info-2"><div class="info-item-1">简介 PyTorch 的自动微分（Autograd）是其核心功能之一，它使得神经网络的梯度计算变得简单高效。  张量与梯度 创建需要梯度的张量： 1234567891011import torch# 💡 requires_grad=True 启用梯度追踪x = torch.tensor([2.0, 3.0], requires_grad=True)y = x ** 2 + 2 * x + 1# 计算梯度y.backward(torch.ones_like(y))print(x.grad)  # tensor([6., 8.])# dy/dx = 2x + 2, 当 x=[2,3] 时，结果为 [6, 8] 计算图 PyTorch 动态构建计算图： 1234567891011121314import torcha = torch.tensor([2.0], requires_grad=True)b = torch.tensor([3.0], requires_grad=True)c = a * bd = c + ae = d ** 2#...</div></div></div></a><a class="pagination-related" href="/2026/rust-ownership/" title="Rust所有权系统详解"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&amp;h=400&amp;fit=crop" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Rust所有权系统详解</div></div><div class="info-2"><div class="info-item-1">简介 Rust 的所有权系统是其最独特的特性，它使 Rust 能够在没有垃圾回收的情况下保证内存安全。  所有权规则 Rust 的所有权规则：  每个值都有一个所有者（owner） 同一时刻只能有一个所有者 当所有者离开作用域时，值会被丢弃  代码示例 12345678910111213fn main() &#123;    // 💡 s 拥有这个 String    let s = String::from(&quot;hello&quot;);        // 💡 所有权转移给 s2    let s2 = s;        // ❌ 编译错误：s 已经无效    // println!(&quot;&#123;&#125;&quot;, s);        // ✅ 只有 s2 可以使用    println!(&quot;&#123;&#125;&quot;, s2);&#125; 借用与引用 1234567891011fn calculate_length(s: &amp;String) -&gt; usize &#123;    // 💡...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "/img/loading.gif" data-lazy-src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">CJX</div><div class="author-info-description">一个数学和程序语言爱好者的个人博客,分享技术心得、学习笔记和生活感悟。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">77</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/KS-MATH"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SMLYFM" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:sudocjx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://github.com/SMLYFM" target="_blank" title=""><i class="github"></i></a><a class="social-icon" href="/sudocjx@gmail.com" target="_blank" title=""><i class="email"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">2.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">带参数的装饰器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%9D%E7%95%99%E5%8E%9F%E5%87%BD%E6%95%B0%E4%BF%A1%E6%81%AF"><span class="toc-number">4.</span> <span class="toc-text">保留原函数信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">类装饰器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">7.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/littlewood-three-principles/" title="Littlewood 三性原理与实分析中的逼近定理"><img src= "/img/loading.gif" data-lazy-src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&amp;h=400&amp;fit=crop" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Littlewood 三性原理与实分析中的逼近定理"/></a><div class="content"><a class="title" href="/2026/littlewood-three-principles/" title="Littlewood 三性原理与实分析中的逼近定理">Littlewood 三性原理与实分析中的逼近定理</a><time datetime="2026-01-25T10:55:00.000Z" title="发表于 2026-01-25 18:55:00">2026-01-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/pinns-variants-advances/" title="PINNs 变体与前沿进展：从基础到 DeepONet"><img src= "/img/loading.gif" data-lazy-src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&amp;h=400&amp;fit=crop" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PINNs 变体与前沿进展：从基础到 DeepONet"/></a><div class="content"><a class="title" href="/2026/pinns-variants-advances/" title="PINNs 变体与前沿进展：从基础到 DeepONet">PINNs 变体与前沿进展：从基础到 DeepONet</a><time datetime="2026-01-25T06:20:00.000Z" title="发表于 2026-01-25 14:20:00">2026-01-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/pinns-deep-dive/" title="物理信息神经网络 (PINNs) 深入解析：理论、实现与应用"><img src= "/img/loading.gif" data-lazy-src="https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&amp;h=400&amp;fit=crop" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="物理信息神经网络 (PINNs) 深入解析：理论、实现与应用"/></a><div class="content"><a class="title" href="/2026/pinns-deep-dive/" title="物理信息神经网络 (PINNs) 深入解析：理论、实现与应用">物理信息神经网络 (PINNs) 深入解析：理论、实现与应用</a><time datetime="2026-01-25T06:15:00.000Z" title="发表于 2026-01-25 14:15:00">2026-01-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/tikz-advanced-techniques/" title="TikZ 高级绘图技巧：从基础到精通"><img src= "/img/loading.gif" data-lazy-src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=800&amp;h=400&amp;fit=crop" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="TikZ 高级绘图技巧：从基础到精通"/></a><div class="content"><a class="title" href="/2026/tikz-advanced-techniques/" title="TikZ 高级绘图技巧：从基础到精通">TikZ 高级绘图技巧：从基础到精通</a><time datetime="2026-01-25T06:10:00.000Z" title="发表于 2026-01-25 14:10:00">2026-01-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/rnn-sequence-modeling/" title="循环神经网络 (RNN) 与序列建模"><img src= "/img/loading.gif" data-lazy-src="https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=800" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="循环神经网络 (RNN) 与序列建模"/></a><div class="content"><a class="title" href="/2026/rnn-sequence-modeling/" title="循环神经网络 (RNN) 与序列建模">循环神经网络 (RNN) 与序列建模</a><time datetime="2026-01-24T19:06:00.000Z" title="发表于 2026-01-25 03:06:00">2026-01-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2026 By CJX</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text">I wish you to become your own sun, no need to rely on who's light.<p><a target="_blank" href="https://hexo.io/"><img src= "/img/loading.gif" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src= "/img/loading.gif" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用butterfly"></a>&nbsp;<a target="_blank" href="https://www.jsdelivr.com/"><img src= "/img/loading.gif" data-lazy-src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&logo=jsDelivr" title="本站使用JsDelivr为静态资源提供CDN加速"></a> &nbsp;<a target="_blank" href="https://vercel.com/ "><img src= "/img/loading.gif" data-lazy-src="https://img.shields.io/badge/Hosted-Vervel-brightgreen?style=flat&logo=Vercel" title="本站采用双线部署，默认线路托管于Vercel"></a>&nbsp;<a target="_blank" href="https://vercel.com/ "><img src= "/img/loading.gif" data-lazy-src="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&logo=Codio" title="本站采用双线部署，联通线路托管于Coding"></a>&nbsp;<a target="_blank" href="https://github.com/"><img src= "/img/loading.gif" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src= "/img/loading.gif" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"mapping":"pathname","inputPosition":"bottom","lang":"zh-CN","reactions-enabled":1}
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark_dimmed' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'SMLYFM/SMLYFM.github.io',
+      'data-repo-id': 'R_kgDOOah4_w',
+      'data-category-id': 'DIC_kwDOOah4_84C1Y78',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !true) {
+    if (true) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><script src="/js/effects/snowfall.js"></script><script src="/js/components/clock.js"></script><script src="/js/components/greeting.js"></script><script src="/js/components/theme-toggle.js"></script><script src="/js/components/reading-progress.js"></script><script src="/js/components/code-enhance.js"></script><script src="/js/components/keyboard-shortcuts.js"></script><script src="/js/components/katex-macros.js"></script><script src="/js/components/math-copy.js"></script><script src="/js/components/equation-numbering.js"></script><script src="/js/components/math-tools.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章..." type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

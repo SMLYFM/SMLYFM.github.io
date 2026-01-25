@@ -1,0 +1,159 @@
+/**
+ * 公式增强样式 - Math Enhancement Styles
+ * 💡 公式复制按钮
+ * 💡 公式悬浮效果
+ */
+
+/* ========================================
+ * 公式包装容器
+ * ======================================== */
+
+.math-copy-wrapper {
+  position: relative;
+  display: block;
+}
+
+/* ========================================
+ * 公式复制按钮
+ * ======================================== */
+
+.math-copy-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  /* 💡 尺寸 */
+  width: 32px;
+  height: 32px;
+  padding: 0;
+
+  /* 💡 玻璃态背景 */
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+
+  /* 💡 布局 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 💡 交互 */
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.math-copy-wrapper:hover .math-copy-btn {
+  opacity: 1;
+}
+
+.math-copy-btn:hover {
+  background: white;
+  border-color: #667eea;
+  transform: scale(1.1);
+}
+
+.math-copy-btn:active {
+  transform: scale(0.95);
+}
+
+/* 💡 图标 */
+.math-copy-btn svg {
+  width: 16px;
+  height: 16px;
+  color: #555;
+}
+
+.math-copy-btn .check-icon {
+  display: none;
+}
+
+/* 💡 复制成功状态 */
+.math-copy-btn.copied {
+  background: rgba(67, 233, 123, 0.15);
+  border-color: #43e97b;
+}
+
+.math-copy-btn.copied svg {
+  color: #2ecc71;
+}
+
+.math-copy-btn.copied .copy-icon {
+  display: none;
+}
+
+.math-copy-btn.copied .check-icon {
+  display: block;
+}
+
+/* 💡 错误状态 */
+.math-copy-btn.error {
+  background: rgba(231, 76, 60, 0.15);
+  border-color: #e74c3c;
+}
+
+.math-copy-btn.error svg {
+  color: #e74c3c;
+}
+
+/* ========================================
+ * 深色模式适配
+ * ======================================== */
+
+[data-theme='dark'] .math-copy-btn {
+  background: rgba(30, 35, 42, 0.9);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .math-copy-btn svg {
+  color: #c9d1d9;
+}
+
+[data-theme='dark'] .math-copy-btn:hover {
+  background: rgba(48, 54, 61, 1);
+  border-color: #79c0ff;
+}
+
+[data-theme='dark'] .math-copy-btn:hover svg {
+  color: #79c0ff;
+}
+
+[data-theme='dark'] .math-copy-btn.copied {
+  background: rgba(67, 233, 123, 0.1);
+  border-color: #43e97b;
+}
+
+[data-theme='dark'] .math-copy-btn.copied svg {
+  color: #7ee787;
+}
+
+/* ========================================
+ * 响应式设计
+ * ======================================== */
+
+@media screen and (max-width: 768px) {
+  .math-copy-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .math-copy-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* ========================================
+ * 打印样式
+ * ======================================== */
+
+@media print {
+  .math-copy-btn {
+    display: none !important;
+  }
+}

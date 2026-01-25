@@ -1,0 +1,245 @@
+/**
+ * 文章系列样式 - Article Series Styles
+ * 💡 系列导航卡片
+ * 💡 系列进度指示
+ */
+
+/* ========================================
+ * 系列导航容器
+ * ======================================== */
+
+.series-nav {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+
+  /* 💡 玻璃态背景 */
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* ========================================
+ * 系列标题
+ * ======================================== */
+
+.series-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.series-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 18px;
+  color: white;
+}
+
+.series-title {
+  flex: 1;
+}
+
+.series-title h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.series-title span {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* ========================================
+ * 系列进度
+ * ======================================== */
+
+.series-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.series-progress-bar {
+  width: 60px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.series-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* ========================================
+ * 系列文章列表
+ * ======================================== */
+
+.series-posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.series-post-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.75rem 0;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+}
+
+.series-post-item:last-child {
+  border-bottom: none;
+}
+
+.series-post-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  color: #888;
+  flex-shrink: 0;
+}
+
+.series-post-item.current .series-post-number {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.series-post-item.completed .series-post-number {
+  background: #43e97b;
+  color: white;
+}
+
+.series-post-item.completed .series-post-number::after {
+  content: '✓';
+}
+
+.series-post-link {
+  flex: 1;
+  font-size: 0.95rem;
+  color: #555;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.series-post-link:hover {
+  color: #667eea;
+}
+
+.series-post-item.current .series-post-link {
+  font-weight: 600;
+  color: #333;
+}
+
+/* 💡 当前文章指示器 */
+.series-post-item.current::after {
+  content: '← 当前';
+  font-size: 0.75rem;
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* ========================================
+ * 深色模式适配
+ * ======================================== */
+
+[data-theme='dark'] .series-nav {
+  background: rgba(22, 27, 34, 0.9);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .series-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .series-title h4 {
+  color: #e6edf3;
+}
+
+[data-theme='dark'] .series-title span {
+  color: #8b949e;
+}
+
+[data-theme='dark'] .series-progress {
+  color: #8b949e;
+}
+
+[data-theme='dark'] .series-progress-bar {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .series-post-item {
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='dark'] .series-post-number {
+  background: rgba(255, 255, 255, 0.1);
+  color: #8b949e;
+}
+
+[data-theme='dark'] .series-post-link {
+  color: #c9d1d9;
+}
+
+[data-theme='dark'] .series-post-link:hover {
+  color: #79c0ff;
+}
+
+[data-theme='dark'] .series-post-item.current .series-post-link {
+  color: #e6edf3;
+}
+
+[data-theme='dark'] .series-post-item.current::after {
+  color: #79c0ff;
+  background: rgba(121, 192, 255, 0.1);
+}
+
+/* ========================================
+ * 响应式设计
+ * ======================================== */
+
+@media screen and (max-width: 768px) {
+  .series-nav {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .series-header {
+    flex-wrap: wrap;
+  }
+
+  .series-progress {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .series-post-item.current::after {
+    display: none;
+  }
+}

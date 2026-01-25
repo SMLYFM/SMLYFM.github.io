@@ -1,0 +1,51 @@
+# ==================================================
+# robots.txt - 搜索引擎爬虫指引
+# 项目: SMLYFM.github.io
+# ==================================================
+
+# 💡 允许所有合法爬虫
+User-agent: *
+Allow: /
+
+# 💡 禁止爬取私密/管理页面
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /search.xml
+
+# 💡 限制爬取频率（避免服务器压力）
+Crawl-delay: 1
+
+# 💡 Sitemap 位置（帮助搜索引擎发现所有页面）
+Sitemap: https://smlyfm.github.io/sitemap.xml
+
+# ==================================================
+# 特定爬虫规则
+# ==================================================
+
+# 💡 Google Bot - 无限制
+User-agent: Googlebot
+Allow: /
+
+# 💡 Bing Bot
+User-agent: Bingbot
+Allow: /
+
+# 💡 DuckDuckGo Bot
+User-agent: DuckDuckBot
+Allow: /
+
+# ==================================================
+# 禁止已知的恶意爬虫
+# ==================================================
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

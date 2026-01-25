@@ -1,0 +1,181 @@
+/**
+ * 现代博客主题 - 主入口文件
+ * 💡 与 Butterfly 原版侧边栏兼容
+ */
+
+/* 💡 引入Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700&display=swap');
+
+/* 💡 引入模块化CSS */
+@import './variables.css';
+@import './cards.css';
+@import './animations.css';
+@import './dark-mode.css';
+@import './theme-toggle.css';
+@import './reading-progress.css';
+@import './code-enhance.css';
+@import './shortcuts-help.css';
+@import './rightside-enhance.css';
+@import './theorem-cards.css';
+@import './math-enhance.css';
+@import './series.css';
+@import './math-tools.css';
+@import './math-professional.css';
+
+/* ========================================
+ * 全局样式增强
+ * ======================================== */
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ========================================
+ * 布局调整 - 让现代卡片和侧边栏并排
+ * ======================================== */
+
+/* 💡 主内容区域（layout自动处理flex布局） */
+#content-inner.layout {
+  display: flex;
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 24px;
+}
+
+/* 💡 现代卡片主区域 */
+.modern-main-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 💡 侧边栏保持原样式，但调整位置 */
+#content-inner.layout #aside-content {
+  width: 300px;
+  flex-shrink: 0;
+}
+
+/* ========================================
+ * 卡片行布局（时钟+社交）
+ * ======================================== */
+
+.cards-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* ========================================
+ * 背景层
+ * ======================================== */
+
+.modern-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+#snowfall-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ========================================
+ * 响应式布局
+ * ======================================== */
+
+/* 💡 中等屏幕：侧边栏变窄 */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  #content-inner.layout #aside-content {
+    width: 260px;
+  }
+}
+
+/* 💡 平板：侧边栏在下方 */
+@media screen and (max-width: 991px) {
+  #content-inner.layout {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  #content-inner.layout #aside-content {
+    width: 100%;
+    order: 2;
+    margin-top: 20px;
+  }
+
+  .cards-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 💡 移动端 */
+@media screen and (max-width: 767px) {
+  #content-inner.layout {
+    padding: 12px;
+    gap: 16px;
+  }
+
+  .modern-main-content {
+    gap: 16px;
+  }
+}
+
+/* ========================================
+ * 工具类
+ * ======================================== */
+
+.scrollbar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.desktop-only {
+  display: block;
+}
+
+@media screen and (max-width: 767px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+}
+
+/* ========================================
+ * 打印样式
+ * ======================================== */
+
+@media print {
+  .modern-card {
+    backdrop-filter: none;
+    background-color: white;
+    break-inside: avoid;
+  }
+
+  .modern-background,
+  #snowfall-canvas,
+  #aside-content {
+    display: none;
+  }
+}

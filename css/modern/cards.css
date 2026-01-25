@@ -1,0 +1,770 @@
+/**
+ * 现代博客主题 - 卡片组件样式
+ * 💡 优化布局、增强导航、美化组件
+ */
+
+/* ========================================
+ * 基础卡片样式 - Base Card
+ * ======================================== */
+
+.modern-card {
+  background-color: var(--color-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-lg);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.modern-card.hoverable:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(102, 126, 234, 0.2);
+}
+
+/* ========================================
+ * 卡片标题通用样式
+ * ======================================== */
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.card-header .card-title {
+  margin-bottom: 0;
+}
+
+.view-all {
+  font-size: 0.85rem;
+  color: var(--color-brand-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.view-all:hover {
+  color: var(--color-brand-secondary);
+}
+
+/* ========================================
+ * Hi Card - 个人介绍卡片
+ * ======================================== */
+
+.hi-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(240, 240, 255, 0.9) 100%
+  );
+}
+
+.hi-card .avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: 0 12px 30px -8px rgba(102, 126, 234, 0.4);
+  margin-bottom: var(--spacing-md);
+  border: 3px solid white;
+}
+
+.hi-card .greeting {
+  font-size: 1.5rem;
+  font-family: var(--font-display);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.hi-card .username {
+  font-size: 2rem;
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+.hi-card .tagline {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  font-weight: 400;
+}
+
+.hi-card .description {
+  margin-top: var(--spacing-sm);
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  max-width: 400px;
+}
+
+.hi-card .quick-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: var(--spacing-md);
+  justify-content: center;
+}
+
+.hi-card .tag {
+  background: rgba(102, 126, 234, 0.1);
+  color: var(--color-brand-primary);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  /* 💡 确保标签使用相对定位,避免堆叠重叠 */
+  position: relative !important;
+  display: inline-block;
+}
+
+/* ========================================
+ * Clock Card - 时钟卡片
+ * ======================================== */
+
+.clock-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.clock-card .time {
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 2px;
+}
+
+.clock-card .date {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-top: 8px;
+}
+
+/* ========================================
+ * Social Card - 社交链接卡片
+ * ======================================== */
+
+.social-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.social-card .social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.social-card .social-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--color-text-primary);
+  background: rgba(102, 126, 234, 0.05);
+  transition: all 0.2s ease;
+}
+
+.social-card .social-link:hover {
+  background: rgba(102, 126, 234, 0.15);
+  transform: translateX(4px);
+}
+
+.social-card .social-link .icon {
+  color: var(--color-brand-primary);
+}
+
+/* ========================================
+ * Article Card - 文章卡片
+ * ======================================== */
+
+.article-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-card .article-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  flex: 1;
+}
+
+@media (max-width: 767px) {
+  .article-card .article-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.article-card .article-item {
+  padding: 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.article-card .article-item:hover {
+  background: rgba(102, 126, 234, 0.08);
+  transform: translateY(-2px);
+}
+
+.article-card .article-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+.article-card .article-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.article-card .article-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ========================================
+ * Quick Nav Card - 快速导航卡片
+ * ======================================== */
+
+.quick-nav-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.quick-nav-card .nav-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: var(--spacing-md);
+}
+
+@media (max-width: 767px) {
+  .quick-nav-card .nav-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.quick-nav-card .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 12px;
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--color-text-primary);
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.08) 0%,
+    rgba(118, 75, 162, 0.08) 100%
+  );
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.quick-nav-card .nav-item:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.15) 0%,
+    rgba(118, 75, 162, 0.15) 100%
+  );
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px -8px rgba(102, 126, 234, 0.3);
+}
+
+.quick-nav-card .nav-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-brand);
+  border-radius: 12px;
+  color: white;
+}
+
+.quick-nav-card .nav-text {
+  text-align: center;
+}
+
+.quick-nav-card .nav-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.quick-nav-card .nav-count {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+/* 学科分类导航 */
+.quick-nav-card .section-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.quick-nav-card .category-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.quick-nav-card .category-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  background: rgba(102, 126, 234, 0.05);
+  color: var(--color-text-primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.quick-nav-card .category-item:hover {
+  background: var(--gradient-brand);
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.quick-nav-card .category-item .emoji {
+  font-size: 1rem;
+}
+
+/* ========================================
+ * Stats Card - 统计卡片
+ * ======================================== */
+
+.stats-card .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 767px) {
+  .stats-card .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stats-card .stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.06) 0%,
+    rgba(118, 75, 162, 0.06) 100%
+  );
+  border-radius: 16px;
+  transition: all 0.2s ease;
+}
+
+.stats-card .stat-item:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.12) 0%,
+    rgba(118, 75, 162, 0.12) 100%
+  );
+  transform: translateY(-2px);
+}
+
+.stats-card .stat-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-brand);
+  border-radius: 12px;
+  color: white;
+}
+
+.stats-card .stat-content {
+  text-align: center;
+}
+
+.stats-card .stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.stats-card .stat-label {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  margin-top: 4px;
+}
+
+/* ========================================
+ * Calendar Card - 日历卡片
+ * ======================================== */
+
+.calendar-card .empty-state {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  padding: var(--spacing-lg) 0;
+}
+
+/* ========================================
+ * 渐变按钮
+ * ======================================== */
+
+.btn-gradient {
+  background: var(--gradient-brand);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* ========================================
+ * 移动端响应式优化
+ * ======================================== */
+
+@media screen and (max-width: 767px) {
+  .modern-card {
+    border-radius: 24px;
+    padding: var(--spacing-md);
+  }
+
+  .hi-card .avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .hi-card .greeting {
+    font-size: 1.25rem;
+  }
+
+  .hi-card .username {
+    font-size: 1.5rem;
+  }
+
+  .clock-card .time {
+    font-size: 2rem;
+  }
+
+  .stats-card .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .quick-nav-card .nav-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .quick-nav-card .nav-item {
+    padding: 12px 8px;
+  }
+}
+
+/* ========================================
+ * Quote Card - 名言卡片
+ * ======================================== */
+
+.quote-card {
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.08) 0%,
+    rgba(118, 75, 162, 0.08) 100%
+  );
+  position: relative;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quote-card .quote-content {
+  text-align: center;
+  padding: 0 var(--spacing-md);
+}
+
+.quote-card .quote-icon {
+  font-size: 3rem;
+  font-family: Georgia, serif;
+  color: var(--color-brand-primary);
+  opacity: 0.3;
+  line-height: 1;
+  margin-bottom: -10px;
+}
+
+.quote-card .quote-text {
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.quote-card .quote-author {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.quote-card .quote-refresh {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brand-primary);
+  transition: all 0.2s ease;
+}
+
+.quote-card .quote-refresh:hover {
+  background: var(--gradient-brand);
+  color: white;
+  transform: rotate(180deg);
+}
+
+/* ========================================
+ * Timeline Card - 时间线卡片
+ * ======================================== */
+
+.timeline-card .timeline {
+  position: relative;
+  padding-left: 24px;
+}
+
+.timeline-card .timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--color-brand-primary) 0%,
+    var(--color-brand-secondary) 100%
+  );
+  border-radius: 2px;
+}
+
+.timeline-card .timeline-item {
+  position: relative;
+  padding-bottom: var(--spacing-md);
+}
+
+.timeline-card .timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-card .timeline-dot {
+  position: absolute;
+  left: -24px;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  background: var(--gradient-brand);
+  border-radius: 50%;
+  border: 3px solid var(--color-card);
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+.timeline-card .timeline-content {
+  background: rgba(102, 126, 234, 0.05);
+  padding: 12px 14px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.timeline-card .timeline-content:hover {
+  background: rgba(102, 126, 234, 0.1);
+  transform: translateX(4px);
+}
+
+.timeline-card .timeline-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.timeline-card .timeline-title:hover {
+  color: var(--color-brand-primary);
+}
+
+.timeline-card .timeline-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.timeline-card .timeline-date {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.timeline-card .timeline-category {
+  background: var(--gradient-brand);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+/* ========================================
+ * Resources Card - 资源卡片
+ * ======================================== */
+
+.resources-card .resources-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 767px) {
+  .resources-card .resources-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.resources-card .resource-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  background: rgba(102, 126, 234, 0.05);
+  transition: all 0.2s ease;
+}
+
+.resources-card .resource-item:hover {
+  background: rgba(102, 126, 234, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.resources-card .resource-icon {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.1) 0%,
+    rgba(118, 75, 162, 0.1) 100%
+  );
+  border-radius: 10px;
+}
+
+.resources-card .resource-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.resources-card .resource-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.resources-card .resource-desc {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ========================================
+ * Stats Card 样式调整
+ * ======================================== */
+
+.stats-card .stat-icon {
+  font-size: 1.5rem;
+  background: none;
+  width: auto;
+  height: auto;
+}

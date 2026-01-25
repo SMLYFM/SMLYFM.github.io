@@ -1,0 +1,150 @@
+/**
+ * 现代博客主题 - CSS变量系统
+ * 提供全局颜色、间距、圆角等设计令牌
+ */
+
+:root {
+  /* ========================================
+   * 品牌色系统 - Brand Colors
+   * ======================================== */
+  
+  /* 💡 主品牌色：参考2025-blog的渐变色系 */
+  --color-brand-primary: #667eea;
+  --color-brand-secondary: #764ba2;
+  
+  /* 💡 渐变定义 */
+  --gradient-brand: linear-gradient(135deg, var(--color-brand-primary) 0%, var(--color-brand-secondary) 100%);
+  --gradient-text: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.2) 0%, 
+    rgba(170, 170, 170, 1) 1%),
+    linear-gradient(to right bottom, var(--color-brand-primary) 40%, var(--color-brand-secondary));
+  
+  /* ========================================
+   * 语义化颜色 - Semantic Colors
+   * ======================================== */
+  
+  --color-bg: #fafafa;
+  --color-card: rgba(255, 255, 255, 0.85);
+  --color-text-primary: #2c3e50;
+  --color-text-secondary: #666;
+  --color-border: rgba(0, 0, 0, 0.08);
+  
+  /* ========================================
+   * 间距系统 - Spacing
+   * ======================================== */
+  
+  --spacing-xs: 0.5rem;    /* 8px */
+  --spacing-sm: 1rem;      /* 16px */
+  --spacing-md: 1.5rem;    /* 24px */
+  --spacing-lg: 2rem;      /* 32px */
+  --spacing-xl: 2.5rem;    /* 40px */
+  --spacing-2xl: 3rem;     /* 48px */
+  
+  /* 💡 卡片间距 */
+  --card-spacing: 36px;
+  --card-spacing-sm: 24px;
+  
+  /* ========================================
+   * 圆角系统 - Border Radius
+   * ======================================== */
+  
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-xl: 40px;
+  --radius-card: 40px;  /* 💡 卡片默认圆角 */
+  
+  /* ========================================
+   * 阴影系统 - Shadows
+   * ======================================== */
+  
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 40px 50px -32px rgba(0, 0, 0, 0.05),
+                 inset 0 0 20px rgba(255, 255, 255, 0.25);
+  
+  /* ========================================
+   * 过渡动画 - Transitions
+   * ======================================== */
+  
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+  
+  /* ========================================
+   * 毛玻璃效果 - Backdrop Filter
+   * ======================================== */
+  
+  --blur-sm: blur(4px);
+  --blur-md: blur(8px);
+  --blur-lg: blur(12px);
+  
+  /* ========================================
+   * 字体系统 - Typography
+   * ======================================== */
+  
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Outfit', var(--font-sans);
+  
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 2rem;      /* 32px */
+  
+  /* ========================================
+   * Z-index层级 - Z-index
+   * ======================================== */
+  
+  --z-background: 0;
+  --z-content: 10;
+  --z-card: 20;
+  --z-nav: 100;
+  --z-overlay: 1000;
+  --z-modal: 2000;
+  
+  /* ========================================
+   * 响应式断点 - Breakpoints
+   * 💡 用于JavaScript判断
+   * ======================================== */
+  
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+/* ========================================
+ * 暗色模式支持（可选）
+ * ======================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1a1a2e;
+    --color-card: rgba(30, 30, 46, 0.85);
+    --color-text-primary: #e0e0e0;
+    --color-text-secondary: #a0a0a0;
+    --color-border: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* ========================================
+ * 全局样式重置
+ * ======================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  transition: background-color var(--transition-base);
+}

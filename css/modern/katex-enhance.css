@@ -1,0 +1,193 @@
+/**
+ * 专业 KaTeX 公式样式
+ * 💡 优雅的 LaTeX 排版效果
+ */
+
+/* ========================================
+ * CSS 变量
+ * ======================================== */
+
+:root {
+  --katex-text: #1e293b;
+  --katex-bg: rgba(59, 130, 246, 0.04);
+  --katex-hover-bg: rgba(59, 130, 246, 0.08);
+  --katex-border: rgba(59, 130, 246, 0.2);
+  --katex-accent: #3b82f6;
+}
+
+[data-theme='dark'] {
+  --katex-text: #e2e8f0;
+  --katex-bg: rgba(96, 165, 250, 0.06);
+  --katex-hover-bg: rgba(96, 165, 250, 0.12);
+  --katex-border: rgba(96, 165, 250, 0.3);
+  --katex-accent: #60a5fa;
+}
+
+/* ========================================
+ * 行间公式 (Display Math)
+ * ======================================== */
+
+.katex-display {
+  display: block;
+  margin: 1.5em 0;
+  padding: 1.25em 1.5em;
+  background: var(--katex-bg);
+  border-left: 3px solid var(--katex-accent);
+  border-radius: 0 8px 8px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  transition: all 0.25s ease;
+}
+
+.katex-display:hover {
+  background: var(--katex-hover-bg);
+  border-left-width: 4px;
+  transform: translateX(2px);
+  box-shadow: 0 2px 12px rgba(59, 130, 246, 0.1);
+}
+
+.katex-display > .katex {
+  display: flex;
+  justify-content: center;
+}
+
+/* ========================================
+ * 行内公式 (Inline Math)
+ * ======================================== */
+
+.katex {
+  font-size: 1.05em;
+  color: var(--katex-text);
+}
+
+p .katex,
+li .katex,
+td .katex {
+  padding: 0.1em 0.2em;
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+p .katex:hover,
+li .katex:hover {
+  background: var(--katex-hover-bg);
+}
+
+/* ========================================
+ * 公式编号
+ * ======================================== */
+
+.katex-display .eqno,
+.katex-display .tag {
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85em;
+  color: #64748b;
+  font-family: 'Consolas', 'Monaco', monospace;
+  background: rgba(100, 116, 139, 0.1);
+  padding: 0.25em 0.6em;
+  border-radius: 4px;
+}
+
+[data-theme='dark'] .katex-display .eqno,
+[data-theme='dark'] .katex-display .tag {
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.15);
+}
+
+/* ========================================
+ * 分数线增强
+ * ======================================== */
+
+.katex .frac-line {
+  border-bottom-width: 0.06em !important;
+}
+
+/* ========================================
+ * 大型运算符
+ * ======================================== */
+
+.katex .mop {
+  margin: 0 0.15em;
+}
+
+/* ========================================
+ * 括号颜色
+ * ======================================== */
+
+.katex .mopen,
+.katex .mclose {
+  color: var(--katex-accent);
+}
+
+/* ========================================
+ * 滚动条样式
+ * ======================================== */
+
+.katex-display::-webkit-scrollbar {
+  height: 6px;
+}
+
+.katex-display::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.katex-display::-webkit-scrollbar-thumb {
+  background: var(--katex-border);
+  border-radius: 3px;
+}
+
+.katex-display::-webkit-scrollbar-thumb:hover {
+  background: var(--katex-accent);
+}
+
+/* ========================================
+ * 响应式
+ * ======================================== */
+
+@media (max-width: 768px) {
+  .katex-display {
+    margin: 1em 0;
+    padding: 1em;
+    font-size: 0.92em;
+  }
+
+  .katex {
+    font-size: 1em;
+  }
+}
+
+/* ========================================
+ * 打印样式
+ * ======================================== */
+
+@media print {
+  .katex-display {
+    background: none !important;
+    border-left: 1px solid #000 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+}
+
+/* ========================================
+ * 动画效果
+ * ======================================== */
+
+@keyframes katexFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.katex-display {
+  animation: katexFadeIn 0.3s ease-out;
+}
