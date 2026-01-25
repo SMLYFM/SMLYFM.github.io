@@ -522,39 +522,74 @@ publish: ## 发布草稿 (make publish DRAFT="草稿名")
 ## 📝 文章管理 - 查看
 # ============================================
 
-list: ## 列出所有文章
-	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+list: ## 列出所有文章（含 hash 状态）
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo "    📄 文章列表 ($$(find $(POST_DIR) -name '*.md' | wc -l) 篇)"
-	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
-	@echo "序号  日期        分类        标题"
-	@echo "────  ──────────  ──────────  ────────────────────────────────"
+	@echo "序号  状态  更新日期    分类        标题"
+	@echo "────  ────  ──────────  ──────────  ────────────────────────────────"
 	@NUM=1; \
 	for file in $$(ls -t $(POST_DIR)/*.md 2>/dev/null); do \
 		TITLE=$$(grep "^title:" "$$file" | head -1 | cut -d':' -f2- | xargs); \
-		FDATE=$$(grep "^date:" "$$file" | head -1 | cut -d' ' -f2); \
+		UDATE=$$(grep "^updated:" "$$file" | head -1 | cut -d' ' -f2 || grep "^date:" "$$file" | head -1 | cut -d' ' -f2); \
 		CAT=$$(grep -A1 "^categories:" "$$file" | tail -1 | sed 's/.*- //' | xargs); \
-		printf "[%2d]  %s  %-10s  %s\n" "$$NUM" "$$FDATE" "$$CAT" "$$TITLE"; \
+		BASENAME=$$(basename "$$file"); \
+		if [ -f ".article-hashes" ]; then \
+			CURRENT_HASH=$$(sed '/^updated:/d' "$$file" | md5sum | cut -d' ' -f1); \
+			STORED_HASH=$$(grep "^$$BASENAME:" ".article-hashes" 2>/dev/null | cut -d: -f2 || echo ""); \
+			if [ -z "$$STORED_HASH" ]; then \
+				STATUS="\033[0;36m NEW\033[0m"; \
+			elif [ "$$CURRENT_HASH" != "$$STORED_HASH" ]; then \
+				STATUS="\033[1;33m MOD\033[0m"; \
+			else \
+				STATUS="\033[0;32m  ✓ \033[0m"; \
+			fi; \
+		else \
+			STATUS="  - "; \
+		fi; \
+		printf "[%2d]  $$STATUS  %s  %-10s  %s\n" "$$NUM" "$$UDATE" "$$CAT" "$$TITLE"; \
 		NUM=$$((NUM + 1)); \
 	done
 	@echo ""
+	@echo "💡 状态: ✓=未修改  MOD=已修改  NEW=新文章  -=未初始化"
+	@if [ ! -f ".article-hashes" ]; then \
+		echo "💡 运行 'make article-init' 初始化 hash 记录"; \
+	fi
+	@echo ""
 
-list-detail: ## 详细列出文章（含标签）
+list-detail: ## 详细列出文章（含 hash 和标签）
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@echo "    📄 文章详情"
+	@echo "    📄 文章详情（含 Hash 信息）"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@for file in $$(ls -t $(POST_DIR)/*.md 2>/dev/null); do \
 		echo ""; \
 		TITLE=$$(grep "^title:" "$$file" | head -1 | cut -d':' -f2- | xargs); \
 		FDATE=$$(grep "^date:" "$$file" | head -1 | cut -d' ' -f2); \
-		UDATE=$$(grep "^updated:" "$$file" | head -1 | cut -d' ' -f2); \
+		UDATE=$$(grep "^updated:" "$$file" | head -1 | sed 's/updated:[[:space:]]*//' || echo "未设置"); \
 		CAT=$$(grep -A1 "^categories:" "$$file" | tail -1 | sed 's/.*- //' | xargs); \
 		TAGS=$$(awk '/^tags:/,/^[a-z]/' "$$file" | grep "  - " | sed 's/  - //' | tr '\n' ' '); \
+		BASENAME=$$(basename "$$file"); \
+		CURRENT_HASH=$$(sed '/^updated:/d' "$$file" | md5sum | cut -d' ' -f1); \
+		if [ -f ".article-hashes" ]; then \
+			STORED_HASH=$$(grep "^$$BASENAME:" ".article-hashes" 2>/dev/null | cut -d: -f2 || echo "无记录"); \
+			if [ "$$CURRENT_HASH" = "$$STORED_HASH" ]; then \
+				HASH_STATUS="\033[0;32m未修改\033[0m"; \
+			elif [ "$$STORED_HASH" = "无记录" ]; then \
+				HASH_STATUS="\033[0;36m新文章\033[0m"; \
+			else \
+				HASH_STATUS="\033[1;33m已修改\033[0m"; \
+			fi; \
+		else \
+			STORED_HASH="未初始化"; \
+			HASH_STATUS="未初始化"; \
+		fi; \
 		echo "📝 $$TITLE"; \
 		echo "   📅 创建: $$FDATE  |  🔄 更新: $$UDATE"; \
 		echo "   📂 分类: $$CAT"; \
 		echo "   🏷️  标签: $$TAGS"; \
-		echo "   📁 文件: $$(basename $$file)"; \
+		echo "   📁 文件: $$BASENAME"; \
+		echo -e "   🔐 Hash: $${CURRENT_HASH:0:12}... [$$HASH_STATUS]"; \
 	done
 	@echo ""
 
