@@ -1,0 +1,36 @@
+# ============================================
+# Hexo 博客开发环境 Dockerfile
+# 💡 支持热重载开发
+# 作者: CJX
+# 项目: SMLYFM.github.io
+# ============================================
+
+FROM node:18-alpine
+
+LABEL maintainer="SMLYFM <yytcjx@gmail.com>"
+LABEL description="SMLYFM Blog - Development Environment"
+
+# 💡 安装构建工具 (部分 npm 包需要)
+RUN apk add --no-cache git python3 make g++
+
+WORKDIR /app
+
+# 💡 先复制依赖文件，利用 Docker 缓存层
+COPY package*.json ./
+
+# 安装所有依赖（包括 devDependencies）
+RUN npm install
+
+# 💡 复制配置文件（源码通过 volume 挂载）
+COPY _config*.yml ./
+COPY scaffolds ./scaffolds/
+
+# 暴露 Hexo 开发服务器端口
+EXPOSE 4000
+
+# 💡 健康检查
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:4000/ || exit 1
+
+# 💡 启动开发服务器（包含草稿预览）
+CMD ["npx", "hexo", "server", "--draft", "--watch"]

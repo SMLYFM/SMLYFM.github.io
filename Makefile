@@ -119,24 +119,45 @@ help: ## 显示帮助信息
 	@echo "    📝 工具与写作     → LaTeX"
 	@echo ""
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@echo "  � 容器化部署"
+	@echo "  🐳 容器化部署"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
 	@echo "  Docker:"
 	@echo "    make docker-build             构建 Docker 镜像"
 	@echo "    make docker-run               运行 Docker 容器 (端口 80)"
+	@echo "    make docker-dev               开发容器 (热重载, 端口 4000)"
+	@echo "    make docker-shell             进入容器 shell"
+	@echo "    make docker-status            查看容器状态"
+	@echo "    make docker-clean             清理悬空镜像"
 	@echo "    make docker-compose-up        Docker Compose 启动"
 	@echo ""
 	@echo "  Podman (Fedora 推荐):"
 	@echo "    make podman-build             构建 Podman 镜像"
 	@echo "    make podman-run               运行 Podman 容器 (端口 8080)"
-	@echo "    make podman-systemd           生成 Systemd 服务"
+	@echo "    make podman-dev               开发容器 (热重载)"
+	@echo "    make podman-shell             进入容器 shell"
+	@echo "    make podman-status            查看容器状态"
+	@echo "    make podman-clean             清理悬空镜像"
+	@echo "    make podman-quadlet           安装 Quadlet 配置"
+	@echo ""
+	@echo "  通用:"
+	@echo "    make container-helper         使用统一容器脚本"
 	@echo ""
 	@echo "  服务器:"
 	@echo "    make deploy-server            部署到自有服务器 (需配置)"
 	@echo ""
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@echo "  �📖 文档链接"
+	@echo "  🔧 诊断与工具"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@echo "    make doctor                   环境诊断 (检查必要工具)"
+	@echo "    make info                     显示项目详细信息"
+	@echo "    make deps-check               检查依赖更新"
+	@echo "    make validate                 验证配置文件"
+	@echo "    make analyze                  分析构建产物大小"
+	@echo ""
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "  📖 文档链接"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
 	@echo "    docs/CONFIG_GUIDE.md          配置修改指南 (公告、背景、导航等)"
@@ -958,3 +979,241 @@ deploy-server: build ## 🖥️ 部署到自有服务器 (需配置 SERVER_*)
 	@echo "🖥️ 部署到服务器: $(SERVER_USER)@$(SERVER_HOST)"
 	rsync -avz --delete ./public/ $(SERVER_USER)@$(SERVER_HOST):$(SERVER_PATH)/
 	@echo "✅ 部署完成"
+
+# ============================================
+# 🐳 Docker 扩展命令
+# ============================================
+
+.PHONY: docker-dev docker-shell docker-status docker-clean docker-export
+
+docker-dev: ## 🐳 开发容器 (热重载, 端口 4000)
+	@echo "🐳 启动 Docker 开发容器..."
+	@docker stop $(CONTAINER_NAME)-dev 2>/dev/null || true
+	@docker rm $(CONTAINER_NAME)-dev 2>/dev/null || true
+	docker compose -f docker-compose.dev.yml up -d --build
+	@echo "✅ 开发容器已启动: http://localhost:4000"
+	@echo "💡 修改源文件后页面会自动刷新"
+
+docker-shell: ## 🐳 进入 Docker 容器 shell
+	@echo "🐳 进入容器 shell..."
+	docker exec -it $(CONTAINER_NAME) sh
+
+docker-status: ## 🐳 查看 Docker 容器状态
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    🐳 Docker 容器状态"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@docker ps -a --filter "name=$(CONTAINER_NAME)" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" 2>/dev/null || echo "未找到容器"
+	@echo ""
+	@echo "镜像:"
+	@docker images | grep -E "^$(DOCKER_IMAGE)|REPOSITORY" || echo "未找到镜像"
+	@echo ""
+
+docker-clean: ## 🐳 清理 Docker 悬空镜像和容器
+	@echo "🐳 清理 Docker 资源..."
+	@docker container prune -f
+	@docker image prune -f
+	@echo "✅ 清理完成"
+
+docker-export: ## 🐳 导出 Docker 镜像
+	@echo "🐳 导出镜像: $(DOCKER_IMAGE)-$(DOCKER_TAG).tar"
+	docker save -o $(DOCKER_IMAGE)-$(DOCKER_TAG).tar $(DOCKER_IMAGE):$(DOCKER_TAG)
+	@echo "✅ 镜像已导出"
+
+# ============================================
+# 🦭 Podman 扩展命令
+# ============================================
+
+.PHONY: podman-dev podman-shell podman-status podman-clean podman-quadlet
+
+podman-dev: ## 🦭 开发容器 (热重载, 端口 4000)
+	@echo "🦭 启动 Podman 开发容器..."
+	@podman stop $(CONTAINER_NAME)-dev 2>/dev/null || true
+	@podman rm $(CONTAINER_NAME)-dev 2>/dev/null || true
+	@if command -v podman-compose &>/dev/null; then \
+		podman-compose -f docker-compose.dev.yml up -d --build; \
+	else \
+		echo "💡 podman-compose 未安装，使用替代方案..."; \
+		podman build -f Dockerfile.dev -t $(DOCKER_IMAGE)-dev:$(DOCKER_TAG) .; \
+		podman run -d --name $(CONTAINER_NAME)-dev \
+			-p 4000:4000 \
+			-v ./source:/app/source:ro \
+			-v ./_config.yml:/app/_config.yml:ro \
+			-v ./_config.butterfly.yml:/app/_config.butterfly.yml:ro \
+			$(DOCKER_IMAGE)-dev:$(DOCKER_TAG); \
+	fi
+	@echo "✅ 开发容器已启动: http://localhost:4000"
+
+podman-shell: ## 🦭 进入 Podman 容器 shell
+	@echo "🦭 进入容器 shell..."
+	podman exec -it $(CONTAINER_NAME) sh
+
+podman-status: ## 🦭 查看 Podman 容器状态
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    🦭 Podman 容器状态"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@podman ps -a --filter "name=$(CONTAINER_NAME)" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" 2>/dev/null || echo "未找到容器"
+	@echo ""
+	@echo "镜像:"
+	@podman images | grep -E "^localhost/$(DOCKER_IMAGE)|REPOSITORY" || echo "未找到镜像"
+	@echo ""
+
+podman-clean: ## 🦭 清理 Podman 悬空镜像和容器
+	@echo "🦭 清理 Podman 资源..."
+	@podman container prune -f
+	@podman image prune -f
+	@echo "✅ 清理完成"
+
+podman-quadlet: ## 🦭 安装 Quadlet 配置 (Fedora 推荐)
+	@echo "🦭 安装 Podman Quadlet 配置..."
+	@mkdir -p ~/.config/containers/systemd
+	@cp podman/quadlet/smlyfm-blog.container ~/.config/containers/systemd/
+	@echo ""
+	@echo "✅ Quadlet 配置已安装"
+	@echo ""
+	@echo "📋 启用步骤:"
+	@echo "   1. 先构建镜像: make podman-build"
+	@echo "   2. 重载服务:   systemctl --user daemon-reload"
+	@echo "   3. 启动服务:   systemctl --user start smlyfm-blog"
+	@echo "   4. 开机自启:   systemctl --user enable smlyfm-blog"
+	@echo ""
+	@echo "📋 查看状态:"
+	@echo "   systemctl --user status smlyfm-blog"
+	@echo "   podman logs smlyfm-blog"
+
+# ============================================
+# 🔧 通用容器命令
+# ============================================
+
+.PHONY: container-helper
+
+container-helper: ## 🔧 使用统一容器管理脚本
+	@./scripts/container-helper.sh help
+
+# ============================================
+# 🔍 诊断与工具
+# ============================================
+
+.PHONY: doctor info deps-check validate analyze
+
+doctor: ## 🔍 环境诊断 (检查必要工具)
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    🔍 环境诊断"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@echo "📦 Node.js 环境:"
+	@printf "  %-15s %s\n" "Node.js:" "$$(node --version 2>/dev/null || echo '❌ 未安装')"
+	@printf "  %-15s %s\n" "npm:" "$$(npm --version 2>/dev/null || echo '❌ 未安装')"
+	@printf "  %-15s %s\n" "Hexo:" "$$(npx hexo version 2>/dev/null | grep '^hexo:' | awk '{print $$2}' || echo '❌ 未安装')"
+	@echo ""
+	@echo "🔧 版本控制:"
+	@printf "  %-15s %s\n" "Git:" "$$(git --version 2>/dev/null | cut -d' ' -f3 || echo '❌ 未安装')"
+	@printf "  %-15s %s\n" "当前分支:" "$$(git branch --show-current 2>/dev/null || echo 'N/A')"
+	@echo ""
+	@echo "🐳 容器运行时:"
+	@printf "  %-15s %s\n" "Docker:" "$$(docker --version 2>/dev/null | cut -d' ' -f3 | tr -d ',' || echo '未安装')"
+	@printf "  %-15s %s\n" "Podman:" "$$(podman --version 2>/dev/null | cut -d' ' -f3 || echo '未安装')"
+	@printf "  %-15s %s\n" "podman-compose:" "$$(podman-compose --version 2>/dev/null | head -1 | awk '{print $$NF}' || echo '未安装')"
+	@echo ""
+	@echo "📁 项目状态:"
+	@printf "  %-15s %s\n" "文章数量:" "$$(find $(POST_DIR) -name '*.md' 2>/dev/null | wc -l) 篇"
+	@printf "  %-15s %s\n" "草稿数量:" "$$(find $(DRAFT_DIR) -name '*.md' 2>/dev/null | wc -l) 篇"
+	@printf "  %-15s %s\n" "Git 状态:" "$$([ -n \"`git status --porcelain 2>/dev/null`\" ] && echo '有未提交更改' || echo '工作区干净')"
+	@echo ""
+	@echo "✅ 诊断完成"
+
+info: ## 📊 显示项目详细信息
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    📊 项目信息: $(PROJECT_NAME)"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@echo "📁 目录结构:"
+	@printf "  %-20s %s\n" "源码目录:" "$(SOURCE_DIR)"
+	@printf "  %-20s %s\n" "文章目录:" "$(POST_DIR)"
+	@printf "  %-20s %s\n" "草稿目录:" "$(DRAFT_DIR)"
+	@printf "  %-20s %s\n" "输出目录:" "$(PUBLIC_DIR)"
+	@echo ""
+	@echo "🌿 Git 配置:"
+	@printf "  %-20s %s\n" "源码分支:" "$(GIT_BRANCH_SOURCE)"
+	@printf "  %-20s %s\n" "部署分支:" "$(GIT_BRANCH_DEPLOY)"
+	@printf "  %-20s %s\n" "远程仓库:" "$(GIT_REMOTE)"
+	@printf "  %-20s %s\n" "当前提交:" "$$(git rev-parse --short HEAD 2>/dev/null || echo 'N/A')"
+	@echo ""
+	@echo "🐳 容器配置:"
+	@printf "  %-20s %s\n" "镜像名称:" "$(DOCKER_IMAGE):$(DOCKER_TAG)"
+	@printf "  %-20s %s\n" "容器名称:" "$(CONTAINER_NAME)"
+	@echo ""
+	@echo "📝 内容统计:"
+	@printf "  %-20s %d 篇\n" "正式文章:" "$$(find $(POST_DIR) -name '*.md' 2>/dev/null | wc -l)"
+	@printf "  %-20s %d 篇\n" "草稿:" "$$(find $(DRAFT_DIR) -name '*.md' 2>/dev/null | wc -l)"
+	@if [ -d "$(PUBLIC_DIR)" ]; then \
+		printf "  %-20s %s\n" "构建产物大小:" "$$(du -sh $(PUBLIC_DIR) 2>/dev/null | cut -f1)"; \
+	fi
+	@echo ""
+
+deps-check: ## 📦 检查依赖更新
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    📦 检查依赖更新"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@echo "🔍 检查过时的 npm 包..."
+	@npm outdated || echo "✅ 所有依赖都是最新版本"
+	@echo ""
+	@echo "💡 更新依赖: npm update"
+	@echo "💡 更新全部: npm update --save"
+
+validate: ## ✅ 验证配置文件
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    ✅ 验证配置文件"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@echo "🔍 检查 _config.yml..."
+	@if npx js-yaml _config.yml > /dev/null 2>&1; then \
+		echo "  ✅ _config.yml 语法正确"; \
+	else \
+		echo "  ❌ _config.yml 语法错误"; \
+	fi
+	@echo ""
+	@echo "🔍 检查 _config.butterfly.yml..."
+	@if npx js-yaml _config.butterfly.yml > /dev/null 2>&1; then \
+		echo "  ✅ _config.butterfly.yml 语法正确"; \
+	else \
+		echo "  ❌ _config.butterfly.yml 语法错误"; \
+	fi
+	@echo ""
+	@echo "🔍 检查 package.json..."
+	@if node -e "JSON.parse(require('fs').readFileSync('package.json'))" 2>/dev/null; then \
+		echo "  ✅ package.json 语法正确"; \
+	else \
+		echo "  ❌ package.json 语法错误"; \
+	fi
+	@echo ""
+	@echo "🔍 尝试 Hexo 生成测试..."
+	@if npx hexo generate --silent 2>/dev/null; then \
+		echo "  ✅ Hexo 构建成功"; \
+	else \
+		echo "  ⚠️  Hexo 构建有警告或错误，请运行 make build 查看详情"; \
+	fi
+	@echo ""
+
+analyze: build ## 📊 分析构建产物大小
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "    📊 构建产物分析"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo ""
+	@echo "📁 总大小: $$(du -sh $(PUBLIC_DIR) | cut -f1)"
+	@echo ""
+	@echo "📂 按目录:"
+	@du -sh $(PUBLIC_DIR)/* 2>/dev/null | sort -hr | head -10
+	@echo ""
+	@echo "📄 最大文件 (前10):"
+	@find $(PUBLIC_DIR) -type f -exec du -h {} + 2>/dev/null | sort -hr | head -10
+	@echo ""
+	@echo "📊 文件类型分布:"
+	@echo "  HTML: $$(find $(PUBLIC_DIR) -name '*.html' | wc -l) 个"
+	@echo "  CSS:  $$(find $(PUBLIC_DIR) -name '*.css' | wc -l) 个"
+	@echo "  JS:   $$(find $(PUBLIC_DIR) -name '*.js' | wc -l) 个"
+	@echo "  图片: $$(find $(PUBLIC_DIR) \( -name '*.png' -o -name '*.jpg' -o -name '*.gif' -o -name '*.webp' \) | wc -l) 个"
+	@echo ""
+

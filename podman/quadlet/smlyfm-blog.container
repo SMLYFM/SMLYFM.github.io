@@ -1,0 +1,63 @@
+# ============================================
+# Podman Quadlet 配置文件
+# 💡 Fedora 推荐的 systemd 原生容器管理方式
+# 作者: CJX
+# 项目: SMLYFM.github.io
+#
+# 安装步骤:
+#   1. mkdir -p ~/.config/containers/systemd
+#   2. cp smlyfm-blog.container ~/.config/containers/systemd/
+#   3. systemctl --user daemon-reload
+#   4. systemctl --user start smlyfm-blog
+#   5. systemctl --user enable smlyfm-blog  # 开机自启
+#
+# 查看状态:
+#   systemctl --user status smlyfm-blog
+#   podman logs smlyfm-blog
+# ============================================
+
+[Unit]
+Description=SMLYFM Blog Container
+After=local-fs.target
+
+[Container]
+# 💡 镜像配置
+Image=localhost/smlyfm-blog:latest
+ContainerName=smlyfm-blog
+
+# 💡 端口映射
+PublishPort=8080:80
+
+# 💡 资源限制（可选）
+# Memory=512M
+# CPUQuota=50%
+
+# 💡 日志配置
+LogDriver=journald
+
+# 💡 环境变量
+Environment=TZ=Asia/Shanghai
+
+# 💡 健康检查
+HealthCmd=wget --no-verbose --tries=1 --spider http://localhost/ || exit 1
+HealthInterval=30s
+HealthTimeout=3s
+HealthRetries=3
+HealthStartPeriod=10s
+
+# 💡 自动更新（需要 podman-auto-update.timer）
+AutoUpdate=registry
+
+# 💡 安全配置
+NoNewPrivileges=true
+ReadOnly=true
+# 挂载临时目录用于 nginx
+Volume=/tmp
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+# 💡 登录后自动启动
+WantedBy=default.target
