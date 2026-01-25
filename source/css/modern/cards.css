@@ -15,7 +15,9 @@
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-card);
   padding: var(--spacing-lg);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
 }
@@ -72,7 +74,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 240, 255, 0.9) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(240, 240, 255, 0.9) 100%
+  );
 }
 
 .hi-card .avatar {
@@ -287,13 +293,21 @@
   border-radius: 16px;
   text-decoration: none;
   color: var(--color-text-primary);
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.08) 0%,
+    rgba(118, 75, 162, 0.08) 100%
+  );
   transition: all 0.2s ease;
   text-align: center;
 }
 
 .quick-nav-card .nav-item:hover {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.15) 0%,
+    rgba(118, 75, 162, 0.15) 100%
+  );
   transform: translateY(-3px);
   box-shadow: 0 8px 20px -8px rgba(102, 126, 234, 0.3);
 }
@@ -384,13 +398,21 @@
   align-items: center;
   gap: 10px;
   padding: 16px;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.06) 0%, rgba(118, 75, 162, 0.06) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.06) 0%,
+    rgba(118, 75, 162, 0.06) 100%
+  );
   border-radius: 16px;
   transition: all 0.2s ease;
 }
 
 .stats-card .stat-item:hover {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.12) 0%,
+    rgba(118, 75, 162, 0.12) 100%
+  );
   transform: translateY(-2px);
 }
 
@@ -500,4 +522,246 @@
   .quick-nav-card .nav-item {
     padding: 12px 8px;
   }
+}
+
+/* ========================================
+ * Quote Card - 名言卡片
+ * ======================================== */
+
+.quote-card {
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.08) 0%,
+    rgba(118, 75, 162, 0.08) 100%
+  );
+  position: relative;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quote-card .quote-content {
+  text-align: center;
+  padding: 0 var(--spacing-md);
+}
+
+.quote-card .quote-icon {
+  font-size: 3rem;
+  font-family: Georgia, serif;
+  color: var(--color-brand-primary);
+  opacity: 0.3;
+  line-height: 1;
+  margin-bottom: -10px;
+}
+
+.quote-card .quote-text {
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.quote-card .quote-author {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.quote-card .quote-refresh {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brand-primary);
+  transition: all 0.2s ease;
+}
+
+.quote-card .quote-refresh:hover {
+  background: var(--gradient-brand);
+  color: white;
+  transform: rotate(180deg);
+}
+
+/* ========================================
+ * Timeline Card - 时间线卡片
+ * ======================================== */
+
+.timeline-card .timeline {
+  position: relative;
+  padding-left: 24px;
+}
+
+.timeline-card .timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--color-brand-primary) 0%,
+    var(--color-brand-secondary) 100%
+  );
+  border-radius: 2px;
+}
+
+.timeline-card .timeline-item {
+  position: relative;
+  padding-bottom: var(--spacing-md);
+}
+
+.timeline-card .timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-card .timeline-dot {
+  position: absolute;
+  left: -24px;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  background: var(--gradient-brand);
+  border-radius: 50%;
+  border: 3px solid var(--color-card);
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+.timeline-card .timeline-content {
+  background: rgba(102, 126, 234, 0.05);
+  padding: 12px 14px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.timeline-card .timeline-content:hover {
+  background: rgba(102, 126, 234, 0.1);
+  transform: translateX(4px);
+}
+
+.timeline-card .timeline-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.timeline-card .timeline-title:hover {
+  color: var(--color-brand-primary);
+}
+
+.timeline-card .timeline-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.timeline-card .timeline-date {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.timeline-card .timeline-category {
+  background: var(--gradient-brand);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+/* ========================================
+ * Resources Card - 资源卡片
+ * ======================================== */
+
+.resources-card .resources-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 767px) {
+  .resources-card .resources-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.resources-card .resource-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  background: rgba(102, 126, 234, 0.05);
+  transition: all 0.2s ease;
+}
+
+.resources-card .resource-item:hover {
+  background: rgba(102, 126, 234, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.resources-card .resource-icon {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.1) 0%,
+    rgba(118, 75, 162, 0.1) 100%
+  );
+  border-radius: 10px;
+}
+
+.resources-card .resource-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.resources-card .resource-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.resources-card .resource-desc {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ========================================
+ * Stats Card 样式调整
+ * ======================================== */
+
+.stats-card .stat-icon {
+  font-size: 1.5rem;
+  background: none;
+  width: auto;
+  height: auto;
 }
