@@ -674,6 +674,35 @@ set-category: ## 修改文章分类 (make set-category FILE="xxx.md" CAT="新分
 	fi
 
 # ============================================
+## 📝 文章管理 - Hash 追踪
+# ============================================
+
+.PHONY: article-init article-check article-update article-show
+
+article-init: ## 📋 初始化文章 hash 记录
+	@./tools/article-hash.sh init
+
+article-check: ## 📋 检查哪些文章被修改
+	@./tools/article-hash.sh check
+
+article-update: ## 📋 更新所有已修改文章的时间戳
+	@./tools/article-hash.sh update
+
+article-update-file: ## 📋 更新指定文章 (make article-update-file FILE="文件名.md")
+	@if [ -z "$(FILE)" ]; then \
+		echo "❌ 用法: make article-update-file FILE=\"文件名.md\""; \
+		exit 1; \
+	fi
+	@./tools/article-hash.sh update-file $(FILE)
+
+article-show: ## 📋 显示指定文章的 hash 信息 (make article-show FILE="文件名.md")
+	@if [ -z "$(FILE)" ]; then \
+		echo "❌ 用法: make article-show FILE=\"文件名.md\""; \
+		exit 1; \
+	fi
+	@./tools/article-hash.sh show $(FILE)
+
+# ============================================
 ## 📝 文章管理 - 删除/重命名
 # ============================================
 
