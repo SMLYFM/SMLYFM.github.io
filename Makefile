@@ -522,6 +522,49 @@ new-tool: ## 创建工具类文章 (make new-tool TITLE="标题")
 	echo "✅ 工具类文章已创建: $$FILENAME"; \
 	echo "   分类: 工具与写作 > LaTeX"
 
+new-custom: ## 自定义创建 (用法: make new-custom FILE="文件名" TITLE="中文标题" CAT="分类" TAGS="标签")
+	@if [ -z "$(FILE)" ] || [ -z "$(TITLE)" ]; then \
+		echo "❌ 错误: 必须指定 FILE 和 TITLE"; \
+		echo "👉 用法示例: make new-custom FILE=\"my-rust-note\" TITLE=\"Rust学习笔记\" CAT=\"编程\" TAGS=\"Rust 学习\""; \
+		exit 1; \
+	fi
+	@# 设置默认分类为 blog，如果命令行未提供 CAT
+	@TARGET_CAT="$${CAT:-$(CAT)}"; \
+	if [ -z "$$TARGET_CAT" ]; then TARGET_CAT="blog"; fi; \
+	FILENAME="$(POST_DIR)/$(FILE).md"; \
+	echo "---" > "$$FILENAME"; \
+	echo "title: $(TITLE)" >> "$$FILENAME"; \
+	echo "date: $(TIMESTAMP)" >> "$$FILENAME"; \
+	echo "updated: $(TIMESTAMP)" >> "$$FILENAME"; \
+	echo "categories:" >> "$$FILENAME"; \
+	echo "  - $$TARGET_CAT" >> "$$FILENAME"; \
+	echo "tags:" >> "$$FILENAME"; \
+	# 处理标签：支持多个标签（空格分隔） \
+	TARGET_TAGS="$(TAGS)"; \
+	if [ -n "$$TARGET_TAGS" ]; then \
+		for tag in $$TARGET_TAGS; do \
+			echo "  - $$tag" >> "$$FILENAME"; \
+		done; \
+	fi; \
+	# 处理描述（可选） \
+	if [ -n "$(DESC)" ]; then \
+		echo "description: $(DESC)" >> "$$FILENAME"; \
+	fi; \
+	echo "highlight_shrink: false" >> "$$FILENAME"; \
+	echo "mathjax: true" >> "$$FILENAME"; \
+	echo "---" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 简介" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 正文" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "✅ 文章已创建: $$FILENAME"; \
+	echo "   标题: $(TITLE)"; \
+	echo "   分类: $$TARGET_CAT"; \
+	echo "   标签: $(TAGS)"
+
 draft: ## 创建草稿 (make draft TITLE="草稿标题")
 	@if [ -z "$(TITLE)" ]; then \
 		echo "❌ 用法: make draft TITLE=\"草稿标题\""; \
@@ -1487,25 +1530,3 @@ restore-full: ## 💾 从完整备份恢复 (BACKUP="备份文件" 或交互式)
 
 restore-single: ## 💾 恢复单篇文章 (BACKUP="备份文件" 或交互式)
 	@./tools/article-backup.sh restore-single $(BACKUP)
-
-new-custom: ## 自定义创建 (make new-custom FILE="my-post" TITLE="中文标题")
-	@if [ -z "$(FILE)" ] || [ -z "$(TITLE)" ]; then \
-		echo "❌ 用法: make new-custom FILE=\"english-filename\" TITLE=\"中文标题\""; \
-		exit 1; \
-	fi
-	@FILENAME="$(POST_DIR)/$(FILE).md"; \
-	echo "---" > "$$FILENAME"; \
-	echo "title: $(TITLE)" >> "$$FILENAME"; \
-	echo "date: $(TIMESTAMP)" >> "$$FILENAME"; \
-	echo "updated: $(TIMESTAMP)" >> "$$FILENAME"; \
-	echo "categories:" >> "$$FILENAME"; \
-	echo "  - blog" >> "$$FILENAME"; \
-	echo "tags:" >> "$$FILENAME"; \
-	echo "---" >> "$$FILENAME"; \
-	echo "" >> "$$FILENAME"; \
-	echo "## 简介" >> "$$FILENAME"; \
-	echo "" >> "$$FILENAME"; \
-	echo "" >> "$$FILENAME"; \
-	echo "" >> "$$FILENAME"; \
-	echo "✅ 文章已创建: $$FILENAME (标题: $(TITLE))"; \
-	echo "   使用 'make edit' 编辑最新文章"

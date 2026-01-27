@@ -45,12 +45,17 @@ make check
 
 ### 项目管理
 
-| 命令 | 说明 | 示例 |
-|------|------|------|
-| `make install` | 安装项目依赖 | `make install` |
-| `make upgrade` | 升级依赖包 | `make upgrade` |
-| `make check` | 检查项目状态 | `make check` |
-| `make status` | 查看Git状态 | `make status` |
+| 命令            | 说明                                      | 示例            |
+| --------------- | ----------------------------------------- | --------------- |
+| `make help`     | 显示所有可用命令及帮助信息                | `make help`     |
+| `make install`  | 安装项目所需的 npm 依赖                   | `make install`  |
+| `make upgrade`  | 检查并升级依赖包                          | `make upgrade`  |
+| `make check`    | 检查项目状态（文章统计 + Git 状态）       | `make check`    |
+| `make status`   | 仅查看 Git 仓库状态                       | `make status`   |
+| `make doctor`   | 环境诊断（检查 Node, Git, Docker 等工具） | `make doctor`   |
+| `make info`     | 显示项目的详细路径、分支和版本信息        | `make info`     |
+| `make validate` | 验证 `_config.yml` 等配置文件的语法正确性 | `make validate` |
+| `make version`  | 显示 Node.js, Hexo 及当前 Git 版本信息    | `make version`  |
 
 ---
 
@@ -157,6 +162,36 @@ bash tools/create-markdown.sh
 - ✅ 预定义内容结构
 - ✅ 支持草稿和正式文章
 - ✅ 可选择是否立即打开编辑器
+
+### 新增“new-custom”
+
+命令行模式下（非交互式）结合 `CAT`（分类）、`TAGS`（标签）和 `DESC`（描述）等功能，你需要利用 **Makefile 变量传参** 的特性，并在 Shell 脚本逻辑中处理这些变量。该命令允许在命令行模式下（非交互式）快速创建文章，支持通过参数指定文件名、标题、分类、标签和描述信息，适合集成到脚本或快捷指令中。
+
+**基础用法（使用默认分类 blog）：**
+
+```bash
+make new-custom FILE="hello-world" TITLE="你好世界"
+```
+
+**指定分类和单标签：**
+
+```bash
+make new-custom FILE="python-tips" TITLE="Python技巧" CAT="编程语言" TAGS="Python"
+```
+
+**指定多标签（注意引号）：**
+
+```bash
+make new-custom FILE="deep-learning-intro" TITLE="深度学习入门" CAT="计算机" TAGS="DeepLearning AI 神经网络"
+```
+
+_注意：多个标签之间用空格隔开，并且整个 `TAGS` 参数必须用引号包裹。_
+
+**带有描述信息：**
+
+```bash
+make new-custom FILE="complex-analysis" TITLE="复分析导论" CAT="数学" DESC="本文介绍了复变函数的基本性质"
+```
 
 ---
 
@@ -657,7 +692,7 @@ make audit
 为了提高效率,Makefile提供了简短的别名:
 
 | 别名 | 原命令 | 说明 |
-|------|--------|------|
+| --- | --- | --- |
 | `make s` | `make server` | 启动服务器 |
 | `make d` | `make dev` | 开发模式 |
 | `make b` | `make build` | 构建 |
@@ -916,7 +951,7 @@ $$
 ### 4. 推荐的公式写作方式
 
 | 场景 | 推荐写法 | 说明 |
-|------|----------|------|
+| --- | --- | --- |
 | 简单行内公式 | `$x^2 + y^2$` | 无下划线，无特殊符号 |
 | 带下标的行内公式 | `$a\_i + b\_j$` | 转义下划线 |
 | 复杂公式 | `$$...$$` 块级 | 避免 markdown 解析干扰 |
@@ -945,7 +980,7 @@ make dev
 ### 7. 常见符号转义速查
 
 | 符号 | Markdown 中的问题 | 解决方案 |
-|------|------------------|----------|
+| --- | --- | --- |
 | `_` | 被解析为斜体 | 使用 `\_` |
 | `*` | 被解析为加粗/斜体 | 使用 `\*` |
 | `<` | 被解析为 HTML | 使用 `\lt` 或块级公式 |
