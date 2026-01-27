@@ -1,7 +1,7 @@
 ---
 title: PINNs 变体与前沿进展：从基础到 DeepONet
 date: 2026-01-25 14:20:00
-updated: 2026-01-25 14:20:00
+updated: 2026-01-27 10:28:02
 categories:
   - 科学计算
   - 偏微分方程

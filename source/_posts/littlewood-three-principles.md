@@ -1,7 +1,7 @@
 ---
 title: Littlewood 三性原理与实分析中的逼近定理
 date: 2026-01-25 18:55:00
-updated: 2026-01-25 19:12:00
+updated: 2026-01-27 10:28:02
 categories:
   - 数学
   - 实分析
