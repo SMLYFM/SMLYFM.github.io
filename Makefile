@@ -1488,3 +1488,24 @@ restore-full: ## 💾 从完整备份恢复 (BACKUP="备份文件" 或交互式)
 restore-single: ## 💾 恢复单篇文章 (BACKUP="备份文件" 或交互式)
 	@./tools/article-backup.sh restore-single $(BACKUP)
 
+new-custom: ## 自定义创建 (make new-custom FILE="my-post" TITLE="中文标题")
+	@if [ -z "$(FILE)" ] || [ -z "$(TITLE)" ]; then \
+		echo "❌ 用法: make new-custom FILE=\"english-filename\" TITLE=\"中文标题\""; \
+		exit 1; \
+	fi
+	@FILENAME="$(POST_DIR)/$(FILE).md"; \
+	echo "---" > "$$FILENAME"; \
+	echo "title: $(TITLE)" >> "$$FILENAME"; \
+	echo "date: $(TIMESTAMP)" >> "$$FILENAME"; \
+	echo "updated: $(TIMESTAMP)" >> "$$FILENAME"; \
+	echo "categories:" >> "$$FILENAME"; \
+	echo "  - blog" >> "$$FILENAME"; \
+	echo "tags:" >> "$$FILENAME"; \
+	echo "---" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "## 简介" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "" >> "$$FILENAME"; \
+	echo "✅ 文章已创建: $$FILENAME (标题: $(TITLE))"; \
+	echo "   使用 'make edit' 编辑最新文章"
