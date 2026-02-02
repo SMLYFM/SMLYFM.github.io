@@ -154,11 +154,11 @@
             
             <tag> PyTorch </tag>
             
+            <tag> 偏微分方程 </tag>
+            
             <tag> PINNs </tag>
             
             <tag> 科学计算 </tag>
-            
-            <tag> 偏微分方程 </tag>
             
             <tag> 自动微分 </tag>
             
@@ -434,9 +434,9 @@
             
             <tag> LaTeX </tag>
             
-            <tag> 数学排版 </tag>
-            
             <tag> 学术写作 </tag>
+            
+            <tag> 数学排版 </tag>
             
         </tags>
       
@@ -463,11 +463,11 @@
       
         <tags>
             
+            <tag> 偏微分方程 </tag>
+            
             <tag> 数值方法 </tag>
             
             <tag> 有限差分 </tag>
-            
-            <tag> 偏微分方程 </tag>
             
         </tags>
       
@@ -655,15 +655,15 @@
       
         <tags>
             
-            <tag> PDE </tag>
-            
             <tag> 数值方法 </tag>
+            
+            <tag> 有限差分 </tag>
+            
+            <tag> PDE </tag>
             
             <tag> 有限元 </tag>
             
             <tag> 数学建模 </tag>
-            
-            <tag> 有限差分 </tag>
             
         </tags>
       
