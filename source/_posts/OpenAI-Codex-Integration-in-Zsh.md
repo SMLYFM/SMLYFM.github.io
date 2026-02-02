@@ -1,7 +1,7 @@
 ---
 title: OpenAI Codex 在 Zsh 环境下的下一代架构集成与工程实践研究报告
 date: 2026-02-02 16:23:08
-updated: 2026-02-02 16:23:08
+updated: 2026-02-02 16:32:27
 categories:
   - 计算机
 tags:
