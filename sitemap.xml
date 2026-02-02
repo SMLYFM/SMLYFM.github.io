@@ -627,27 +627,6 @@
   </url>
   
   <url>
-    <loc>https://smlyfm.github.io/tags/littlewood/</loc>
-    <lastmod>2026-02-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://smlyfm.github.io/tags/egoroff%E5%AE%9A%E7%90%86/</loc>
-    <lastmod>2026-02-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://smlyfm.github.io/tags/lusin%E5%AE%9A%E7%90%86/</loc>
-    <lastmod>2026-02-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://smlyfm.github.io/tags/%E6%AD%A3%E5%88%99%E5%8C%96/</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -677,6 +656,27 @@
   
   <url>
     <loc>https://smlyfm.github.io/tags/%E8%BF%87%E6%8B%9F%E5%90%88/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://smlyfm.github.io/tags/littlewood/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://smlyfm.github.io/tags/egoroff%E5%AE%9A%E7%90%86/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://smlyfm.github.io/tags/lusin%E5%AE%9A%E7%90%86/</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -746,6 +746,20 @@
   </url>
   
   <url>
+    <loc>https://smlyfm.github.io/tags/deeponet/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://smlyfm.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%AE%97%E5%AD%90/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://smlyfm.github.io/tags/python/</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -761,41 +775,6 @@
   
   <url>
     <loc>https://smlyfm.github.io/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2026-02-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://smlyfm.github.io/tags/deeponet/</loc>
-    <lastmod>2026-02-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://smlyfm.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%AE%97%E5%AD%90/</loc>
-    <lastmod>2026-02-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://smlyfm.github.io/tags/rust/</loc>
-    <lastmod>2026-02-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://smlyfm.github.io/tags/%E5%86%85%E5%AD%98%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2026-02-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://smlyfm.github.io/tags/%E6%89%80%E6%9C%89%E6%9D%83/</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -844,7 +823,21 @@
   </url>
   
   <url>
-    <loc>https://smlyfm.github.io/tags/%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE/</loc>
+    <loc>https://smlyfm.github.io/tags/rust/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://smlyfm.github.io/tags/%E5%86%85%E5%AD%98%E5%AE%89%E5%85%A8/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://smlyfm.github.io/tags/%E6%89%80%E6%9C%89%E6%9D%83/</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -873,6 +866,13 @@
   
   <url>
     <loc>https://smlyfm.github.io/tags/%E9%97%AD%E9%9B%86/</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://smlyfm.github.io/tags/%E7%A7%91%E5%AD%A6%E7%BB%98%E5%9B%BE/</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -986,14 +986,14 @@
   </url>
   
   <url>
-    <loc>https://smlyfm.github.io/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%99%E4%BD%9C/latex/</loc>
+    <loc>https://smlyfm.github.io/categories/%E6%95%B0%E5%AD%A6/%E6%8B%93%E6%89%91%E5%AD%A6/</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://smlyfm.github.io/categories/%E6%95%B0%E5%AD%A6/%E6%8B%93%E6%89%91%E5%AD%A6/</loc>
+    <loc>https://smlyfm.github.io/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%99%E4%BD%9C/latex/</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
